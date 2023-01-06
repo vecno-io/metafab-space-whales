@@ -12,3 +12,10 @@ position = Vector2( 480, 270 )
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 137, 166 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.8
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timeout"]

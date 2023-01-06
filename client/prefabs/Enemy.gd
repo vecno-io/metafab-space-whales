@@ -11,9 +11,13 @@ var stuned = false
 var stun_color = Color(0.9,0.9,0.9)
 onready var stun_timer = get_node("%StunTimer")
 
+var dust_particles = preload("res://prefabs/DustParticles.tscn")
 
 func _process(delta):
 	if hp <= 0:
+		if Global.sector_node != null:
+			var object = Global.instance_node(dust_particles, Global.sector_node, global_position)
+			object.rotation = velocity.angle()
 		queue_free()
 	if stuned:
 		velocity = lerp(velocity, Vector2(0,0), 0.3)

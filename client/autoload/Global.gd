@@ -2,6 +2,7 @@ extends Node
 
 
 var sector_node = null
+var local_player = null
 
 
 func instance_node(node, parent, location):

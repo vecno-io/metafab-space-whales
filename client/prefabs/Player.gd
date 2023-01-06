@@ -10,6 +10,15 @@ onready var firerate = get_node("%Firerate")
 
 var bullet = preload("res://prefabs/Bullet.tscn")
 
+
+func _ready():
+	Global.local_player = self
+
+
+func _exit_tree():
+	Global.local_player = null
+
+
 func _process(delta):
 	velocity.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	velocity.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))

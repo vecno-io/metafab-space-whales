@@ -7,6 +7,7 @@ onready var shake_timer = get_node("%ShakeTimer")
 
 
 func _ready():
+	randomize()
 	Global.local_camera = self
 
 
@@ -15,15 +16,17 @@ func _exit_tree():
 
 
 func _process(delta):
-	zoom = lerp(zoom, Vector2(1, 1), 0.3)
+	zoom = lerp(zoom, Vector2(1, 1), 0.24)
 	if shake_screen:
 		var x = rand_range(-shake_intensity, shake_intensity)
 		var y = rand_range(-shake_intensity, shake_intensity)
 		global_position += Vector2(x, y) * delta
+	else:
+		global_position = lerp(global_position, Vector2(480, 270), 0.24)
 
 
 func screen_shake(intensity, time):
-	zoom = Vector2.ONE - Vector2(intensity * 0.002, intensity * 0.002)
+	zoom = Vector2.ONE - Vector2(intensity * 0.0008, intensity * 0.0008)
 	shake_intensity = intensity
 	shake_timer.wait_time = time
 	shake_screen = true

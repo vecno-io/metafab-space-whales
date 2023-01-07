@@ -12,6 +12,8 @@ var points = 0 setget _no_set
 var paused = true setget _no_set
 var highsocre = 0 setget _no_set
 
+var overlay = null
+
 var local_camera = null
 var local_player = null
 var local_sector = null setget _set_sector
@@ -65,6 +67,14 @@ func add_points(value):
 	if points > highsocre: highsocre = points
 	emit_signal("updated_points", points)
 
+
+func screen_shake(intensity, time):
+	# ToDo Juice: Increase the shake intencity based on the 
+	# sectors difficulty to impact the feeling difficulty gives.
+	if Global.overlay != null:
+		Global.overlay.screen_shake(intensity, time)
+	if Global.local_camera != null:
+		Global.local_camera.screen_shake(intensity, time)
 
 func instance_node(node, parent, location):
 	var object = node.instance()

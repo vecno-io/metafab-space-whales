@@ -9,6 +9,7 @@ onready var spawn_timer = get_node("%SpawnTimer")
 var enemy_one = preload("res://prefabs/Enemy.tscn")
 
 func _ready():
+	randomize()
 	Global.local_sector = self
 
 

@@ -3,17 +3,17 @@ extends Node2D
 
 signal updated_difficulty
 
+var difficulty = 0
+
 export(int) var spawn_inital = 3
 
 export(float) var spawn_time_base = 1.8
 export(float) var spawn_time_ticks = 0.1
 export(float) var spawn_time_mimimum = 0.6
 
-var difficulty = 0
+export(Array, PackedScene) var enemies
 
 onready var spawn_timer = get_node("%SpawnTimer")
-
-var proto_enemy = preload("res://prefabs/enemies/ProtoEnemy.tscn")
 
 
 func _ready():
@@ -38,7 +38,8 @@ func _spawn_enemy():
 	else:
 		if x < 480: x -= 480 + 64
 		else: x += 480 + 64
-	Global.instance_node(proto_enemy, self, Vector2(x, y))
+	var idx = round(rand_range(0, enemies.size() - 1))
+	Global.instance_node(enemies[idx], self, Vector2(x, y))
 
 
 func _on_spawn_timeout():

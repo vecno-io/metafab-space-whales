@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "EnemyBase",
 "class": "ProtoEnemy",
 "language": "GDScript",
-"path": "res://prefabs/enemies/ProtoEnemy.gd"
+"path": "res://prefabs/enemies/scripts/BasicEnemy.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",

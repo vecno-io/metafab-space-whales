@@ -7,14 +7,12 @@
 extents = Vector2( 4.4, 4.4 )
 
 [node name="Enemy" type="Sprite"]
-modulate = Color( 0.901961, 0.533333, 0.286275, 1 )
+modulate = Color( 0.67451, 0.192157, 0.270588, 1 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
-hp = 2
-speed = 160
-base_color = Color( 0.901961, 0.533333, 0.286275, 1 )
-stun_color = Color( 0.945312, 0.783919, 0.675751, 1 )
+base_color = Color( 0.67451, 0.192157, 0.270588, 1 )
+stun_color = Color( 0.929688, 0.675476, 0.716811, 1 )
 
 [node name="Hitbox" type="Area2D" parent="." groups=["enemy"]]
 

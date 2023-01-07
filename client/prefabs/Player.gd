@@ -12,6 +12,7 @@ var bullet = preload("res://prefabs/Bullet.tscn")
 
 
 func _ready():
+	Global.unpause_game()
 	Global.local_player = self
 
 
@@ -20,6 +21,9 @@ func _exit_tree():
 
 
 func _process(delta):
+	if Global.paused:
+		return
+
 	velocity.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	velocity.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	global_position += velocity.normalized() * speed * delta
@@ -32,3 +36,12 @@ func _process(delta):
 
 func _on_firerate_timeout():
 	fire_up = true
+
+
+func _on_hitbox_area_entered(area:Area2D):
+	if area.is_in_group("enemy"):
+		visible = false
+		Global.pause_game()
+		yield(get_tree().create_timer(1.6), "timeout")
+		#warning-ignore: return_value_discarded
+		get_tree().reload_current_scene()

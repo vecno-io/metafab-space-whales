@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/square.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.6, 3.6 )
+extents = Vector2( 2.8, 2.8 )
 
 [node name="Player" type="Sprite"]
 modulate = Color( 0.101961, 0.545098, 0.560784, 1 )
@@ -12,11 +12,16 @@ scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 2.7, -4.76837e-07 )
+scale = Vector2( 1.125, 0.4 )
+texture = ExtResource( 2 )
+
 [node name="Hitbox" type="Area2D" parent="." groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-visible = false
-position = Vector2( -1.19209e-07, -1.90735e-07 )
+position = Vector2( -2.38419e-08, 1.19209e-08 )
+scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="Firerate" type="Timer" parent="."]
@@ -24,10 +29,15 @@ unique_name_in_owner = true
 wait_time = 0.08
 one_shot = true
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 2.7, -4.76837e-07 )
-scale = Vector2( 1.125, 0.4 )
-texture = ExtResource( 2 )
+[node name="SpeedBoost" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 4.0
+one_shot = true
+
+[node name="ReloadBoost" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 4.0
+one_shot = true
 
 [node name="SegmentHook" type="Position2D" parent="."]
 unique_name_in_owner = true
@@ -35,3 +45,5 @@ position = Vector2( -8, 0 )
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_entered"]
 [connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]
+[connection signal="timeout" from="SpeedBoost" to="." method="_on_speed_boost_timeout"]
+[connection signal="timeout" from="ReloadBoost" to="." method="_on_reaload_boost_timeout"]

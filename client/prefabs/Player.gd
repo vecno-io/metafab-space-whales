@@ -28,8 +28,8 @@ func _process(delta):
 	velocity.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	global_position += velocity.normalized() * speed * delta
 
-	if fire_up && Input.is_action_pressed("fire_main") && Global.sector_node != null:
-		Global.instance_node(bullet, Global.sector_node, global_position)
+	if fire_up && Input.is_action_pressed("fire_main") && Global.local_sector != null:
+		Global.instance_node(bullet, Global.local_sector, global_position)
 		firerate.start()
 		fire_up = false
 

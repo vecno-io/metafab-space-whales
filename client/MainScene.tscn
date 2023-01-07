@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://prefabs/Sector.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/fonts/Rye-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Overlay.gd" type="Script" id=3]
 [ext_resource path="res://assets/fonts/Oldenburg-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/bg/Background-v1-0.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=2]
 size = 72
@@ -88,5 +89,1288 @@ unique_name_in_owner = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
+
+[node name="Background" type="Node2D" parent="."]
+position = Vector2( -920, -270 )
+
+[node name="Row-01" type="Node2D" parent="Background"]
+
+[node name="Group 01" type="Node2D" parent="Background/Row-01"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-01/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-01/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-01/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-01/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-01"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-01/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-01/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-01/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-01/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-01"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-01/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-01/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-01/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-01/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-01"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-01/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-01/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-01/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-01/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-01/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-01"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-01/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-01/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-01/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-01/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-01/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Row-02" type="Node2D" parent="Background"]
+position = Vector2( 0, 2160 )
+
+[node name="Group 01" type="Node2D" parent="Background/Row-02"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-02/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-02/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-02/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-02/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-02"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-02/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-02/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-02/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-02/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-02"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-02/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-02/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-02/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-02/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-02"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-02/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-02/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-02/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-02/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-02/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-02"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-02/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-02/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-02/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-02/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-02/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Row-03" type="Node2D" parent="Background"]
+position = Vector2( 0, 4320 )
+
+[node name="Group 01" type="Node2D" parent="Background/Row-03"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-03/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-03/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-03/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-03/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-03"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-03/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-03/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-03/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-03/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-03"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-03/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-03/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-03/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-03/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-03"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-03/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-03/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-03/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-03/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-03/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-03"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-03/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-03/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-03/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-03/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-03/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Row-04" type="Node2D" parent="Background"]
+position = Vector2( 0, 6480 )
+
+[node name="Group 01" type="Node2D" parent="Background/Row-04"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-04/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-04/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-04/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-04/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-04"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-04/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-04/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-04/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-04/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-04"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-04/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-04/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-04/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-04/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-04"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-04/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-04/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-04/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-04/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-04/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-04"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-04/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-04/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-04/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-04/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-04/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Row-05" type="Node2D" parent="Background"]
+position = Vector2( 0, 8640 )
+
+[node name="Group 01" type="Node2D" parent="Background/Row-05"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-05/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-05/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-05/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-05/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-05"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-05/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-05/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-05/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-05/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-05"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-05/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-05/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-05/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-05/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-05"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-05/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-05/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-05/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-05/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-05/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-05"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-05/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-05/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-05/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-05/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-05/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Row-06" type="Node2D" parent="Background"]
+position = Vector2( 0, -2160 )
+
+[node name="Group 01" type="Node2D" parent="Background/Row-06"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-06/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-06/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-06/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-06/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-06"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-06/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-06/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-06/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-06/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-06"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-06/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-06/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-06/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-06/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-06"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-06/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-06/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-06/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-06/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-06/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-06"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-06/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-06/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-06/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-06/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-06/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Row-07" type="Node2D" parent="Background"]
+position = Vector2( 0, -4320 )
+
+[node name="Group 01" type="Node2D" parent="Background/Row-07"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-07/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-07/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-07/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-07/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-07"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-07/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-07/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-07/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-07/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-07"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-07/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-07/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-07/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-07/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-07"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-07/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-07/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-07/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-07/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-07/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-07"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-07/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-07/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-07/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-07/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-07/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Row-08" type="Node2D" parent="Background"]
+position = Vector2( 0, -6480 )
+
+[node name="Group 01" type="Node2D" parent="Background/Row-08"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-08/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-08/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-08/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-08/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-08"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-08/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-08/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-08/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-08/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-08"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-08/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-08/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-08/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-08/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-08"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-08/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-08/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-08/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-08/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-08/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-08"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-08/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-08/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-08/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-08/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-08/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Row-09" type="Node2D" parent="Background"]
+position = Vector2( 0, -8640 )
+
+[node name="Group 01" type="Node2D" parent="Background/Row-09"]
+
+[node name="Background-01" type="Sprite" parent="Background/Row-09/Group 01"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-09/Group 01"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-09/Group 01"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-09/Group 01"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 02" type="Node2D" parent="Background/Row-09"]
+position = Vector2( -3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-09/Group 02"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-09/Group 02"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-09/Group 02"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-09/Group 02"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 03" type="Node2D" parent="Background/Row-09"]
+position = Vector2( -7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-09/Group 03"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-09/Group 03"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-09/Group 03"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-09/Group 03"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 04" type="Node2D" parent="Background/Row-09"]
+position = Vector2( 3840, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-09/Group 04"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-09/Group 04"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-09/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-09/Group 04"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-09/Group 04"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Group 05" type="Node2D" parent="Background/Row-09"]
+position = Vector2( 7680, 0 )
+
+[node name="Background-01" type="Sprite" parent="Background/Row-09/Group 05"]
+position = Vector2( 0, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+
+[node name="Background-02" type="Sprite" parent="Background/Row-09/Group 05"]
+z_index = -1000
+texture = ExtResource( 5 )
+flip_h = true
+flip_v = true
+
+[node name="Background-03" type="Sprite" parent="Background/Row-09/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-04" type="Sprite" parent="Background/Row-09/Group 05"]
+position = Vector2( 1920, 1080 )
+z_index = -1000
+texture = ExtResource( 5 )
+
+[node name="Background-05" type="Sprite" parent="Background/Row-09/Group 05"]
+position = Vector2( 1920, 0 )
+z_index = -1000
+texture = ExtResource( 5 )
+flip_v = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 8000, -8000 )
 
 [connection signal="timeout" from="Overlay/ShakeTimer" to="Overlay" method="_on_shake_timeout"]

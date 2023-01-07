@@ -66,5 +66,21 @@ text = "01"
 align = 1
 valign = 1
 
+[node name="LastHighsocre" type="Label" parent="Overlay/Control"]
+unique_name_in_owner = true
+modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -120.0
+margin_top = -41.0
+rect_min_size = Vector2( 120, 0 )
+size_flags_horizontal = 4
+custom_fonts/font = SubResource( 3 )
+text = "000"
+align = 1
+valign = 1
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )

@@ -10,6 +10,7 @@ signal updated_difficulty(value)
 
 var points = 0 setget _no_set
 var paused = true setget _no_set
+var highsocre = 0 setget _no_set
 
 var local_camera = null
 var local_player = null
@@ -61,6 +62,7 @@ func unpause_game():
 
 func add_points(value):
 	points += value
+	if points > highsocre: highsocre = points
 	emit_signal("updated_points", points)
 
 

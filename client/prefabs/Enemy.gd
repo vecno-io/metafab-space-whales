@@ -15,10 +15,12 @@ var dust_particles = preload("res://prefabs/DustParticles.tscn")
 
 func _process(delta):
 	if hp <= 0:
+		queue_free()
+		Global.add_points(1)
 		if Global.sector_node != null:
 			var object = Global.instance_node(dust_particles, Global.sector_node, global_position)
 			object.rotation = velocity.angle()
-		queue_free()
+		
 	if stuned:
 		velocity = lerp(velocity, Vector2(0,0), 0.3)
 	elif Global.local_player != null:

@@ -6,7 +6,7 @@ var difficulty = 0
 
 onready var spawn_timer = get_node("%SpawnTimer")
 
-var enemy_one = preload("res://prefabs/Enemy.tscn")
+var proto_enemy = preload("res://prefabs/enemies/ProtoEnemy.tscn")
 
 func _ready():
 	randomize()
@@ -30,7 +30,7 @@ func _on_spawn_timeout():
 	else:
 		if x < 480: x -= 480 + 64
 		else: x += 480 + 64
-	Global.instance_node(enemy_one, self, Vector2(x, y))
+	Global.instance_node(proto_enemy, self, Vector2(x, y))
 
 
 func _on_difficulty_timeout():

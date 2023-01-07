@@ -38,7 +38,7 @@ func _on_firerate_timeout():
 	fire_up = true
 
 
-func _on_hitbox_area_entered(area:Area2D):
+func _on_hitbox_entered(area:Area2D):
 	if area.is_in_group("enemy"):
 		visible = false
 		Global.pause_game()

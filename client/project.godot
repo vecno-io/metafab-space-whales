@@ -14,14 +14,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://prefabs/Bullet.gd"
 }, {
+"base": "Sprite",
+"class": "EnemyBase",
+"language": "GDScript",
+"path": "res://prefabs/enemies/scripts/EnemyBase.gd"
+}, {
 "base": "Node2D",
 "class": "Player",
 "language": "GDScript",
 "path": "res://prefabs/Player.gd"
+}, {
+"base": "EnemyBase",
+"class": "ProtoEnemy",
+"language": "GDScript",
+"path": "res://prefabs/enemies/ProtoEnemy.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
-"Player": ""
+"EnemyBase": "",
+"Player": "",
+"ProtoEnemy": ""
 }
 
 [application]

@@ -13,6 +13,7 @@ var stuned = false
 var fire_up = true
 
 var velocity = Vector2.ZERO
+var turn_speed = PI * 2.6
 
 onready var stun_timer = get_node("%StunTimer")
 
@@ -28,9 +29,17 @@ func _on_stun_timeout():
 	stuned = false
 
 
-func _do_base_movement(delta) -> bool:
-	if Global.paused:
-		return false
+func _base_look_at(delta, target):
+	var direction = target.global_position - global_position
+	var base = global_rotation
+	var angle = direction.angle()
+	angle = lerp_angle(base, angle, 1.0)
+	var angle_delta = turn_speed * delta
+	angle = clamp(angle, base - angle_delta, base + angle_delta)
+	global_rotation = angle
+
+
+func _do_base_movement(delta, target) -> bool:
 	if hp <= 0:
 		queue_free()
 		Global.add_points(1)
@@ -43,10 +52,7 @@ func _do_base_movement(delta) -> bool:
 		velocity = lerp(velocity, Vector2(0,0), 0.3)
 		global_position += velocity * delta
 		return true
-	if Global.local_player == null:
-		return false
-	var target = Global.local_player.global_position
-	velocity = global_position.direction_to(target)
+	velocity = global_position.direction_to(target.global_position)
 	global_position += velocity * speed * delta
 	return true
 	

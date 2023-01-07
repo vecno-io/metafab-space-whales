@@ -22,6 +22,8 @@ func _process(delta):
 		if Global.sector_node != null:
 			var object = Global.instance_node(dust_particles, Global.sector_node, global_position)
 			object.rotation = velocity.angle()
+		if Global.local_camera != null:
+			Global.local_camera.screen_shake(18, 0.08)
 	if stuned:
 		velocity = lerp(velocity, Vector2(0,0), 0.3)
 	elif Global.local_player != null:

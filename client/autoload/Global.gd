@@ -9,6 +9,7 @@ var points = 0 setget _no_set
 var paused = true setget _no_set
 
 var sector_node = null
+var local_camera = null
 var local_player = null
 
 

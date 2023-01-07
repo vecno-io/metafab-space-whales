@@ -19,8 +19,8 @@ func _process(delta):
 	if hp <= 0:
 		queue_free()
 		Global.add_points(1)
-		if Global.sector_node != null:
-			var object = Global.instance_node(dust_particles, Global.sector_node, global_position)
+		if Global.local_sector != null:
+			var object = Global.instance_node(dust_particles, Global.local_sector, global_position)
 			object.rotation = velocity.angle()
 		if Global.local_camera != null:
 			Global.local_camera.screen_shake(18, 0.08)

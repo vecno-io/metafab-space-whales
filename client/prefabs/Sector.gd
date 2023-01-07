@@ -1,16 +1,19 @@
 extends Node2D
 
+signal updated_difficulty
 
-onready var firerate = get_node("%SpawnTimer")
+var difficulty = 0
+
+onready var spawn_timer = get_node("%SpawnTimer")
 
 var enemy_one = preload("res://prefabs/Enemy.tscn")
 
 func _ready():
-	Global.sector_node = self
+	Global.local_sector = self
 
 
 func _exit_tree():
-	Global.sector_node = null
+	Global.local_sector = null
 
 
 func _on_spawn_timeout():
@@ -27,3 +30,10 @@ func _on_spawn_timeout():
 		if x < 480: x -= 480 + 64
 		else: x += 480 + 64
 	Global.instance_node(enemy_one, self, Vector2(x, y))
+
+
+func _on_difficulty_timeout():
+	if spawn_timer.wait_time > 0.6:
+		difficulty += 1
+		spawn_timer.wait_time -= 0.1
+		emit_signal("updated_difficulty", difficulty)

@@ -29,5 +29,9 @@ position = Vector2( 2.7, -4.76837e-07 )
 scale = Vector2( 1.125, 0.4 )
 texture = ExtResource( 2 )
 
+[node name="SegmentHook" type="Position2D" parent="."]
+unique_name_in_owner = true
+position = Vector2( -8, 0 )
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_entered"]
 [connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]

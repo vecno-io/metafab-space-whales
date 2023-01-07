@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/square.png" type="Texture" id=1]
+[ext_resource path="res://prefabs/PlayerPart.gd" type="Script" id=2]
+
+[node name="PlayerSegment" type="Sprite"]
+modulate = Color( 0.1035, 0.43845, 0.45, 1 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="SegmentHook" type="Position2D" parent="."]
+unique_name_in_owner = true
+position = Vector2( -10, 0 )

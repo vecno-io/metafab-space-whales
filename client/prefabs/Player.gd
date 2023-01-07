@@ -45,6 +45,10 @@ func _process(delta):
 		fire_up = false
 
 
+func get_segment_hook():
+	return get_node("%SegmentHook")
+
+
 func _on_firerate_timeout():
 	fire_up = true
 

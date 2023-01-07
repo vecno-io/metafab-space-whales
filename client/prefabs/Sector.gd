@@ -28,15 +28,18 @@ func _exit_tree():
 
 
 func _spawn_enemy():
+	if Global.local_camera == null:
+		return
+	var position = Global.local_camera.global_position
 	# Note: Depend on screen size
-	var x =	rand_range(0, 960)
-	var y =	rand_range(0, 540)
+	var x =	rand_range(position.x - 480, position.x + 480)
+	var y =	rand_range(position.y - 270, position.y + 270)
 	var z = rand_range(0, 999)
 	if (int(z) % 2) == 0:
-		if y < 270: y -= 270 + 64
+		if y < position.y: y -= 270 + 64
 		else: y += 270 + 64
 	else:
-		if x < 480: x -= 480 + 64
+		if x < position.x: x -= 480 + 64
 		else: x += 480 + 64
 	var idx = round(rand_range(0, enemies.size() - 1))
 	Global.instance_node(enemies[idx], self, Vector2(x, y))

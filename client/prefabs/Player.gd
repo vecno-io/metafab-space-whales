@@ -2,9 +2,8 @@ class_name Player
 extends Node2D
 
 signal speed_boost_ended
-signal speed_boost_started
-
 signal reload_boost_ended
+signal speed_boost_started
 signal reload_boost_started
 
 var speed = 150

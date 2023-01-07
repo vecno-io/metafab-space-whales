@@ -3,6 +3,8 @@ extends Camera2D
 var shake_screen = false
 var shake_intensity = 0
 
+var target_position = Vector2.ZERO
+
 onready var shake_timer = get_node("%ShakeTimer")
 
 
@@ -16,13 +18,23 @@ func _exit_tree():
 
 
 func _process(delta):
+	_follow_player_movement()
 	zoom = lerp(zoom, Vector2(1, 1), 0.24)
 	if shake_screen:
 		var x = rand_range(-shake_intensity, shake_intensity)
 		var y = rand_range(-shake_intensity, shake_intensity)
+		global_position = lerp(global_position, target_position, 0.24)
 		global_position += Vector2(x, y) * delta
 	else:
-		global_position = lerp(global_position, Vector2(480, 270), 0.24)
+		global_position = lerp(global_position, target_position, 0.24)
+
+
+func _follow_player_movement():
+	if Global.local_player == null:
+		return
+	var target = Global.local_player.global_position
+	# ToDo Juice: smooth center between mouse and player
+	target_position = lerp(target, target_position, 0.24)
 
 
 func screen_shake(intensity, time):

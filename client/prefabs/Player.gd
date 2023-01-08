@@ -91,6 +91,7 @@ func _on_reaload_boost_timeout():
 func _on_hitbox_entered(area:Area2D):
 	if area.is_in_group("enemy"):
 		visible = false
+		Global.save_game()
 		Global.pause_game()
 		yield(get_tree().create_timer(1.6), "timeout")
 		#warning-ignore: return_value_discarded

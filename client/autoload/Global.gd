@@ -7,6 +7,7 @@ signal game_unpaused
 signal updated_points(value)
 signal updated_difficulty(value)
 
+const SAVE_FILE := "user://savefile.data"
 
 var points = 0 setget _no_set
 var paused = true setget _no_set
@@ -21,6 +22,10 @@ var local_sector = null setget _set_sector
 
 func _no_set(_value):
 	pass
+
+
+func _ready():
+	_load_game()
 
 
 func _set_sector(value):
@@ -50,6 +55,22 @@ func _sector_disconnect():
 
 func _sector_updated_difficulty(value):
 	emit_signal("updated_difficulty", value)
+
+
+func save_game():
+	var file := ConfigFile.new()
+	file.set_value("highsocre", "last", highsocre)
+	var err = file.save(SAVE_FILE)
+	if err != OK: 
+		push_warning("save_game: %s" % err)
+
+func _load_game():
+	var file := ConfigFile.new()
+	var err = file.load(SAVE_FILE)
+	if err != OK: 
+		push_warning("_load_game: %s" % err)
+	if file.has_section_key("highsocre", "last"):
+		highsocre = file.get_value("highsocre", "last") 
 
 
 func pause_game():

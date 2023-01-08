@@ -14,6 +14,8 @@ var speed_default = 150
 var reload_default = 0.08
 
 onready var firerate = get_node("%Firerate")
+onready var sfx_firerate = get_node("%SfxrStreamFire")
+
 onready var speed_boost = get_node("%SpeedBoost")
 onready var reload_boost = get_node("%ReloadBoost")
 
@@ -57,6 +59,7 @@ func _process_game(delta):
 		global_rotation = angle
 	if fire_up && Input.is_action_pressed("fire_main") && Global.local_sector != null:
 		Global.instance_node(bullet, Global.local_sector, global_position)
+		AudioManager.play_sfx_effect(sfx_firerate)
 		firerate.start()
 		fire_up = false
 

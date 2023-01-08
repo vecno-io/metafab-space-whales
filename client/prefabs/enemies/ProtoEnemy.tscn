@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/square.png" type="Texture" id=1]
 [ext_resource path="res://prefabs/enemies/scripts/BasicEnemy.gd" type="Script" id=2]
+[ext_resource path="res://addons/godot_sfxr/SfxrStreamPlayer2D.gd" type="Script" id=3]
+[ext_resource path="res://assets/audio/ProtoEnemyHit.tres" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/ProtoEnemyDies.tres" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.4, 4.4 )
@@ -26,6 +29,68 @@ shape = SubResource( 1 )
 [node name="StunTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.125
+
+[node name="SfxrPlayerHit" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = 1.0
+script = ExtResource( 3 )
+wave/type = 0
+sample_params/sound_vol = 0.25
+sample_params/sample_rate = 44100.0
+envelope/attack_time = 0.0
+envelope/sustain_time = 0.0718589
+envelope/punch_time = 0.0
+envelope/decay_time = 0.111123
+frequency/start_frequency = 0.459521
+frequency/min_freq_cutoff = 0.0
+frequency/slide = -0.47295
+frequency/delta_slide = 0.0
+vibrato/depth = 0.0
+vibrato/speed = 0.0
+arpeggiation/frequency_mult = 0.0
+arpeggiation/change_speed = 0.0
+duty_cycle/duty_cycle = 0.391576
+duty_cycle/sweep = 0.0
+retrigger/rate = 0.0
+flanger/offset = 0.0
+flanger/sweep = 0.0
+low_pass_filter/cutoff_frequency = 1.0
+low_pass_filter/cutoff_sweep = 0.0
+low_pass_filter/resonance = 0.0
+high_pass_filter/cutoff_frequency = 0.124631
+high_pass_filter/cutoff_sweep = 0.0
+
+[node name="SfxrPlayerExplode" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 5 )
+volume_db = 1.0
+script = ExtResource( 3 )
+wave/type = 3
+sample_params/sound_vol = 0.25
+sample_params/sample_rate = 44100.0
+envelope/attack_time = 0.0
+envelope/sustain_time = 0.330811
+envelope/punch_time = 0.409573
+envelope/decay_time = 0.0691815
+frequency/start_frequency = 0.0412771
+frequency/min_freq_cutoff = 0.0
+frequency/slide = -0.323807
+frequency/delta_slide = 0.0
+vibrato/depth = 0.339539
+vibrato/speed = 0.551722
+arpeggiation/frequency_mult = 0.0
+arpeggiation/change_speed = 0.0
+duty_cycle/duty_cycle = 0.0
+duty_cycle/sweep = 0.0
+retrigger/rate = 0.0
+flanger/offset = -0.166346
+flanger/sweep = -0.299921
+low_pass_filter/cutoff_frequency = 1.0
+low_pass_filter/cutoff_sweep = 0.0
+low_pass_filter/resonance = 0.0
+high_pass_filter/cutoff_frequency = 0.0
+high_pass_filter/cutoff_sweep = 0.0
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_entered"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_stun_timeout"]

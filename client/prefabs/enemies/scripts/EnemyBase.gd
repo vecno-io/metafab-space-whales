@@ -43,7 +43,7 @@ func _do_base_movement(delta, target) -> bool:
 	if hp <= 0:
 		queue_free()
 		Global.add_points(1)
-		Global.screen_shake(32, 0.24)
+		Global.screen_shake(48, 0.24)
 		if Global.local_sector != null:
 			var object = Global.instance_node(dust_particles, Global.local_sector, global_position)
 			object.modulate = Color.from_hsv(base_color.h, base_color.s * 0.9, base_color.v * 0.6)

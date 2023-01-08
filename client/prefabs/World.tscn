@@ -19,14 +19,13 @@ unique_name_in_owner = true
 
 [node name="TutorialView" type="Node2D" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="Enemy" parent="TutorialView" instance=ExtResource( 5 )]
-position = Vector2( 109.655, -87.3451 )
+position = Vector2( 104.655, -47.3452 )
 rotation = -0.734784
 freeze = true
 
 [node name="Enemy2" parent="TutorialView" instance=ExtResource( 1 )]
-position = Vector2( 38.6549, -131.345 )
+position = Vector2( 33.6549, -91.3451 )
 rotation = 0.18326
 freeze = true

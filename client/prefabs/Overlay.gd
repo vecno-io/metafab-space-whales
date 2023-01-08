@@ -70,8 +70,8 @@ func show_tutorial():
 
 
 func screen_shake(intensity, time):
-	active.rect_scale = Vector2.ONE - Vector2(intensity * 0.0004, intensity * 0.0004)
-	shake_intensity = intensity * 0.5
+	active.rect_scale = Vector2.ONE - Vector2(intensity * 0.0006, intensity * 0.0006)
+	shake_intensity = intensity * 0.75
 	shake_timer.wait_time = time
 	shake_screen = true
 	shake_timer.start()

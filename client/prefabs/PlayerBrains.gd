@@ -8,6 +8,7 @@ signal reload_boost_started
 
 var speed = 150
 var fire_up = true
+var destroyed = false
 var velocity = Vector2.ZERO
 var turn_speed = PI * 2.2
 var speed_default = 150
@@ -24,6 +25,7 @@ var bullet = preload("res://prefabs/Bullet.tscn")
 
 func _ready():
 	Global.local_player = self
+	destroyed = false
 	speed_default = speed
 	reload_default = firerate.wait_time
 
@@ -115,9 +117,11 @@ func _on_reaload_boost_timeout():
 
 
 func _on_hitbox_entered(area:Area2D):
+	if destroyed: return
 	if area.is_in_group("enemy"):
 		Global.save_game()
 		Global.pause_game()
+		destroyed = true
 		# TODO Juice: Jump off screen, escape home
 		yield(get_tree().create_timer(1.4), "timeout")
 		get_parent().queue_free()

@@ -28,9 +28,9 @@ func _exit_tree():
 
 
 func _spawn_enemy():
-	if Global.local_camera == null:
+	if Global.camera == null:
 		return
-	var position = Global.local_camera.global_position
+	var position = Global.camera.global_position
 	# Note: Depend on screen size
 	var x =	rand_range(position.x - 480, position.x + 480)
 	var y =	rand_range(position.y - 270, position.y + 270)

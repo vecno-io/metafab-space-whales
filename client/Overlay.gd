@@ -12,7 +12,9 @@ onready var tutorial_view  = get_node("%TutorialView")
 
 onready var shake_timer = get_node("%ShakeTimer")
 
-onready var highsocre = get_node("%LastHighsocre")
+onready var last_socre = get_node("%LastHighsocre")
+onready var tutorial_socre = get_node("%TutorialHighsocre")
+
 onready var total_points = get_node("%TotalPoints")
 onready var sector_level = get_node("%SectorLevel")
 
@@ -20,9 +22,13 @@ onready var sector_level = get_node("%SectorLevel")
 func _ready():
 	randomize()
 	Global.overlay = self
+	game_view.visible = false
+	dialog_view.visible = false
+	tutorial_view.visible = false
 	score = Global.highsocre
 	active = tutorial_view
-	highsocre.text = "%03d" % score
+	last_socre.text = "%03d" % score
+	tutorial_socre.text = last_socre.text
 	#warning-ignore: return_value_discarded
 	Global.connect("updated_points", self, "_on_updated_points")
 	#warning-ignore: return_value_discarded
@@ -45,6 +51,24 @@ func _process(delta):
 		active.rect_position = lerp(active.rect_position, Vector2(0, 0), 0.24)
 
 
+func show_game():
+	game_view.visible = true
+	dialog_view.visible = false
+	tutorial_view.visible = false
+
+
+func show_dialog():
+	game_view.visible = false
+	dialog_view.visible = true
+	tutorial_view.visible = false
+
+
+func show_tutorial():
+	game_view.visible = false
+	dialog_view.visible = false
+	tutorial_view.visible = true
+
+
 func screen_shake(intensity, time):
 	active.rect_scale = Vector2.ONE - Vector2(intensity * 0.0004, intensity * 0.0004)
 	shake_intensity = intensity * 0.5
@@ -62,8 +86,21 @@ func _on_updated_points(value):
 	total_points.text = "%03d" % value
 	if value > score: 
 		score = value
-		highsocre.text = total_points.text
+		last_socre.text = total_points.text
+		tutorial_socre.text = last_socre.text
 
 
 func _on_updated_difficulty(value):
 	sector_level.text = "%02d" % value
+
+
+func _on_start_pressed():
+	Global.show_game()
+
+
+func _on_jump_in_pressed():
+	Global.show_game()
+
+
+func _on_jump_out_pressed():
+	Global.show_dialog()

@@ -1,6 +1,13 @@
 class_name ProtoEnemy
 extends EnemyBase
 
+export(bool) var freeze = false
+
+func _ready():
+	if !freeze: return
+	$Hitbox.queue_free()
+	$StunTimer.queue_free()
+	
 
 func _process(delta):
 	if Global.paused:

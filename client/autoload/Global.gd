@@ -1,5 +1,14 @@
 extends Node
 
+enum State {
+	No,
+	Game,
+	Dialog,
+	Tutorial
+}
+
+signal actor_died
+signal state_updated
 
 signal game_paused
 signal game_unpaused
@@ -9,14 +18,16 @@ signal updated_difficulty(value)
 
 const SAVE_FILE := "user://savefile.data"
 
+var state = State.No setget _no_set
+
 var points = 0 setget _no_set
 var paused = true setget _no_set
 var highsocre = 0 setget _no_set
 
 var world = null
+var camera = null
 var overlay = null
 
-var local_camera = null
 var local_player = null
 var local_sector = null setget _set_sector
 
@@ -27,6 +38,8 @@ func _no_set(_value):
 
 func _ready():
 	_load_game()
+	yield(get_tree().create_timer(0.1), "timeout")
+	show_tutorial()
 
 
 func _set_sector(value):
@@ -42,6 +55,7 @@ func _sector_reset():
 	paused = false;
 	emit_signal("updated_points", 0)
 	emit_signal("updated_difficulty", 0)
+
 
 func _sector_connect():
 	if local_sector == null:
@@ -59,12 +73,36 @@ func _sector_updated_difficulty(value):
 	emit_signal("updated_difficulty", value)
 
 
+func show_game():
+	state = Global.State.Game
+	emit_signal("state_updated")
+	if world != null: world.show_game()
+	if overlay != null: overlay.show_game()
+
+
+func show_dialog():
+	world.reset_player()
+	camera.reset_position()
+	state = Global.State.Dialog
+	emit_signal("state_updated")
+	if world != null: world.show_dialog()
+	if overlay != null: overlay.show_dialog()
+
+
+func show_tutorial():
+	state = Global.State.Tutorial
+	emit_signal("state_updated")
+	if world != null: world.show_tutorial()
+	if overlay != null: overlay.show_tutorial()
+
+
 func save_game():
 	var file := ConfigFile.new()
 	file.set_value("highsocre", "last", highsocre)
 	var err = file.save(SAVE_FILE)
 	if err != OK: 
 		push_warning("save_game: %s" % err)
+
 
 func _load_game():
 	var file := ConfigFile.new()
@@ -91,13 +129,19 @@ func add_points(value):
 	emit_signal("updated_points", points)
 
 
+func actor_died():
+	emit_signal("actor_died")
+	show_dialog()
+
+
 func screen_shake(intensity, time):
 	# ToDo Juice: Increase the shake intencity based on the 
 	# sectors difficulty to impact the feeling difficulty gives.
+	if Global.camera != null:
+		Global.camera.screen_shake(intensity, time)
 	if Global.overlay != null:
 		Global.overlay.screen_shake(intensity, time)
-	if Global.local_camera != null:
-		Global.local_camera.screen_shake(intensity, time)
+
 
 func instance_node(node, parent, location):
 	var object = node.instance()

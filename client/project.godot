@@ -20,9 +20,14 @@ _global_script_classes=[ {
 "path": "res://prefabs/enemies/scripts/EnemyBase.gd"
 }, {
 "base": "Node2D",
-"class": "Player",
+"class": "PlayerBrains",
 "language": "GDScript",
-"path": "res://prefabs/Player.gd"
+"path": "res://prefabs/PlayerBrains.gd"
+}, {
+"base": "Sprite",
+"class": "PlayerSegment",
+"language": "GDScript",
+"path": "res://prefabs/PlayerSegment.gd"
 }, {
 "base": "EnemyBase",
 "class": "ProtoEnemy",
@@ -32,7 +37,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Bullet": "",
 "EnemyBase": "",
-"Player": "",
+"PlayerBrains": "",
+"PlayerSegment": "",
 "ProtoEnemy": ""
 }
 

@@ -13,6 +13,7 @@ var points = 0 setget _no_set
 var paused = true setget _no_set
 var highsocre = 0 setget _no_set
 
+var world = null
 var overlay = null
 
 var local_camera = null
@@ -33,6 +34,7 @@ func _set_sector(value):
 	local_sector = value
 	_sector_connect()
 	_sector_reset()
+	unpause_game()
 
 
 func _sector_reset():

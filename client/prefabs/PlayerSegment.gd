@@ -1,3 +1,4 @@
+class_name PlayerSegment
 extends Sprite
 
 var target = null

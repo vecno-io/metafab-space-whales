@@ -1,4 +1,4 @@
-class_name Player
+class_name PlayerBrains
 extends Node2D
 
 signal speed_boost_ended
@@ -21,7 +21,6 @@ var bullet = preload("res://prefabs/Bullet.tscn")
 
 
 func _ready():
-	Global.unpause_game()
 	Global.local_player = self
 	speed_default = speed
 	reload_default = firerate.wait_time

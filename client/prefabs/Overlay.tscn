@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://prefabs/Overlay.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Rye-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/fonts/Olden-Text-16.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/fonts/Olden-Text-12.tres" type="DynamicFont" id=7]
 [ext_resource path="res://prefabs/overlay/DialogView.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/fonts/Olden-Text-14.tres" type="DynamicFont" id=9]
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
@@ -306,6 +307,7 @@ valign = 1
 
 [node name="GameView" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 960, 540 )
@@ -354,10 +356,10 @@ mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="DialogView" parent="." instance=ExtResource( 8 )]
+visible = false
 
 [node name="TutorialView" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -368,7 +370,7 @@ margin_top = 41.0
 margin_right = 293.0
 margin_bottom = 397.0
 mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "You: The Space Whale"
 text = "You: The Space Whale"
@@ -377,11 +379,11 @@ deselect_on_focus_loss_enabled = false
 
 [node name="TextLabel-You-Info" type="RichTextLabel" parent="TutorialView/TextLabel-You"]
 margin_left = 12.0
-margin_top = 34.0
-margin_right = 221.0
-margin_bottom = 360.0
+margin_top = 31.0
+margin_right = 250.0
+margin_bottom = 357.0
 custom_colors/default_color = Color( 0.811765, 0.811765, 0.811765, 1 )
-custom_fonts/normal_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "You float around in space and harvest the stardust needed to feed yourself and your home.
 
@@ -416,12 +418,12 @@ scale = Vector2( 0.2, 0.34 )
 texture = ExtResource( 4 )
 
 [node name="TextLabel-Them" type="RichTextLabel" parent="TutorialView"]
-margin_left = 663.65
-margin_top = 63.0
-margin_right = 941.65
-margin_bottom = 328.0
+margin_left = 657.0
+margin_top = 52.0
+margin_right = 951.0
+margin_bottom = 393.0
 mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "Them: Dust Monkies"
 text = "Them: Dust Monkies"
@@ -431,21 +433,25 @@ deselect_on_focus_loss_enabled = false
 [node name="TextLabel-Them-Info" type="RichTextLabel" parent="TutorialView/TextLabel-Them"]
 margin_left = 10.0
 margin_top = 32.0
-margin_right = 269.0
-margin_bottom = 250.0
+margin_right = 281.0
+margin_bottom = 338.0
 mouse_filter = 2
 custom_colors/default_color = Color( 0.811765, 0.811765, 0.811765, 1 )
-custom_fonts/normal_font = ExtResource( 7 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "They started as an experiment to speed up dust extraction from gravity wells, but we all know that they got a bit out of hand.
 
 The monkey farms where setup to to increase dust harvesting yields but now they harvest us and can be found across all dust fields known to whales.
 
 
+
+
 [center][color=#fefefe]\"They must be destroyed!\"[/color][/center]"
 text = "They started as an experiment to speed up dust extraction from gravity wells, but we all know that they got a bit out of hand.
 
 The monkey farms where setup to to increase dust harvesting yields but now they harvest us and can be found across all dust fields known to whales.
+
+
 
 
 \"They must be destroyed!\""
@@ -465,7 +471,7 @@ margin_top = 123.0
 margin_right = 488.0
 margin_bottom = 156.0
 mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Kill Count[/center]"
 text = "Kill Count"
@@ -485,7 +491,7 @@ margin_top = 416.0
 margin_right = 231.0
 margin_bottom = 447.0
 mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Dust Amounts[/center]"
 text = "Dust Amounts"
@@ -500,12 +506,12 @@ scale = Vector2( 0.125, 0.2 )
 texture = ExtResource( 4 )
 
 [node name="TextLabel-Mid" type="RichTextLabel" parent="TutorialView"]
-margin_left = 321.0
-margin_top = 394.0
-margin_right = 472.0
-margin_bottom = 427.0
+margin_left = 323.0
+margin_top = 409.0
+margin_right = 474.0
+margin_bottom = 442.0
 mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Thread Level[/center]"
 text = "Thread Level"
@@ -527,7 +533,7 @@ margin_bottom = 480.0
 mouse_filter = 2
 custom_constants/line_separation = -4
 custom_fonts/italics_font = ExtResource( 7 )
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Jump Drive[/center]
 [center][i]Activate: TAB[/i][/center]"
@@ -537,18 +543,25 @@ scroll_active = false
 deselect_on_focus_loss_enabled = false
 
 [node name="TextLabel-Mid3" type="RichTextLabel" parent="TutorialView"]
-margin_left = 414.0
-margin_top = 291.0
-margin_right = 546.0
-margin_bottom = 335.0
+modulate = Color( 1, 1, 1, 0.827451 )
+margin_left = 380.0
+margin_top = 298.0
+margin_right = 587.0
+margin_bottom = 384.0
 mouse_filter = 2
 custom_constants/line_separation = -2
 custom_fonts/italics_font = ExtResource( 7 )
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center][i]Fire: Left Mouse Button[/i][/center]
+
+[center][i]Speacials: A / 1 & E / 2 [/i][/center]
+
 [center][i]Move: WASD / ARROWS[/i][/center]"
 text = "Fire: Left Mouse Button
+
+Speacials: A / 1 & E / 2 
+
 Move: WASD / ARROWS"
 scroll_active = false
 deselect_on_focus_loss_enabled = false
@@ -561,12 +574,12 @@ scale = Vector2( 0.125, 0.2 )
 texture = ExtResource( 4 )
 
 [node name="TextLabel-Right" type="RichTextLabel" parent="TutorialView"]
-margin_left = 773.0
-margin_top = 407.0
-margin_right = 905.0
-margin_bottom = 435.0
+margin_left = 776.0
+margin_top = 423.0
+margin_right = 908.0
+margin_bottom = 451.0
 mouse_filter = 2
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/normal_font = ExtResource( 9 )
 bbcode_enabled = true
 bbcode_text = "[center]Evaluation[/center]"
 text = "Evaluation"

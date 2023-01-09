@@ -1,7 +1,7 @@
 extends Node
 
-var score = 0
 var active = null
+var highsocre = 0
 
 var shake_screen = false
 var shake_intensity = 0
@@ -12,12 +12,13 @@ onready var tutorial_view  = get_node("%TutorialView")
 
 onready var shake_timer = get_node("%ShakeTimer")
 
-onready var last_socre = get_node("%LastHighsocre")
-onready var tutorial_socre = get_node("%TutorialHighsocre")
+onready var thread_lvl = get_node("%ThreadLvl")
+onready var points_high = get_node("%PointsHigh")
+onready var points_sector = get_node("%PointsSector")
 
-onready var total_points = get_node("%TotalPoints")
-onready var sector_level = get_node("%SectorLevel")
-
+onready var kill_count = get_node("%KillCount")
+onready var dust_account = get_node("%DustAccount")
+onready var dust_inventory = get_node("%DustInventory")
 
 func _ready():
 	randomize()
@@ -25,20 +26,28 @@ func _ready():
 	game_view.visible = false
 	dialog_view.visible = false
 	tutorial_view.visible = false
-	score = Global.highsocre
 	active = tutorial_view
-	last_socre.text = "%03d" % score
-	tutorial_socre.text = last_socre.text
+	highsocre = Global.highsocre
+	points_high.text = "%04d" % highsocre
+	#warning-ignore: return_value_discarded
+	Global.connect("updated_kills", self, "_on_updated_kills")
 	#warning-ignore: return_value_discarded
 	Global.connect("updated_points", self, "_on_updated_points")
 	#warning-ignore: return_value_discarded
 	Global.connect("updated_difficulty", self, "_on_updated_difficulty")
+	#warning-ignore: return_value_discarded
+	Global.connect("dust_storage_updated", self, "_on_dust_storage_updated")
+	#warning-ignore: return_value_discarded
+	Global.connect("dust_invetory_updated", self, "_on_dust_invetory_updated")
 
 
 func _exit_tree():
 	Global.overlay = null
+	Global.disconnect("updated_kills", self, "_on_updated_kills")
 	Global.disconnect("updated_points", self, "_on_updated_points")
 	Global.disconnect("updated_difficulty", self, "_on_updated_difficulty")
+	Global.disconnect("dust_storage_updated", self, "_on_dust_storage_updated")
+	Global.disconnect("dust_invetory_updated", self, "_on_dust_invetory_updated")
 
 
 func _process(delta):
@@ -82,25 +91,39 @@ func _on_shake_timeout():
 	shake_screen = false
 
 
+func _on_updated_kills(value):
+	kill_count.text = "%03d" % value
+
+
 func _on_updated_points(value):
-	total_points.text = "%03d" % value
-	if value > score: 
-		score = value
-		last_socre.text = total_points.text
-		tutorial_socre.text = last_socre.text
+	points_sector.text = "%04d" % value
+	if value > highsocre: 
+		highsocre = value
+		points_high.text = points_sector.text
 
 
 func _on_updated_difficulty(value):
-	sector_level.text = "%02d" % value
+	thread_lvl.text = "%02d" % value
+
+
+func _on_dust_storage_updated(value):
+	dust_account.text = "%04d" % value
+
+
+func _on_dust_invetory_updated(value):
+	dust_inventory.text = "%04d" % value
+
 
 
 func _on_start_pressed():
 	Global.show_game()
 
 
-func _on_jump_in_pressed():
-	Global.show_game()
-
-
-func _on_jump_out_pressed():
-	Global.show_dialog()
+func _on_jump_pressed():
+	match Global.state:
+		Global.State.Game:
+			Global.show_dialog()
+		Global.State.Dialog:
+			Global.show_game()
+		Global.State.Tutorial:
+			Global.show_game()

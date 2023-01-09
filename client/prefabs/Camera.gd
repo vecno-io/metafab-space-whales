@@ -36,6 +36,7 @@ func _process_game(delta):
 	if shake_screen:
 		var x = rand_range(-shake_intensity, shake_intensity)
 		var y = rand_range(-shake_intensity, shake_intensity)
+		
 		global_position = lerp(global_position, target_position, 0.24)
 		global_position += Vector2(x, y) * delta
 	else:
@@ -43,26 +44,30 @@ func _process_game(delta):
 
 
 func _process_dialog(_delta):
-	# TODO Implement _process_tutorial
-	pass
+	if Global.local_player == null:
+		return
+	var target = Global.local_player.global_position - Vector2(40.0, 0)
+	global_position = lerp(global_position, target, 0.24)
 
 
 func _process_tutorial(_delta):
-	# TODO Implement _process_tutorial
-	pass
+	if Global.local_player == null:
+		return
+	var target = Global.local_player.global_position - Vector2(40.0, 0)
+	global_position = lerp(global_position, target, 0.24)
 
 
 func _follow_player_movement():
 	if Global.local_player == null:
 		return
-	var target = Global.local_player.global_position
+	var target = Global.local_player.global_position - Vector2(40.0, 0)
 	# ToDo Juice: smooth center between mouse and player
 	target_position = lerp(target, target_position, 0.24)
 
 
 func reset_position():
 	yield(get_tree().create_timer(0.1), "timeout")
-	global_position = Vector2.ZERO
+	global_position = Vector2(-40.0, 0)
 
 
 func screen_shake(intensity, time):

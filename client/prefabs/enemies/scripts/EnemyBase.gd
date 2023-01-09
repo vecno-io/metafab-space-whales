@@ -42,7 +42,8 @@ func _base_look_at(delta, target):
 func _do_base_movement(delta, target) -> bool:
 	if hp <= 0:
 		queue_free()
-		Global.add_points(1)
+		Global.add_kill()
+		Global.add_points(2)
 		Global.screen_shake(48, 0.24)
 		if Global.local_sector != null:
 			var object = Global.instance_node(dust_particles, Global.local_sector, global_position)

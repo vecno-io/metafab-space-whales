@@ -8,7 +8,8 @@ export(int) var dust_max = 250
 
 func _ready():
 	randomize()
-	dust_amount = int(rand_range(dust_min, dust_max))
+	if 0 <= dust_amount:
+		dust_amount = int(rand_range(dust_min, dust_max))
 
 func _on_freeze_timeout():
 	set_process(false)

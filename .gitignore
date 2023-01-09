@@ -15,4 +15,5 @@ data_*/
 .env.ci
 .env.dev
 .env.prod
+build/
 server/vendor

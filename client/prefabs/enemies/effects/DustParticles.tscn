@@ -18,6 +18,8 @@ initial_velocity_random = 1.0
 scale_amount = 0.04
 scale_amount_random = 0.24
 script = ExtResource( 1 )
+dust_min = 150
+dust_max = 300
 
 [node name="Hitbox" type="Area2D" parent="."]
 

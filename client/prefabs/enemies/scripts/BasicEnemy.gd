@@ -2,6 +2,7 @@ class_name ProtoEnemy
 extends EnemyBase
 
 export(bool) var freeze = false
+export(bool) var is_hunter = false
 
 onready var sfx_hit = get_node("%SfxrPlayerHit")
 onready var sfx_explode = get_node("%SfxrPlayerExplode")
@@ -14,19 +15,33 @@ func _ready():
 
 func _process(delta):
 	if Global.paused:
-		return false
+		return
 	if Global.local_player == null:
-		return false
-	_base_look_at(delta, Global.local_player)
-	if hp <= 0: 
+		return
+	if _has_died(): 
 		AudioManager.play_sfx_effect(sfx_explode)
-	if _do_base_movement(delta, Global.local_player):
-		# ToDo Juice: Animate move
-		pass
+		return
+	match state:
+		State.Flee:
+			_do_base_look(delta, target)
+			if _do_base_movement(delta, target):
+				# ToDo Juice: Animate move
+				pass
+		State.Harvest:
+			var position = Global.local_player.global_position
+			_do_base_look(delta, position)
+			if _do_base_movement(delta, position):
+				# ToDo Juice: Animate move
+				pass
 
 
 func _on_hitbox_entered(area: Area2D):
 	if ._do_base_knockback(area):
 		AudioManager.play_sfx_effect(sfx_hit)
 		# ToDo Juice: Animate hit
-		pass
+	if ._do_base_loot(area):
+		# ToDo Juice: Play loot sound
+		if !is_hunter:
+			._base_start_running()
+		else:
+			speed += 30

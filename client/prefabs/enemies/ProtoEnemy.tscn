@@ -16,8 +16,11 @@ texture = ExtResource( 1 )
 script = ExtResource( 2 )
 hp = 2
 speed = 160
+min_loot_amount = 30
+max_loot_amount = 60
 base_color = Color( 0.901961, 0.533333, 0.286275, 1 )
 stun_color = Color( 0.945312, 0.783919, 0.675751, 1 )
+is_hunter = true
 
 [node name="Hitbox" type="Area2D" parent="." groups=["enemy"]]
 

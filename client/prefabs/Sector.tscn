@@ -32,6 +32,33 @@ position = Vector2( 24, 255 )
 [node name="DustParticles 03" parent="." instance=ExtResource( 2 )]
 position = Vector2( -316, -128 )
 
+[node name="DustParticles 04" parent="." instance=ExtResource( 2 )]
+position = Vector2( -259, 687 )
+
+[node name="DustParticles 05" parent="." instance=ExtResource( 2 )]
+position = Vector2( -464, 1059 )
+
+[node name="DustParticles 06" parent="." instance=ExtResource( 2 )]
+position = Vector2( -804, 676 )
+
+[node name="DustParticles 07" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1005, -1094 )
+
+[node name="DustParticles 08" parent="." instance=ExtResource( 2 )]
+position = Vector2( 800, -722 )
+
+[node name="DustParticles 09" parent="." instance=ExtResource( 2 )]
+position = Vector2( 460, -1105 )
+
+[node name="DustParticles 10" parent="." instance=ExtResource( 2 )]
+position = Vector2( -263, -1818 )
+
+[node name="DustParticles 11" parent="." instance=ExtResource( 2 )]
+position = Vector2( -468, -1446 )
+
+[node name="DustParticles 12" parent="." instance=ExtResource( 2 )]
+position = Vector2( -808, -1829 )
+
 [node name="SpawnTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 1.8

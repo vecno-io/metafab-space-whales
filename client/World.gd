@@ -58,11 +58,13 @@ func _load_active_sector():
 	if sector != null: _unload_active_sector()
 		# TODO Polish: Select random sector
 	sector = entry_sector.instance()
+	sector.difficulty = Global.difficulty
 	game_view.add_child(sector)
 
 
 func _unload_active_sector():
 	if sector == null: return
+	Global.difficulty = int(sector.difficulty * 0.5) + 1
 	sector.queue_free()
 	sector = null
 

@@ -53,6 +53,7 @@ var overlay = null
 var local_player = null
 var local_sector = null setget _set_sector
 
+var difficulty = 1
 
 func _no_set(_value):
 	pass
@@ -173,6 +174,7 @@ func save_game():
 	file.set_value("firerate_boost", "inventory", firerate_inventory)
 	# High Score
 	file.set_value("highsocre", "latest", highsocre)
+	file.set_value("difficulty", "latest", difficulty)
 	var err = file.save(SAVE_FILE)
 	if err != OK: 
 		push_warning("save_game: %s" % err)
@@ -198,9 +200,11 @@ func _load_game():
 		firerate_storage = file.get_value("firerate_boost", "storage")
 	if file.has_section_key("firerate_boost", "inventory"):
 		firerate_inventory = file.get_value("firerate_boost", "inventory")
-	# High Score
+	# Globals
 	if file.has_section_key("highsocre", "latest"):
 		highsocre = file.get_value("highsocre", "latest") 
+	if file.has_section_key("difficulty", "latest"):
+		difficulty = file.get_value("difficulty", "latest") 
 
 
 func pause_game():

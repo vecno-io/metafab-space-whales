@@ -11,11 +11,26 @@
 script = ExtResource( 1 )
 enemies = [ ExtResource( 3 ), ExtResource( 5 ) ]
 
-[node name="SpeedBoost" parent="." instance=ExtResource( 8 )]
-position = Vector2( 345, 387 )
+[node name="SpeedBoost 01" parent="." instance=ExtResource( 8 )]
+position = Vector2( 261, -306 )
 
-[node name="ReloadBoost" parent="." instance=ExtResource( 7 )]
-position = Vector2( 591, 400 )
+[node name="SpeedBoost 02" parent="." instance=ExtResource( 8 )]
+position = Vector2( -195, 131 )
+
+[node name="ReloadBoost 01" parent="." instance=ExtResource( 7 )]
+position = Vector2( -156, -295 )
+
+[node name="ReloadBoost 02" parent="." instance=ExtResource( 7 )]
+position = Vector2( 337, 175 )
+
+[node name="DustParticles 01" parent="." instance=ExtResource( 2 )]
+position = Vector2( 229, -117 )
+
+[node name="DustParticles 02" parent="." instance=ExtResource( 2 )]
+position = Vector2( 24, 255 )
+
+[node name="DustParticles 03" parent="." instance=ExtResource( 2 )]
+position = Vector2( -316, -128 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -25,12 +40,6 @@ autostart = true
 [node name="DifficultyTimer" type="Timer" parent="."]
 wait_time = 7.2
 autostart = true
-
-[node name="DustParticles 01" parent="." instance=ExtResource( 2 )]
-position = Vector2( 78, -53 )
-
-[node name="DustParticles 02" parent="." instance=ExtResource( 2 )]
-position = Vector2( 49, 169 )
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timeout"]

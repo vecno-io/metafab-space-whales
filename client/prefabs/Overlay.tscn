@@ -113,7 +113,7 @@ mouse_filter = 2
 custom_constants/margin_right = 4
 custom_constants/margin_left = 4
 
-[node name="DustAccount" type="Label" parent="HudView/VBoxContainer/BottomTags/DustStarts/VBoxContainer/MarginContainer"]
+[node name="DustStorage" type="Label" parent="HudView/VBoxContainer/BottomTags/DustStarts/VBoxContainer/MarginContainer"]
 unique_name_in_owner = true
 modulate = Color( 0.501961, 0.501961, 0.501961, 1 )
 margin_left = 4.0
@@ -163,12 +163,21 @@ text = "01"
 align = 1
 valign = 1
 
-[node name="JumpButton" type="Button" parent="HudView/VBoxContainer/BottomTags/Main/VBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="HudView/VBoxContainer/BottomTags/Main/VBoxContainer"]
 margin_top = 11.0
 margin_right = 632.0
 margin_bottom = 67.0
 rect_min_size = Vector2( 0, 56 )
+mouse_filter = 2
+
+[node name="JumpButton" type="Button" parent="HudView/VBoxContainer/BottomTags/Main/VBoxContainer/CenterContainer"]
+margin_left = 251.0
+margin_top = 14.0
+margin_right = 380.0
+margin_bottom = 42.0
 mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_fonts/font = ExtResource( 5 )
 custom_styles/hover = SubResource( 10 )
 custom_styles/pressed = SubResource( 11 )
@@ -450,13 +459,13 @@ texture = ExtResource( 4 )
 
 [node name="TextLabel-Left" type="RichTextLabel" parent="TutorialView"]
 margin_left = 74.0
-margin_top = 414.0
-margin_right = 222.0
+margin_top = 416.0
+margin_right = 231.0
 margin_bottom = 447.0
 mouse_filter = 2
 custom_fonts/normal_font = ExtResource( 6 )
 bbcode_enabled = true
-bbcode_text = "[center]Dust Inventory[/center]"
+bbcode_text = "[center]Dust Amounts[/center]"
 text = "Dust Amounts"
 scroll_active = false
 deselect_on_focus_loss_enabled = false
@@ -552,5 +561,5 @@ texture = ExtResource( 4 )
 [node name="ShakeTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
-[connection signal="pressed" from="HudView/VBoxContainer/BottomTags/Main/VBoxContainer/JumpButton" to="." method="_on_jump_pressed"]
+[connection signal="pressed" from="HudView/VBoxContainer/BottomTags/Main/VBoxContainer/CenterContainer/JumpButton" to="." method="_on_jump_pressed"]
 [connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timeout"]

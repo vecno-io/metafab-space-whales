@@ -20,6 +20,12 @@ signal updated_difficulty(value)
 signal dust_storage_updated(value)
 signal dust_invetory_updated(value)
 
+signal speed_storage_updated(value)
+signal speed_invetory_updated(value)
+
+signal firerate_storage_updated(value)
+signal firerate_invetory_updated(value)
+
 const SAVE_FILE := "user://savefile.data"
 
 var state = State.No setget _no_set
@@ -31,6 +37,12 @@ var highsocre = 0 setget _no_set
 
 var dust_storage = 0 setget _set_dust_storage
 var dust_invetory = 0 setget _set_dust_invetory
+
+var speed_storage = 0 setget _set_speed_storage
+var speed_invetory = 0 setget _set_speed_invetory
+
+var firerate_storage = 0 setget _set_firerate_storage
+var firerate_invetory = 0 setget _set_firerate_invetory
 
 var world = null
 var camera = null
@@ -68,6 +80,30 @@ func _set_dust_invetory(value):
 	dust_invetory = value
 	# TODO Save to storage file
 	emit_signal("dust_invetory_updated", value)
+
+
+func _set_speed_storage(value):
+	speed_storage = value
+	# TODO Save to storage file
+	emit_signal("speed_storage_updated", value)
+
+
+func _set_speed_invetory(value):
+	speed_invetory = value
+	# TODO Save to storage file
+	emit_signal("speed_invetory_updated", value)
+
+
+func _set_firerate_storage(value):
+	firerate_storage = value
+	# TODO Save to storage file
+	emit_signal("firerate_storage_updated", value)
+
+
+func _set_firerate_invetory(value):
+	firerate_invetory = value
+	# TODO Save to storage file
+	emit_signal("firerate_invetory_updated", value)
 
 
 func _sector_reset():
@@ -136,9 +172,9 @@ func _load_game():
 	if err != OK: 
 		push_warning("_load_game: %s" % err)
 	if file.has_section_key("dust", "storage"):
-		dust_storage = file.get_value("dust", "storage") 
+		dust_storage = file.get_value("dust", "storage")
 	if file.has_section_key("dust", "invetory"):
-		dust_invetory = file.get_value("dust", "invetory") 
+		dust_invetory = file.get_value("dust", "invetory")
 	if file.has_section_key("highsocre", "latest"):
 		highsocre = file.get_value("highsocre", "latest") 
 

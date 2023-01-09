@@ -17,7 +17,7 @@ onready var points_high = get_node("%PointsHigh")
 onready var points_sector = get_node("%PointsSector")
 
 onready var kill_count = get_node("%KillCount")
-onready var dust_account = get_node("%DustAccount")
+onready var dust_storage = get_node("%DustStorage")
 onready var dust_inventory = get_node("%DustInventory")
 
 func _ready():
@@ -29,6 +29,8 @@ func _ready():
 	active = tutorial_view
 	highsocre = Global.highsocre
 	points_high.text = "%04d" % highsocre
+	dust_storage.text = "%04d" % Global.dust_storage
+	dust_inventory.text = "%04d" % Global.dust_invetory
 	#warning-ignore: return_value_discarded
 	Global.connect("updated_kills", self, "_on_updated_kills")
 	#warning-ignore: return_value_discarded
@@ -107,7 +109,7 @@ func _on_updated_difficulty(value):
 
 
 func _on_dust_storage_updated(value):
-	dust_account.text = "%04d" % value
+	dust_storage.text = "%04d" % value
 
 
 func _on_dust_invetory_updated(value):

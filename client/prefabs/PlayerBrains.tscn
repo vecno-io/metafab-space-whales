@@ -44,7 +44,7 @@ unique_name_in_owner = true
 wait_time = 4.0
 one_shot = true
 
-[node name="ReloadBoost" type="Timer" parent="."]
+[node name="FirerateBoost" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 4.0
 one_shot = true
@@ -87,4 +87,4 @@ high_pass_filter/cutoff_sweep = 0.0
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_entered"]
 [connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]
 [connection signal="timeout" from="SpeedBoost" to="." method="_on_speed_boost_timeout"]
-[connection signal="timeout" from="ReloadBoost" to="." method="_on_reaload_boost_timeout"]
+[connection signal="timeout" from="FirerateBoost" to="." method="_on_reaload_boost_timeout"]

@@ -18,13 +18,13 @@ signal updated_points(value)
 signal updated_difficulty(value)
 
 signal dust_storage_updated(value)
-signal dust_invetory_updated(value)
+signal dust_inventory_updated(value)
 
 signal speed_storage_updated(value)
-signal speed_invetory_updated(value)
+signal speed_inventory_updated(value)
 
 signal firerate_storage_updated(value)
-signal firerate_invetory_updated(value)
+signal firerate_inventory_updated(value)
 
 const SAVE_FILE := "user://savefile.data"
 
@@ -36,13 +36,15 @@ var paused = true setget _no_set
 var highsocre = 0 setget _no_set
 
 var dust_storage = 0 setget _set_dust_storage
-var dust_invetory = 0 setget _set_dust_invetory
+var dust_inventory = 0 setget _set_dust_inventory
 
+var speed_cost = 384 setget _no_set
 var speed_storage = 0 setget _set_speed_storage
-var speed_invetory = 0 setget _set_speed_invetory
+var speed_inventory = 0 setget _set_speed_inventory
 
+var firerate_cost = 214 setget _no_set
 var firerate_storage = 0 setget _set_firerate_storage
-var firerate_invetory = 0 setget _set_firerate_invetory
+var firerate_inventory = 0 setget _set_firerate_inventory
 
 var world = null
 var camera = null
@@ -76,10 +78,10 @@ func _set_dust_storage(value):
 	emit_signal("dust_storage_updated", value)
 
 
-func _set_dust_invetory(value):
-	dust_invetory = value
+func _set_dust_inventory(value):
+	dust_inventory = value
 	# TODO Save to storage file
-	emit_signal("dust_invetory_updated", value)
+	emit_signal("dust_inventory_updated", value)
 
 
 func _set_speed_storage(value):
@@ -88,10 +90,10 @@ func _set_speed_storage(value):
 	emit_signal("speed_storage_updated", value)
 
 
-func _set_speed_invetory(value):
-	speed_invetory = value
+func _set_speed_inventory(value):
+	speed_inventory = value
 	# TODO Save to storage file
-	emit_signal("speed_invetory_updated", value)
+	emit_signal("speed_inventory_updated", value)
 
 
 func _set_firerate_storage(value):
@@ -100,10 +102,10 @@ func _set_firerate_storage(value):
 	emit_signal("firerate_storage_updated", value)
 
 
-func _set_firerate_invetory(value):
-	firerate_invetory = value
+func _set_firerate_inventory(value):
+	firerate_inventory = value
 	# TODO Save to storage file
-	emit_signal("firerate_invetory_updated", value)
+	emit_signal("firerate_inventory_updated", value)
 
 
 func _sector_reset():
@@ -134,6 +136,7 @@ func _sector_updated_difficulty(value):
 
 
 func show_game():
+	self.save_game()
 	state = Global.State.Game
 	emit_signal("state_updated")
 	if world != null: world.show_game()
@@ -141,6 +144,7 @@ func show_game():
 
 
 func show_dialog():
+	self.save_game()
 	world.reset_player()
 	camera.reset_position()
 	state = Global.State.Dialog
@@ -158,8 +162,16 @@ func show_tutorial():
 
 func save_game():
 	var file := ConfigFile.new()
+	# Dust Currency
 	file.set_value("dust", "storage", dust_storage)
-	file.set_value("dust", "invetory", dust_invetory)
+	file.set_value("dust", "inventory", dust_inventory)
+	# Speed Booster Currency
+	file.set_value("speed_boost", "storage", speed_storage)
+	file.set_value("speed_boost", "inventory", speed_inventory)
+	# Firerate Booster Currency
+	file.set_value("firerate_boost", "storage", firerate_storage)
+	file.set_value("firerate_boost", "inventory", firerate_inventory)
+	# High Score
 	file.set_value("highsocre", "latest", highsocre)
 	var err = file.save(SAVE_FILE)
 	if err != OK: 
@@ -171,10 +183,22 @@ func _load_game():
 	var err = file.load(SAVE_FILE)
 	if err != OK: 
 		push_warning("_load_game: %s" % err)
+	# Dust Currency
 	if file.has_section_key("dust", "storage"):
 		dust_storage = file.get_value("dust", "storage")
-	if file.has_section_key("dust", "invetory"):
-		dust_invetory = file.get_value("dust", "invetory")
+	if file.has_section_key("dust", "inventory"):
+		dust_inventory = file.get_value("dust", "inventory")
+	# Speed Booster Currency
+	if file.has_section_key("speed_boost", "storage"):
+		speed_storage = file.get_value("speed_boost", "storage")
+	if file.has_section_key("speed_boost", "inventory"):
+		speed_inventory = file.get_value("speed_boost", "inventory")
+	# Firerate Booster Currency
+	if file.has_section_key("firerate_boost", "storage"):
+		firerate_storage = file.get_value("firerate_boost", "storage")
+	if file.has_section_key("firerate_boost", "inventory"):
+		firerate_inventory = file.get_value("firerate_boost", "inventory")
+	# High Score
 	if file.has_section_key("highsocre", "latest"):
 		highsocre = file.get_value("highsocre", "latest") 
 

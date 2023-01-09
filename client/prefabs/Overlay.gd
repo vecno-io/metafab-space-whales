@@ -20,6 +20,10 @@ onready var kill_count = get_node("%KillCount")
 onready var dust_storage = get_node("%DustStorage")
 onready var dust_inventory = get_node("%DustInventory")
 
+onready var speed_inventory = get_node("%SpeedInventory")
+onready var firerate_inventory = get_node("%FirerateInventory")
+
+
 func _ready():
 	randomize()
 	Global.overlay = self
@@ -30,7 +34,9 @@ func _ready():
 	highsocre = Global.highsocre
 	points_high.text = "%04d" % highsocre
 	dust_storage.text = "%04d" % Global.dust_storage
-	dust_inventory.text = "%04d" % Global.dust_invetory
+	dust_inventory.text = "%04d" % Global.dust_inventory
+	speed_inventory.text = "%d/8" % Global.speed_inventory
+	firerate_inventory.text = "%d/8" % Global.firerate_inventory
 	#warning-ignore: return_value_discarded
 	Global.connect("updated_kills", self, "_on_updated_kills")
 	#warning-ignore: return_value_discarded
@@ -40,7 +46,11 @@ func _ready():
 	#warning-ignore: return_value_discarded
 	Global.connect("dust_storage_updated", self, "_on_dust_storage_updated")
 	#warning-ignore: return_value_discarded
-	Global.connect("dust_invetory_updated", self, "_on_dust_invetory_updated")
+	Global.connect("dust_inventory_updated", self, "_on_dust_inventory_updated")
+	#warning-ignore: return_value_discarded
+	Global.connect("speed_inventory_updated", self, "_on_speed_inventory_updated")
+	#warning-ignore: return_value_discarded
+	Global.connect("firerate_inventory_updated", self, "_on_firerate_inventory_updated")
 
 
 func _exit_tree():
@@ -49,7 +59,9 @@ func _exit_tree():
 	Global.disconnect("updated_points", self, "_on_updated_points")
 	Global.disconnect("updated_difficulty", self, "_on_updated_difficulty")
 	Global.disconnect("dust_storage_updated", self, "_on_dust_storage_updated")
-	Global.disconnect("dust_invetory_updated", self, "_on_dust_invetory_updated")
+	Global.disconnect("dust_inventory_updated", self, "_on_dust_inventory_updated")
+	Global.disconnect("speed_inventory_updated", self, "_on_speed_inventory_updated")
+	Global.disconnect("firerate_inventory_updated", self, "_on_firerate_inventory_updated")
 
 
 func _process(delta):
@@ -112,8 +124,26 @@ func _on_dust_storage_updated(value):
 	dust_storage.text = "%04d" % value
 
 
-func _on_dust_invetory_updated(value):
+func _on_dust_inventory_updated(value):
 	dust_inventory.text = "%04d" % value
+
+
+func _on_speed_storage_updated(_value):
+	# TODO Implement in dialog
+	pass
+
+
+func _on_speed_inventory_updated(value):
+	speed_inventory.text = "8/%d" % value
+
+
+func _on_firerate_storage_updated(_value):
+	# TODO Implement in dialog
+	pass
+
+
+func _on_firerate_inventory_updated(value):
+	firerate_inventory.text = "%d/8" % value
 
 
 

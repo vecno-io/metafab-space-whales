@@ -75,7 +75,6 @@ func _process_game(delta):
 	if Global.local_sector == null:
 		return
 	if fire_up && Input.is_action_pressed("fire_main"):
-		print_debug("fire a")
 		self.fire_weapon()
 	if speed_boost_up && Input.is_action_just_pressed("boost_speed"):
 		self.start_speed_boost(speed_boost_timeout, speed_boost)
@@ -105,27 +104,27 @@ func get_segment_hook():
 
 
 func dust_pickup(amount):
-	Global.dust_invetory += amount
+	Global.dust_inventory += amount
 
 
 func speed_boost_pickup(amount):
-	Global.speed_invetory += amount
+	Global.speed_inventory += amount
 
 
 func firerate_boost_pickup(amount):
-	Global.firerate_invetory += amount
+	Global.firerate_inventory += amount
 
 
 func fire_weapon():
 	if !fire_up:
 		return
 	var cost = int(rand_range(bullet_cost_min, bullet_cost_max))
-	if cost > Global.dust_invetory: 
-		print_debug("Fire out: %s > %s" % [cost, Global.dust_invetory])
+	if cost > Global.dust_inventory: 
+		print_debug("Fire out: %s > %s" % [cost, Global.dust_inventory])
 		# TODO Juice: out of speed boost sfx
 		return
 	fire_up = false
-	Global.dust_invetory -= cost
+	Global.dust_inventory -= cost
 	Global.instance_node(bullet, Global.local_sector, global_position)
 	AudioManager.play_sfx_effect(fire_sfx)
 	firerate_timer.wait_time = firerate
@@ -139,7 +138,7 @@ func _on_firerate_timeout():
 func start_speed_boost(time, value):
 	if !speed_boost_up:
 		return
-	if Global.speed_invetory <= 0:
+	if Global.speed_inventory <= 0:
 		# TODO Juice: out of speed boost sfx
 		print("Speed boost out: sfx")
 		return
@@ -148,7 +147,7 @@ func start_speed_boost(time, value):
 	speed_boost_timer.wait_time = time
 	speed_boost_timer.start()
 	emit_signal("speed_boost_start")
-	Global.speed_invetory -= 1
+	Global.speed_inventory -= 1
 
 
 func _on_speed_boost_timeout():
@@ -160,7 +159,7 @@ func _on_speed_boost_timeout():
 func start_firerate_boost(time, value):
 	if !firerate_boost_up:
 		return
-	if Global.firerate_invetory <= 0:
+	if Global.firerate_inventory <= 0:
 		# TODO Juice: out of firerate boost sfx
 		print("Firerate boost out: sfx")
 		return
@@ -169,7 +168,7 @@ func start_firerate_boost(time, value):
 	firerate_boost_timer.wait_time = time
 	firerate_boost_timer.start()
 	emit_signal("firerate_boost_start")
-	Global.firerate_invetory -= 1
+	Global.firerate_inventory -= 1
 
 
 func _on_reaload_boost_timeout():
@@ -182,7 +181,9 @@ func _on_hitbox_entered(area:Area2D):
 	if destroyed: 
 		return
 	if area.is_in_group("enemy"):
-		Global.dust_invetory -= int(Global.dust_invetory * 0.6)
+		Global.dust_inventory -= int(Global.dust_inventory * 0.6)
+		Global.firerate_inventory = 0
+		Global.speed_inventory = 0
 		Global.pause_game()
 		Global.save_game()
 		destroyed = true

@@ -65,6 +65,9 @@ func _exit_tree():
 
 
 func _process(delta):
+	if Input.is_action_just_pressed("jump"):
+		_on_jump_pressed()
+		return
 	active.rect_scale = lerp(active.rect_scale, Vector2(1, 1), 0.24)
 	if shake_screen:
 		var x = rand_range(-shake_intensity, shake_intensity)

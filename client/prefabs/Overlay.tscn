@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://prefabs/Overlay.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Rye-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/fonts/Olden-Text-16.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/fonts/Olden-Text-12.tres" type="DynamicFont" id=7]
 [ext_resource path="res://prefabs/overlay/DialogView.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/ShortCut-Jump.tres" type="ShortCut" id=9]
 
 [sub_resource type="DynamicFont" id=2]
 size = 64
@@ -221,7 +220,6 @@ custom_styles/pressed = SubResource( 11 )
 custom_styles/focus = SubResource( 12 )
 custom_styles/disabled = SubResource( 13 )
 custom_styles/normal = SubResource( 14 )
-shortcut = ExtResource( 9 )
 text = ">>  Jump  <<"
 
 [node name="FirerateStarts" type="MarginContainer" parent="HudView/VBoxContainer/BottomTags"]

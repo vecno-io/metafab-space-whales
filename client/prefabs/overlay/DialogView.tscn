@@ -198,10 +198,10 @@ margin_bottom = 23.0
 
 [node name="Title" type="Label" parent="VBoxContainer/MainTags/Left/CenterContainer/MarginContainer/VBoxContainer/SpeedBoostStorage/VBoxContainer2/TitleBox"]
 modulate = Color( 0.690196, 0.690196, 0.690196, 1 )
-margin_right = 131.0
+margin_right = 136.0
 margin_bottom = 23.0
 custom_fonts/font = ExtResource( 1 )
-text = "Move Booster"
+text = "Speed Booster"
 
 [node name="StoreBox" type="HBoxContainer" parent="VBoxContainer/MainTags/Left/CenterContainer/MarginContainer/VBoxContainer/SpeedBoostStorage/VBoxContainer2"]
 margin_top = 29.0
@@ -477,10 +477,10 @@ margin_bottom = 23.0
 
 [node name="Title" type="Label" parent="VBoxContainer/MainTags/Right/CenterContainer/MarginContainer/VBoxContainer/SpeedBoostShop/VBoxContainer2/TitleBox"]
 modulate = Color( 0.690196, 0.690196, 0.690196, 1 )
-margin_right = 131.0
+margin_right = 136.0
 margin_bottom = 23.0
 custom_fonts/font = ExtResource( 1 )
-text = "Move Booster"
+text = "Speed Booster"
 
 [node name="CostBox" type="HBoxContainer" parent="VBoxContainer/MainTags/Right/CenterContainer/MarginContainer/VBoxContainer/SpeedBoostShop/VBoxContainer2"]
 margin_top = 29.0

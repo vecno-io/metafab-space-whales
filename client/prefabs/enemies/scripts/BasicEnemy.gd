@@ -40,6 +40,8 @@ func _on_hitbox_entered(area: Area2D):
 		AudioManager.play_sfx_effect(sfx_hit)
 		# ToDo Juice: Animate hit
 	if ._do_base_loot(area):
+		modulate = Color.from_hsv(base_color.h, base_color.s * 1.4, base_color.v * 1.4)
+		base_color = modulate
 		# ToDo Juice: Play loot sound
 		if !is_hunter:
 			._base_start_running()

@@ -87,8 +87,9 @@ func _do_base_movement(delta, to) -> bool:
 
 
 func _do_base_loot(area: Area2D) -> bool:
-	if !area.is_in_group("player_segment"):
-		return false
+	if loot != 0: return false
+	if Global.dust_inventory == 0: return false
+	if !area.is_in_group("player_segment"): return false
 	var amount = int(rand_range(min_loot_amount, max_loot_amount))
 	if amount > Global.dust_inventory:
 		loot = Global.dust_inventory

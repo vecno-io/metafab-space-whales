@@ -51,7 +51,7 @@ func _process_dialog(delta):
 	global_position = lerp(global_position, segment.global_position, 0.24)
 
 
-func _process_tutorial(delta):
+func _process_tutorial(_delta):
 	# TODO Implement _process_tutorial
 	pass
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://prefabs/PlayerBrains.gd" type="Script" id=1]
 [ext_resource path="res://assets/square.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2.8, 2.8 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 8.0399
 
 [node name="PlayerHead" type="Sprite"]
 modulate = Color( 0.101961, 0.545098, 0.560784, 1 )
@@ -24,6 +27,12 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2( -2.38419e-08, 1.19209e-08 )
 shape = SubResource( 1 )
+
+[node name="Pickup" type="Area2D" parent="." groups=["player_pickup"]]
+scale = Vector2( 1, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+shape = SubResource( 2 )
 
 [node name="Firerate" type="Timer" parent="."]
 unique_name_in_owner = true

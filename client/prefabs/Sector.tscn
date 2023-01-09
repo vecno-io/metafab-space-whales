@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://prefabs/Sector.gd" type="Script" id=1]
+[ext_resource path="res://prefabs/enemies/effects/DustParticles.tscn" type="PackedScene" id=2]
 [ext_resource path="res://prefabs/enemies/GamaEnemy.tscn" type="PackedScene" id=3]
 [ext_resource path="res://prefabs/enemies/ProtoEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefabs/pickups/ReloadBoost.tscn" type="PackedScene" id=7]
@@ -24,6 +25,12 @@ autostart = true
 [node name="DifficultyTimer" type="Timer" parent="."]
 wait_time = 7.2
 autostart = true
+
+[node name="DustParticles 01" parent="." instance=ExtResource( 2 )]
+position = Vector2( 78, -53 )
+
+[node name="DustParticles 02" parent="." instance=ExtResource( 2 )]
+position = Vector2( 49, 169 )
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timeout"]
 [connection signal="timeout" from="DifficultyTimer" to="." method="_on_difficulty_timeout"]

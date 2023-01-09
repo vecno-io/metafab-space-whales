@@ -14,6 +14,9 @@ var turn_speed = PI * 2.2
 var speed_default = 150
 var reload_default = 0.08
 
+export(int) var bullet_cost_min = 8
+export(int) var bullet_cost_max = 12
+
 onready var firerate = get_node("%Firerate")
 onready var sfx_firerate = get_node("%SfxrStreamFire")
 
@@ -60,6 +63,10 @@ func _process_game(delta):
 		angle = clamp(angle, base - angle_delta, base + angle_delta)
 		global_rotation = angle
 	if fire_up && Input.is_action_pressed("fire_main") && Global.local_sector != null:
+		var cost = int(rand_range(bullet_cost_min, bullet_cost_max))
+		if cost > Global.dust_invetory: 
+			return
+		Global.dust_invetory -= cost
 		Global.instance_node(bullet, Global.local_sector, global_position)
 		AudioManager.play_sfx_effect(sfx_firerate)
 		firerate.start()
@@ -78,13 +85,17 @@ func _process_dialog(delta):
 		global_rotation = angle
 
 
-func _process_tutorial(delta):
+func _process_tutorial(_delta):
 	# TODO Implement _process_tutorial
 	pass
 
 
 func get_segment_hook():
 	return get_node("%SegmentHook")
+
+
+func dust_pickup(amount):
+	Global.dust_invetory += amount
 
 
 func start_speed_boost(time, move_speed):

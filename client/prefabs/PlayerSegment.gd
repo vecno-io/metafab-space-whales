@@ -1,6 +1,7 @@
 class_name PlayerSegment
 extends Sprite
 
+
 var target = null
 var segment = null
 var turn_speed = PI * 1.8

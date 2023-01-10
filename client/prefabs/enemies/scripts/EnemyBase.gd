@@ -1,6 +1,7 @@
 class_name EnemyBase
 extends Sprite
 
+
 enum State {
 	No,
 	Flee,
@@ -43,10 +44,12 @@ func _on_stun_timeout():
 	modulate = base_color
 	stuned = false
 
+
 func _base_start_running():
 	target = Vector2(rand_range(8000, 8000), rand_range(8000, 8000))
 	# ToDo Select closest Home Planet
 	state = State.Flee
+
 
 func _has_died() -> bool:
 	if hp > 0: 
@@ -65,6 +68,7 @@ func _has_died() -> bool:
 			object.dust_amount = int(loot * 1.4)
 			object.rotation = velocity.angle()
 	return true
+
 
 func _do_base_look(delta, at):
 	var direction = at - global_position
@@ -101,6 +105,7 @@ func _do_base_loot(area: Area2D) -> bool:
 	speed -= 20
 	return true
 
+
 func _do_base_knockback(area: Area2D) -> bool:
 	if !area.is_in_group("player_bullets"):
 		return false
@@ -112,4 +117,3 @@ func _do_base_knockback(area: Area2D) -> bool:
 		stun_timer.start()
 		stuned = true
 	return true
-	

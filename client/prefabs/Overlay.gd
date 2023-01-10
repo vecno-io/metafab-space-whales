@@ -1,5 +1,6 @@
 extends Node
 
+
 var active = null
 var highsocre = 0
 
@@ -147,7 +148,6 @@ func _on_firerate_storage_updated(_value):
 
 func _on_firerate_inventory_updated(value):
 	firerate_inventory.text = "%d/8" % value
-
 
 
 func _on_start_pressed():

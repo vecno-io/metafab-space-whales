@@ -1,5 +1,6 @@
 extends Node
 
+
 enum State {
 	No,
 	Game,
@@ -54,6 +55,7 @@ var local_player = null
 var local_sector = null setget _set_sector
 
 var difficulty = 1
+
 
 func _no_set(_value):
 	pass
@@ -220,6 +222,7 @@ func unpause_game():
 func add_kill():
 	kills += 1
 	emit_signal("updated_kills", kills)
+
 
 func add_points(value):
 	points += value

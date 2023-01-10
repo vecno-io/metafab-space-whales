@@ -1,11 +1,13 @@
 class_name ProtoEnemy
 extends EnemyBase
 
+
 export(bool) var freeze = false
 export(bool) var is_hunter = false
 
 onready var sfx_hit = get_node("%SfxrPlayerHit")
 onready var sfx_explode = get_node("%SfxrPlayerExplode")
+
 
 func _ready():
 	if !freeze: return

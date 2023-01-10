@@ -1,5 +1,6 @@
 extends Node2D
 
+
 var sector = null
 
 export(PackedScene) var entry_sector

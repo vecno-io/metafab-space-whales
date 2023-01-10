@@ -1,7 +1,9 @@
 extends Node
 
+
 onready var music_player = get_node("%MusicPlayer")
 onready var effect_players = get_node("%EffectPlayers")
+
 
 func play_sfx_effect(sfx):
 	var chidren = effect_players.get_children()

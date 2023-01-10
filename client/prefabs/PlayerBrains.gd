@@ -1,6 +1,7 @@
 class_name PlayerBrains
 extends Node2D
 
+
 # ToDo Juice: Hook up visual indicators
 # Boosted particle efects and item glows
 signal speed_boost_start

@@ -1,5 +1,6 @@
 extends CPUParticles2D
 
+
 var dust_amount = 0
 
 export(int) var dust_min = 50
@@ -10,6 +11,7 @@ func _ready():
 	randomize()
 	if 0 <= dust_amount:
 		dust_amount = int(rand_range(dust_min, dust_max))
+
 
 func _on_freeze_timeout():
 	set_process(false)

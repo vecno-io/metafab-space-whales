@@ -1,5 +1,6 @@
 extends Camera2D
 
+
 var shake_screen = false
 var shake_intensity = 0
 

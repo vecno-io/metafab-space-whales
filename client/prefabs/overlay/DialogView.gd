@@ -1,5 +1,6 @@
 extends Control
 
+
 onready var dust_storage = get_node("%DustStorage")
 onready var dust_inventory = get_node("%DustInventory")
 onready var speed_cost = get_node("%SpeedCost")
@@ -15,6 +16,7 @@ onready var speed_craft_btn = get_node("%SpeedCraftBtn")
 onready var speed_refine_btn = get_node("%SpeedRefineBtn")
 onready var firerate_craft_btn = get_node("%FirerateCraftBtn")
 onready var firerate_refine_btn = get_node("%FirerateRefineBtn")
+
 
 func _ready():
 	dust_storage.text = "%06d" % Global.dust_storage

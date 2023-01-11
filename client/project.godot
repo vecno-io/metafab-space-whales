@@ -19,6 +19,131 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://prefabs/enemies/scripts/EnemyBase.gd"
 }, {
+"base": "MetaFabRequest",
+"class": "MetaFabContracts",
+"language": "GDScript",
+"path": "res://addons/metafab-api/contracts/Contracts.gd"
+}, {
+"base": "MetaFabRequest",
+"class": "MetaFabCurrencies",
+"language": "GDScript",
+"path": "res://addons/metafab-api/currencies/Currencies.gd"
+}, {
+"base": "MetaFabRequest",
+"class": "MetaFabGames",
+"language": "GDScript",
+"path": "res://addons/metafab-api/games/Games.gd"
+}, {
+"base": "MetaFabRequest",
+"class": "MetaFabItems",
+"language": "GDScript",
+"path": "res://addons/metafab-api/items/Items.gd"
+}, {
+"base": "MetaFabRequest",
+"class": "MetaFabLootboxes",
+"language": "GDScript",
+"path": "res://addons/metafab-api/lootboxes/Lootboxes.gd"
+}, {
+"base": "MetaFabRequest",
+"class": "MetaFabPlayers",
+"language": "GDScript",
+"path": "res://addons/metafab-api/players/Players.gd"
+}, {
+"base": "HTTPRequest",
+"class": "MetaFabRequest",
+"language": "GDScript",
+"path": "res://addons/metafab-api/MetaFabRequest.gd"
+}, {
+"base": "MetaFabRequest",
+"class": "MetaFabShops",
+"language": "GDScript",
+"path": "res://addons/metafab-api/shops/Shops.gd"
+}, {
+"base": "MetaFabRequest",
+"class": "MetaFabTransactions",
+"language": "GDScript",
+"path": "res://addons/metafab-api/transactions/Transactions.gd"
+}, {
+"base": "MetaFabRequest",
+"class": "MetaFabWallets",
+"language": "GDScript",
+"path": "res://addons/metafab-api/wallets/Wallets.gd"
+}, {
+"base": "Reference",
+"class": "NakamaAPI",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaAPI.gd"
+}, {
+"base": "Reference",
+"class": "NakamaAsyncResult",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaAsyncResult.gd"
+}, {
+"base": "Reference",
+"class": "NakamaClient",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/client/NakamaClient.gd"
+}, {
+"base": "Reference",
+"class": "NakamaException",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaException.gd"
+}, {
+"base": "Node",
+"class": "NakamaHTTPAdapter",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/client/NakamaHTTPAdapter.gd"
+}, {
+"base": "Reference",
+"class": "NakamaLogger",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaLogger.gd"
+}, {
+"base": "Reference",
+"class": "NakamaMultiplayerBridge",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaMultiplayerBridge.gd"
+}, {
+"base": "NakamaAsyncResult",
+"class": "NakamaRTAPI",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaRTAPI.gd"
+}, {
+"base": "Reference",
+"class": "NakamaRTMessage",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaRTMessage.gd"
+}, {
+"base": "Reference",
+"class": "NakamaSerializer",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/utils/NakamaSerializer.gd"
+}, {
+"base": "NakamaAsyncResult",
+"class": "NakamaSession",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaSession.gd"
+}, {
+"base": "Reference",
+"class": "NakamaSocket",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/socket/NakamaSocket.gd"
+}, {
+"base": "Node",
+"class": "NakamaSocketAdapter",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/socket/NakamaSocketAdapter.gd"
+}, {
+"base": "Reference",
+"class": "NakamaStorageObjectId",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaStorageObjectId.gd"
+}, {
+"base": "Reference",
+"class": "NakamaWriteStorageObject",
+"language": "GDScript",
+"path": "res://addons/com.heroiclabs.nakama/api/NakamaWriteStorageObject.gd"
+}, {
 "base": "Node2D",
 "class": "PlayerBrains",
 "language": "GDScript",
@@ -52,6 +177,31 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Bullet": "",
 "EnemyBase": "",
+"MetaFabContracts": "",
+"MetaFabCurrencies": "",
+"MetaFabGames": "",
+"MetaFabItems": "",
+"MetaFabLootboxes": "",
+"MetaFabPlayers": "",
+"MetaFabRequest": "",
+"MetaFabShops": "",
+"MetaFabTransactions": "",
+"MetaFabWallets": "",
+"NakamaAPI": "",
+"NakamaAsyncResult": "",
+"NakamaClient": "",
+"NakamaException": "",
+"NakamaHTTPAdapter": "",
+"NakamaLogger": "",
+"NakamaMultiplayerBridge": "",
+"NakamaRTAPI": "",
+"NakamaRTMessage": "",
+"NakamaSerializer": "",
+"NakamaSession": "",
+"NakamaSocket": "",
+"NakamaSocketAdapter": "",
+"NakamaStorageObjectId": "",
+"NakamaWriteStorageObject": "",
 "PlayerBrains": "",
 "PlayerSegment": "",
 "ProtoEnemy": "",
@@ -70,6 +220,7 @@ config/icon="res://icon.png"
 
 Global="*res://autoload/Global.gd"
 AudioManager="*res://autoload/AudioManager.tscn"
+MetaFab="*res://addons/metafab-api/MetaFab.tscn"
 
 [display]
 
@@ -82,7 +233,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/godot_sfxr/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/godot_sfxr/plugin.cfg", "res://addons/metafab-api/plugin.cfg" )
 
 [gui]
 

@@ -1,0 +1,5 @@
+# Server configuration utilities and information:
+# https://heroiclabs.com/docs/nakama/getting-started/configuration/
+shutdown_grace_sec: 24
+logger:
+    level: DEBUG

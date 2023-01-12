@@ -1,5 +1,5 @@
 class_name EnemyBase
-extends Sprite
+extends Node2D
 
 
 enum State {

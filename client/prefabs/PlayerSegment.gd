@@ -1,11 +1,12 @@
 class_name PlayerSegment
-extends Sprite
+extends Node2D
 
 
 var target = null
 var segment = null
-var turn_speed = PI * 1.8
 
+export(float) var lerp_speed = 0.4
+export(float) var turn_speed = 7.6
 export(String) var target_name = "PlayerHead"
 
 
@@ -33,7 +34,7 @@ func _process_game(delta):
 	angle = clamp(angle, base - angle_delta, base + angle_delta)
 	global_rotation = angle
 
-	global_position = lerp(global_position, segment.global_position, 0.24)
+	global_position = lerp(global_position, segment.global_position, lerp_speed)
 
 
 func _process_dialog(delta):
@@ -51,4 +52,4 @@ func _process_dialog(delta):
 
 
 func get_segment_hook():
-	return get_node("%SegmentHook")
+	return get_node("SegmentHook")

@@ -48,4 +48,4 @@ func _on_hitbox_entered(area: Area2D):
 		if !is_hunter:
 			._base_start_running()
 		else:
-			speed += 30
+			speed += 20

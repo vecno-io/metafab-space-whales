@@ -9,8 +9,8 @@ signal speed_boost_stoped
 signal firerate_boost_start
 signal firerate_boost_stoped
 
-var speed = 150
-var speed_boost = 275
+var speed = 140
+var speed_boost = 240
 var speed_default = speed
 var speed_boost_up = true
 var speed_boost_timeout = 6.0
@@ -94,7 +94,7 @@ func _process_dialog(delta):
 
 
 func get_segment_hook():
-	return get_node("%SegmentHook")
+	return get_node("SegmentHook")
 
 
 func dust_pickup(amount):
@@ -184,5 +184,6 @@ func _on_hitbox_entered(area:Area2D):
 		# TODO Juice: Explode into dust
 		# TODO Juice: Jump head off screen
 		yield(get_tree().create_timer(1.4), "timeout")
+		# TODO FixMe: Double call, null after timeout
 		get_parent().queue_free()
 		Global.actor_died()

@@ -1,32 +1,34 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/square.png" type="Texture" id=1]
+[ext_resource path="res://assets/actors/DustMonkey-Hunter-01.png" type="Texture" id=1]
 [ext_resource path="res://prefabs/enemies/scripts/BasicEnemy.gd" type="Script" id=2]
 [ext_resource path="res://addons/godot_sfxr/SfxrStreamPlayer2D.gd" type="Script" id=3]
 [ext_resource path="res://assets/audio/ProtoEnemyHit.tres" type="AudioStream" id=4]
 [ext_resource path="res://assets/audio/ProtoEnemyDies.tres" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.4, 4.4 )
+extents = Vector2( 6.5, 9 )
 
-[node name="Enemy" type="Sprite"]
-modulate = Color( 0.901961, 0.533333, 0.286275, 1 )
-scale = Vector2( 2.5, 2.5 )
-texture = ExtResource( 1 )
+[node name="Enemy" type="Node2D"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 script = ExtResource( 2 )
 hp = 2
-speed = 160
+speed = 120
 min_loot_amount = 30
 max_loot_amount = 60
-base_color = Color( 0.901961, 0.533333, 0.286275, 1 )
-stun_color = Color( 0.945312, 0.783919, 0.675751, 1 )
+base_color = Color( 0.627451, 0.627451, 0.627451, 1 )
+stun_color = Color( 0.866667, 0.737255, 0.647059, 1 )
 is_hunter = true
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 1 )
 
 [node name="Hitbox" type="Area2D" parent="." groups=["enemy"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 visible = false
-position = Vector2( 1.90735e-07, -1.90735e-07 )
+position = Vector2( 0.5, 0 )
 shape = SubResource( 1 )
 
 [node name="StunTimer" type="Timer" parent="."]

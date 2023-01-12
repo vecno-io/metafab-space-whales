@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://prefabs/Bullet.gd"
 }, {
-"base": "Sprite",
+"base": "Node2D",
 "class": "EnemyBase",
 "language": "GDScript",
 "path": "res://prefabs/enemies/scripts/EnemyBase.gd"
@@ -149,7 +149,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://prefabs/PlayerBrains.gd"
 }, {
-"base": "Sprite",
+"base": "Node2D",
 "class": "PlayerSegment",
 "language": "GDScript",
 "path": "res://prefabs/PlayerSegment.gd"

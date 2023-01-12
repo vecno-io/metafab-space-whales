@@ -156,9 +156,9 @@ func _on_start_pressed():
 
 func _on_jump_pressed():
 	match Global.state:
+		Global.State.No:
+			Global.show_game()
 		Global.State.Game:
 			Global.show_dialog()
 		Global.State.Dialog:
-			Global.show_game()
-		Global.State.Tutorial:
 			Global.show_game()

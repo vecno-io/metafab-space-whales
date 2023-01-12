@@ -20,8 +20,6 @@ func _process(delta):
 			_process_game(delta)
 		Global.State.Dialog:
 			_process_dialog(delta)
-		Global.State.Tutorial:
-			_process_tutorial(delta)
 
 
 func _process_game(delta):
@@ -50,11 +48,6 @@ func _process_dialog(delta):
 	global_rotation = angle
 
 	global_position = lerp(global_position, segment.global_position, 0.24)
-
-
-func _process_tutorial(_delta):
-	# TODO Implement _process_tutorial
-	pass
 
 
 func get_segment_hook():

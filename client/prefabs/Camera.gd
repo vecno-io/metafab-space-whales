@@ -23,12 +23,19 @@ func _exit_tree():
 
 func _process(delta):
 	match Global.state:
+		Global.State.No:
+			_process_none(delta)
 		Global.State.Game:
 			_process_game(delta)
 		Global.State.Dialog:
 			_process_dialog(delta)
-		Global.State.Tutorial:
-			_process_tutorial(delta)
+
+
+func _process_none(_delta):
+	if Global.local_player == null:
+		return
+	var target = Global.local_player.global_position - Vector2(40.0, 0)
+	global_position = lerp(global_position, target, 0.24)
 
 
 func _process_game(delta):
@@ -45,13 +52,6 @@ func _process_game(delta):
 
 
 func _process_dialog(_delta):
-	if Global.local_player == null:
-		return
-	var target = Global.local_player.global_position - Vector2(40.0, 0)
-	global_position = lerp(global_position, target, 0.24)
-
-
-func _process_tutorial(_delta):
 	if Global.local_player == null:
 		return
 	var target = Global.local_player.global_position - Vector2(40.0, 0)

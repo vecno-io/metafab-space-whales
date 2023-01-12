@@ -13,7 +13,7 @@ radius = 8.0399
 
 [node name="PlayerHead" type="Sprite"]
 modulate = Color( 0.101961, 0.545098, 0.560784, 1 )
-scale = Vector2( 2.5, 2.5 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 
@@ -29,7 +29,6 @@ position = Vector2( -2.38419e-08, 1.19209e-08 )
 shape = SubResource( 1 )
 
 [node name="Pickup" type="Area2D" parent="." groups=["player_pickup"]]
-scale = Vector2( 1, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
 shape = SubResource( 2 )

@@ -4,8 +4,7 @@ extends Node
 enum State {
 	No,
 	Game,
-	Dialog,
-	Tutorial
+	Dialog
 }
 
 signal actor_died
@@ -157,7 +156,7 @@ func show_dialog():
 
 
 func show_tutorial():
-	state = Global.State.Tutorial
+	state = Global.State.No
 	emit_signal("state_updated")
 	if world != null: world.show_tutorial()
 	if overlay != null: overlay.show_tutorial()

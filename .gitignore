@@ -15,5 +15,6 @@ data_*/
 .env.ci
 .env.dev
 .env.prod
+arts/*.png
 build/
 server/vendor

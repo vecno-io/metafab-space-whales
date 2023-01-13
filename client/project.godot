@@ -235,9 +235,14 @@ window/stretch/aspect="keep"
 
 enabled=PoolStringArray( "res://addons/godot_sfxr/plugin.cfg", "res://addons/metafab-api/plugin.cfg" )
 
+[global]
+
+theme=false
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+theme/custom="res://assets/gui/ui-theme-main.tres"
 
 [input]
 
@@ -293,6 +298,7 @@ boost_firerate={
 [physics]
 
 common/enable_pause_aware_picking=true
+2d/thread_model=2
 
 [rendering]
 

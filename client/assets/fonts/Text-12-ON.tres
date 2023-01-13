@@ -1,10 +1,9 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://assets/fonts/Stencil-Pixel.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/PressStart.ttf" type="DynamicFontData" id=1]
 
 [resource]
-size = 32
-outline_size = 2
+size = 12
 outline_color = Color( 0.00784314, 0.00784314, 0.00784314, 0.752941 )
 use_mipmaps = true
 font_data = ExtResource( 1 )

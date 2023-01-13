@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ui-arrow-big.png-b52f54cb969a8297617fc5016e2e4dae.stex"
+path="res://.import/ui-arrow-big.png-6f1f41d4211d745075c00cee7b87b44f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/gui/ui-arrow-big.png"
-dest_files=[ "res://.import/ui-arrow-big.png-b52f54cb969a8297617fc5016e2e4dae.stex" ]
+source_file="res://assets/gui/images/ui-arrow-big.png"
+dest_files=[ "res://.import/ui-arrow-big.png-6f1f41d4211d745075c00cee7b87b44f.stex" ]
 
 [params]
 

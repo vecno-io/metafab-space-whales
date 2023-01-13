@@ -19,10 +19,10 @@ onready var spawn_timer = get_node("%SpawnTimer")
 func _ready():
 	randomize()
 	Global.local_sector = self
-	var t = difficulty * spawn_time_ticks
-	spawn_timer.wait_time = spawn_time_base - t
-	if spawn_time_mimimum > spawn_timer.wait_time:
-		spawn_timer.wait_time = spawn_time_mimimum
+	var time = spawn_time_base - (difficulty * spawn_time_ticks)
+	if time > spawn_time_mimimum: spawn_timer.wait_time = time
+	else: spawn_timer.wait_time = spawn_time_mimimum
+	spawn_timer.wait_time = time
 	emit_signal("updated_difficulty", difficulty)
 	for __ in range(0, spawn_inital):_spawn_enemy()
 
@@ -57,8 +57,8 @@ func _on_spawn_timeout():
 func _on_difficulty_timeout():
 	if spawn_timer.wait_time > spawn_time_mimimum:
 		difficulty += 1
-		var t = difficulty * spawn_time_ticks
-		spawn_timer.wait_time = spawn_time_base - t
-		if spawn_time_mimimum > spawn_timer.wait_time:
-			spawn_timer.wait_time = spawn_time_mimimum
+		var time = spawn_time_base - (difficulty * spawn_time_ticks)
+		if time > spawn_time_mimimum: spawn_timer.wait_time = time
+		else: spawn_timer.wait_time = spawn_time_mimimum
+		spawn_timer.wait_time = time
 		emit_signal("updated_difficulty", difficulty)

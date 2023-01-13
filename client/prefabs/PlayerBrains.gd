@@ -114,7 +114,6 @@ func fire_weapon():
 		return
 	var cost = int(rand_range(bullet_cost_min, bullet_cost_max))
 	if cost > Global.dust_inventory: 
-		print_debug("Fire out: %s > %s" % [cost, Global.dust_inventory])
 		# TODO Juice: out of speed boost sfx
 		return
 	fire_up = false

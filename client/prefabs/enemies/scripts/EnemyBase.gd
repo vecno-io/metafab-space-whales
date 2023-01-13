@@ -46,7 +46,7 @@ func _on_stun_timeout():
 
 
 func _base_start_running():
-	target = Vector2(rand_range(8000, 8000), rand_range(8000, 8000))
+	target = Vector2(rand_range(-8000, 8000), rand_range(-8000, 8000))
 	# ToDo Select closest Home Planet
 	state = State.Flee
 

@@ -29,6 +29,8 @@ func _process(delta):
 			if _do_base_movement(delta, target):
 				# ToDo Juice: Animate move
 				pass
+			if 0.1 > global_position.direction_to(target).length():
+				._base_start_running()
 		State.Harvest:
 			var position = Global.local_player.global_position
 			_do_base_look(delta, position)

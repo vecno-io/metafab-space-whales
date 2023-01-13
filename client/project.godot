@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://prefabs/Bullet.gd"
 }, {
+"base": "Reference",
+"class": "ConfigWorker",
+"language": "GDScript",
+"path": "res://autoload/workers/ConfigWorker.gd"
+}, {
 "base": "Node2D",
 "class": "EnemyBase",
 "language": "GDScript",
@@ -160,6 +165,16 @@ _global_script_classes=[ {
 "path": "res://prefabs/enemies/scripts/BasicEnemy.gd"
 }, {
 "base": "Reference",
+"class": "ServerAccount",
+"language": "GDScript",
+"path": "res://autoload/domains/ServerAccount.gd"
+}, {
+"base": "Reference",
+"class": "ServerException",
+"language": "GDScript",
+"path": "res://autoload/domains/ServerException.gd"
+}, {
+"base": "Reference",
 "class": "SfxrGenerator",
 "language": "GDScript",
 "path": "res://addons/godot_sfxr/SfxrGenerator.gd"
@@ -176,6 +191,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"ConfigWorker": "",
 "EnemyBase": "",
 "MetaFabContracts": "",
 "MetaFabCurrencies": "",
@@ -205,6 +221,8 @@ _global_script_class_icons={
 "PlayerBrains": "",
 "PlayerSegment": "",
 "ProtoEnemy": "",
+"ServerAccount": "",
+"ServerException": "",
 "SfxrGenerator": "",
 "SfxrGlobals": "",
 "SfxrStreamPlayerInterface": ""
@@ -213,14 +231,16 @@ _global_script_class_icons={
 [application]
 
 config/name="The-Dust-Harvest"
-run/main_scene="res://MainScene.tscn"
+run/main_scene="res://MetaTestScene.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 Global="*res://autoload/Global.gd"
-AudioManager="*res://autoload/AudioManager.tscn"
+Nakama="*res://addons/com.heroiclabs.nakama/Nakama.gd"
 MetaFab="*res://addons/metafab-api/MetaFab.tscn"
+GameServer="*res://autoload/GameServer.gd"
+AudioManager="*res://autoload/AudioManager.tscn"
 
 [display]
 

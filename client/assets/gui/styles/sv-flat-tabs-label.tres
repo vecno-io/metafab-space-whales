@@ -1,0 +1,11 @@
+[gd_resource type="StyleBoxFlat" format=2]
+
+[resource]
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.054902, 0.0470588, 0.0705882, 0.894118 )
+border_width_bottom = 1
+border_color = Color( 0.8, 0.8, 0.8, 0.501961 )
+shadow_color = Color( 0, 0, 0, 0 )

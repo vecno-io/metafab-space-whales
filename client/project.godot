@@ -24,6 +24,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://prefabs/enemies/scripts/EnemyBase.gd"
 }, {
+"base": "Reference",
+"class": "MainOverlay",
+"language": "GDScript",
+"path": "res://interface/scripts/MainOverlay.gd"
+}, {
 "base": "MetaFabRequest",
 "class": "MetaFabContracts",
 "language": "GDScript",
@@ -73,6 +78,11 @@ _global_script_classes=[ {
 "class": "MetaFabWallets",
 "language": "GDScript",
 "path": "res://addons/metafab-api/wallets/Wallets.gd"
+}, {
+"base": "Reference",
+"class": "MetafabPlayer",
+"language": "GDScript",
+"path": "res://autoload/domains/MetafabPlayer.gd"
 }, {
 "base": "Reference",
 "class": "NakamaAPI",
@@ -175,6 +185,11 @@ _global_script_classes=[ {
 "path": "res://autoload/domains/ServerException.gd"
 }, {
 "base": "Reference",
+"class": "SessionWorker",
+"language": "GDScript",
+"path": "res://autoload/workers/SessionWorker.gd"
+}, {
+"base": "Reference",
 "class": "SfxrGenerator",
 "language": "GDScript",
 "path": "res://addons/godot_sfxr/SfxrGenerator.gd"
@@ -188,11 +203,17 @@ _global_script_classes=[ {
 "class": "SfxrStreamPlayerInterface",
 "language": "GDScript",
 "path": "res://addons/godot_sfxr/SfxrStreamPlayerInterface.gd"
+}, {
+"base": "Reference",
+"class": "UserInfo",
+"language": "GDScript",
+"path": "res://structs/UserInfo.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "ConfigWorker": "",
 "EnemyBase": "",
+"MainOverlay": "",
 "MetaFabContracts": "",
 "MetaFabCurrencies": "",
 "MetaFabGames": "",
@@ -203,6 +224,7 @@ _global_script_class_icons={
 "MetaFabShops": "",
 "MetaFabTransactions": "",
 "MetaFabWallets": "",
+"MetafabPlayer": "",
 "NakamaAPI": "",
 "NakamaAsyncResult": "",
 "NakamaClient": "",
@@ -223,9 +245,11 @@ _global_script_class_icons={
 "ProtoEnemy": "",
 "ServerAccount": "",
 "ServerException": "",
+"SessionWorker": "",
 "SfxrGenerator": "",
 "SfxrGlobals": "",
-"SfxrStreamPlayerInterface": ""
+"SfxrStreamPlayerInterface": "",
+"UserInfo": ""
 }
 
 [application]

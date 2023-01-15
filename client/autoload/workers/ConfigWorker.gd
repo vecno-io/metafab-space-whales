@@ -23,6 +23,34 @@ static func get_client_hash() -> String:
 	return out
 
 
+static func get_game_id() -> String:
+	var file := ConfigFile.new()
+	var __ = file.load(APP_FILE)
+	return file.get_value("metafab", "game_id", "")
+
+
+static func save_game_id(id: String) -> void:
+	var file := ConfigFile.new()
+	var __ = file.load(APP_FILE)
+	file.set_value("metafab", "game_id", id)
+	_push_app_warning(file.save(APP_FILE), "save file failed")
+
+
+# Gets the public metafab key for the game
+static func get_game_key() -> String:
+	var file := ConfigFile.new()
+	var __ = file.load(APP_FILE)
+	return file.get_value("metafab", "game_key", "")
+
+
+# Saves the public metafab key for the game
+static func save_game_key(key: String) -> void:
+	var file := ConfigFile.new()
+	var __ = file.load(APP_FILE)
+	file.set_value("metafab", "game_key", key)
+	_push_app_warning(file.save(APP_FILE), "save file failed")
+
+
 static func get_server_localhost() -> bool:
 	var file := ConfigFile.new()
 	if OK == file.load(APP_FILE) && file.has_section_key("server", "localhost"):

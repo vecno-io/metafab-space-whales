@@ -19,13 +19,17 @@ region = Rect2( 292, 40, 10, 32 )
 
 [node name="AccountDialog" type="Popup"]
 unique_name_in_owner = true
-visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 script = ExtResource( 7 )
+
+[node name="AuthTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 12.0
+one_shot = true
 
 [node name="ColorOverlay" type="TextureRect" parent="."]
 unique_name_in_owner = true
@@ -510,6 +514,7 @@ text = "x"
 align = 2
 icon_align = 1
 
+[connection signal="timeout" from="AuthTimer" to="." method="_on_auth_timer_timeout"]
 [connection signal="pressed" from="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
 [connection signal="text_changed" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput/EmailInputEdit" to="." method="_on_email_text_changed"]
 [connection signal="text_entered" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput/EmailInputEdit" to="." method="_on_email_entered"]

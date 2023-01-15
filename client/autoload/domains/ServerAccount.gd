@@ -2,9 +2,6 @@ class_name ServerAccount
 extends Reference
 
 
-signal signed_in
-signal signed_out
-
 signal session_closed
 signal session_created
 
@@ -29,11 +26,30 @@ func _init(client: NakamaClient, exception: ServerException) -> void:
 	_exception = exception
 
 
-func has_account() -> bool:
+func has_user() -> bool:
 	# Authentication sets the password;
 	# on failure the password is cleared.
-	if _authenticating: return false
-	return !_password.empty()
+	if _authenticating: 
+		print(">>>> auth: %s" % _authenticating)
+		return false
+	if _id.empty(): 
+		print(">>>> _id: %s" % _id)
+		return false
+	if _email.empty():
+		print(">>>> _email: %s" % _email)
+		return false
+	if _password.empty(): 
+		print(">>>> _password: %s" % _password)
+		return false
+	return true
+
+
+func get_user_id() -> String:
+	return _id
+
+
+func get_user_info() -> UserInfo:
+	return UserInfo.new(_id, _name, _email)
 
 
 func has_session() -> bool:
@@ -62,10 +78,6 @@ func get_session_async() -> NakamaSession:
 	return _session
 
 
-func get_user_info() -> UserInfo:
-	return UserInfo.new(_id, _name, _email)
-
-
 func authenticate_device_async() -> int:
 	if _authenticating:
 		yield(GameServer.get_tree(), "idle_frame")
@@ -82,7 +94,6 @@ func authenticate_device_async() -> int:
 		return -1
 	else:
 		_session = session
-		SessionWorker.save_session_token(_id, _password, _session.token)
 		print("[Server.Account] Authenticated: %s" % session.user_id)
 		_save_session_data(false)
 		emit_signal("session_created")
@@ -115,10 +126,8 @@ func create_account_async(email: String, password: String, save_email: bool = fa
 		_email = ""
 		return -1
 	else:
-		# TODO Create MetaFab Account
-		SessionWorker.save_session_token(_id, _password, _session.token)
+		# TODO Create the MetaFab Account
 		_save_session_data(save_email)
-		emit_signal("signed_in")
 		_authenticating = false
 		return OK
 
@@ -138,10 +147,8 @@ func authenticate_account_async(email: String, password: String, save_email: boo
 		_email = ""
 		return -1
 	else:
-		# TODO Load The MetaFab Account
-		SessionWorker.save_session_token(_id, _password, _session.token)
+		# TODO Load the MetaFab Account
 		_save_session_data(save_email)
-		emit_signal("signed_in")
 		_authenticating = false
 		return OK
 
@@ -160,7 +167,9 @@ func _save_session_data(save_email: bool):
 	SessionWorker.save_user_info(
 		UserInfo.new(_id, _name, email)
 	)
-	# TODO Save Session Tokens
+	SessionWorker.save_session_token(
+		_id, _password, _session.token
+	)
 
 
 func _close_session_async():
@@ -172,9 +181,6 @@ func _close_session_async():
 	if OK != _exception.parse_nakama(result): _push_error(
 		4, "close session failed: %s" % session.user_id
 	)
-	if !_password.empty():
-		emit_signal("signed_out")
-		_password = ""
 	emit_signal("session_closed")
 
 

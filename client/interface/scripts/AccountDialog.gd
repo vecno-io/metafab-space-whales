@@ -11,6 +11,7 @@ var is_loading: bool = false
 
 onready var tabs = get_node("%TabContainer")
 onready var overlay = get_node("%ColorOverlay")
+onready var auth_timer = get_node("%AuthTimer")
 
 onready var txn_list = get_node("%TransactionList")
 onready var txn_empty = get_node("%TransactionsEmpty")
@@ -41,16 +42,23 @@ func _ready():
 		_set_server_connecting()
 	else: 
 		_set_server_connected()
+	signed_out()
 
 
 func signed_in():
-	if !is_loading:
-		_set_server_signed_in()
+	btn_logout.show()
+	form_login.hide()
+	form_actors.show()
+	tabs.set_tab_disabled(1, false)
+	if is_loading: _end_server_loading()
 
 
 func signed_out():
-	if !is_loading:
-		_set_server_signed_out()
+	btn_logout.hide()
+	form_login.show()
+	form_actors.hide()
+	tabs.set_tab_disabled(1, true)
+	if is_loading: _end_server_loading()
 
 
 func session_created():
@@ -78,9 +86,10 @@ func _start_server_loading():
 	box_loading.show()
 
 
-func _set_server_signed_in():
-	if !GameServer.has_account():
-		_set_server_signed_out()
+func _set_player_signed_in():
+	if !GameServer.has_user():
+		_push_error("player signed in: no user")
+		_set_player_signed_out()
 		return
 	btn_logout.show()
 	form_login.hide()
@@ -89,9 +98,10 @@ func _set_server_signed_in():
 	tabs.set_tab_disabled(1, false)
 
 
-func _set_server_signed_out():
-	if GameServer.has_account():
-		_set_server_signed_in()
+func _set_player_signed_out():
+	if GameServer.has_user():
+		_push_error("player signed out: has user")
+		_set_player_signed_in()
 		return
 	btn_logout.hide()
 	form_login.show()
@@ -105,10 +115,6 @@ func _set_server_connected():
 	box_link.hide()
 	box_actors.show()
 	box_loading.hide()
-	if !GameServer.has_account():
-		_set_server_signed_out()
-	else: 
-		_set_server_signed_in()
 
 
 func _set_server_connecting():
@@ -125,37 +131,44 @@ func _on_close_pressed():
 func _on_login_pressed():
 	_start_server_loading()
 	# TODO Add in the option to save and password conformation on register
-	if OK != yield(GameServer.login_async(edit_email.text, edit_pass.text, true), "completed"):
+	var result = yield(GameServer.login_async(edit_email.text, edit_pass.text, true), "completed")
+	if OK != result:
 		msg_actors.text = "Login failed, check info."
-		_set_server_signed_out()
+		push_error("login account: %s" % result)
 		_end_server_loading()
 		return
 	msg_actors.text = ""
-	_set_server_signed_in()
-	_end_server_loading()
+	auth_timer.start(12)
 
 
 func _on_logout_pressed():
 	_start_server_loading()
-	if OK != yield(GameServer.logout_async(), "completed"):
+	var result = yield(GameServer.logout_async(), "completed")
+	if OK != result:
 		msg_actors.text = "Logout failed, check files."
-	else:
-		msg_actors.text = ""
-	_set_server_signed_out()
-	_end_server_loading()
+		push_error("logout account: %s" % result)
+		return
+	msg_actors.text = ""
+	auth_timer.start(12)
 
 
 func _on_register_pressed():
 	_start_server_loading()
 	# TODO Add in the option to save and password conformation on register
-	if OK != yield(GameServer.register_async(edit_email.text, edit_pass.text, true), "completed"):
+	var result = yield(GameServer.register_async(edit_email.text, edit_pass.text, true), "completed")
+	if OK != result:
 		msg_actors.text = "Register failed, check info."
-		_set_server_signed_out()
+		push_error("register account: %s" % result)
 		_end_server_loading()
 		return
 	msg_actors.text = ""
-	_set_server_signed_in()
-	_end_server_loading()
+	auth_timer.start(12)
+
+
+func _on_auth_timer_timeout():
+	if is_loading:
+		msg_actors.text = "Network timedout, try later."
+		_end_server_loading()
 
 
 func _on_pass_entered(_value):
@@ -186,6 +199,10 @@ func _check_account_buttons():
 func _validate_account_input() -> bool:
 	if edit_pass.text.length() < 8: 
 		return false
-	if !regex.search(edit_email.text): 
+	if null == regex.search(edit_email.text): 
 		return false
 	return true
+
+
+func _push_error(message: String) -> void:
+	push_error("[GUI.AccountDialog] %s" % message)

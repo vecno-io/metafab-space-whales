@@ -14,6 +14,15 @@ func clear() -> void:
 	code = OK
 
 
+func metafab_parse(result: String) -> int:
+	if result != MetaFabRequest.Ok:
+		message = result
+		code = 0
+		_push_exception()
+		return code
+	return OK
+
+
 func parse_nakama(result: NakamaAsyncResult) -> int:
 	if result.is_exception():
 		var exception = result.get_exception()
@@ -25,4 +34,4 @@ func parse_nakama(result: NakamaAsyncResult) -> int:
 
 
 func _push_exception() -> void:
-	push_error("[Server.Exception] Code: %s | Message: %s" % [code, message])
+	push_error("[Exception] Code: %s | Message: %s" % [code, message])

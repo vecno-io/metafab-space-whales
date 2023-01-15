@@ -9,7 +9,6 @@ const SERVER_REGION_DEFAULT = "main"
 
 
 const APP_FILE = "user://app.ini"
-const USER_FILE = "user://user.ini"
 
 
 static func get_client_hash() -> String:

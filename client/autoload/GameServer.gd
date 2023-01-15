@@ -31,9 +31,30 @@ func _init() -> void:
 	_server_setup(address)
 
 
-func _ready():
-	# TODO If user: auth user else:
-	_account.authenticate_device()
+func authenticate():
+	# TODO If user: auth old session else:
+	# TODO Handle account and session error messages
+	var __ = yield(_account.authenticate_device_async(), "completed")
+
+
+func has_account() -> bool:
+	return _account.has_account()
+
+
+func has_session() -> bool:
+	return _account.has_session()
+
+
+func logout_async() -> int:
+	return yield(_account.clear_account_async(), "completed")
+
+
+func login_async(email: String, password: String, save_email: bool = false) -> int:
+	return yield(_account.authenticate_account_async(email, password, save_email), "completed")
+
+
+func register_async(email: String, password: String, save_email: bool = false) -> int:
+	return yield(_account.create_account_async(email, password, save_email), "completed")
 
 
 func _no_set(_value) -> void:
@@ -42,7 +63,7 @@ func _no_set(_value) -> void:
 
 func _server_setup(address: String):
 	# Create the Client, Account, and Storage; connect all signals
-	_client = Nakama.create_client(SERVER_KEY, address, 7350, "http", 12)
+	_client = Nakama.create_client(SERVER_KEY, address, 7350, "http", 12, NakamaLogger.LOG_LEVEL.INFO)
 	_client.auto_retry = false
 	_account = ServerAccount.new(_client, _exception)
 	#warning-ignore: return_value_discarded
@@ -65,7 +86,6 @@ func _on_account_signed_out():
 
 func _on_account_session_closed():
 	emit_signal("session_closed")
-
 
 func _on_account_session_created():
 	emit_signal("session_created")

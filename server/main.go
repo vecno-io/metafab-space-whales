@@ -8,12 +8,21 @@ import (
 	"os"
 
 	"github.com/heroiclabs/nakama-common/runtime"
+	"github.com/vecno-io/metafab-space-whales/server/meta"
 )
 
 func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, initializer runtime.Initializer) error {
 	if err := _validate_environment_variables(); err != nil {
 		logger.Error("Enviroment variable: %v", err)
 		return err		
+	}
+	if err := initializer.RegisterRpc("game_info", GameInfo); err != nil {
+		logger.Error("Unable to register rpc: game_info: %v", err)
+		return err
+	}
+	if err := initializer.RegisterRpc("meta_register", meta.Register); err != nil {
+		logger.Error("Unable to register rpc: meta_register: %v", err)
+		return err
 	}
 	return nil
 }

@@ -1,11 +1,11 @@
-class_name MetafabPlayer
+class_name MetaAccount
 extends Reference
 
 signal signed_in
 signal signed_out
 
 
-var _id: String = "" setget _no_set
+var _player: PlayerInfo= null setget _no_set
 var _password: String = "" setget _no_set
 
 var _client: NakamaClient setget _no_set
@@ -19,18 +19,25 @@ func _init(client: NakamaClient, account: ServerAccount, exception: ServerExcept
 	_exception = exception
 
 
+func player_info() -> PlayerInfo:
+	if _player != null: return PlayerInfo.new(
+		_player.id, _player.token, _player.wallet
+	)
+	return PlayerInfo.new()
+
+
 func clear_player() -> int:
-	_id = ""
+	_player = null
 	_password = ""
 	emit_signal("signed_out")
 	return OK
 
 
 func create_player(password: String) -> int:
-	var user = _account.get_user_info()
+	var user = _account.user_info()
 	if !user.is_valid(): return -1
 	if OK != _exception.metafab_parse(MetaFab.create_player(self,
-		"_on_create_player_result", GameServer.game_key(), 
+		"_on_create_player_result", ConfigWorker.game_key(), 
 		user.id, password
 	)):
 		_push_error(_exception.code, 
@@ -43,10 +50,10 @@ func create_player(password: String) -> int:
 
 
 func authenticate_player(password: String) -> int:
-	var user = _account.get_user_info()
+	var user = _account.user_info()
 	if !user.is_valid(): return -1
 	if OK != _exception.metafab_parse(MetaFab.auth_player(self,
-		"_on_authenticate_player_result", GameServer.game_key(), 
+		"_on_authenticate_player_result", ConfigWorker.game_key(), 
 		user.id, password
 	)): 
 		_push_error(_exception.code, 
@@ -62,24 +69,37 @@ func _on_create_player_result(code: int, result: String) -> void:
 	var json = JSON.parse(result)
 	if code != 200: 
 		_push_error(-1, "auth_player: %s - %s" % [code, json.result])
+		_password = ""
+		_player = null
 		return
-	var user_id = _account.get_user_id()
+	var user_id = _account.user_id()
 	var session = yield(_account.get_session_async(), "completed")
 	if session == null:
 		_push_error(-2, "meta_register session: %s - %s" % [user_id, json.result])
 		_password = ""
+		_player = null
 		return
-	if OK != _exception.parse_nakama(yield(_client.rpc_async(session, "meta_register", JSON.print({
-		"wallet_id": json.result.walletId,
-		"metafab_id": json.result.id,
-	})), "completed")):
-		_push_error(-3, "meta_register rpc: %s - %s" % [user_id, json.result])
+	if typeof(json.result) != TYPE_DICTIONARY:
+		_push_error(-3, "meta_register json: %s - %s" % [user_id, json.result])
+		_password = ""
+		_player = null
+		return
+	_player = _player_info_from_result(json.result)
+	if !_player.is_valid(): 
+		_push_error(-4, "meta_register json: %s - %s" % [user_id, json.result])
 		_password = ""
 		return
-	# TODO Enable again
-	#user = SessionWorker.save_metafab_user(_hashed, _password, json.result)
-	_id = json.result.id
+	if OK != _exception.parse_nakama(yield(_client.rpc_async(session, "meta_register", JSON.print({
+		"wallet_id": _player.walletId,
+		"metafab_id": _player.id,
+	})), "completed")):
+		_push_error(-5, "meta_register rpc: %s - %s" % [user_id, json.result])
+		_password = ""
+		_player = null
+		return
+	SessionWorker.save_player_info(user_id, _password, _player)
 	emit_signal("signed_in")
+	_get_user_metadata()
 
 
 func _on_authenticate_player_result(code: int, result: String) -> void:
@@ -88,10 +108,40 @@ func _on_authenticate_player_result(code: int, result: String) -> void:
 		_push_error(-1, "auth_player: %s - %s" % [code, json.result])
 		_password = ""
 		return
-	# TODO Enable again
-	#user = SessionWorker.save_metafab_user(_hashed, _password, json.result)
-	_id = json.result.id
+	var user_id = _account.user_id()
+	if typeof(json.result) != TYPE_DICTIONARY:
+		_push_error(-3, "meta_register json: %s - %s" % [user_id, json.result])
+		_password = ""
+		return
+	_player = _player_info_from_result(json.result)
+	if !_player.is_valid(): 
+		_push_error(-4, "meta_register json: %s - %s" % [user_id, json.result])
+		_password = ""
+		return
+	SessionWorker.save_player_info(user_id, _password, _player)
 	emit_signal("signed_in")
+	_get_user_metadata()
+
+
+func _get_user_metadata():
+	# TODO Implement this next
+	# get the metadata for the user
+	# load list of actors for the user
+	pass
+
+
+static func _player_info_from_result(data: Dictionary) -> PlayerInfo:
+	if data == null: return PlayerInfo.new()
+	if !data.has_all([
+		"id", 
+		"walletId", 
+		"accessToken"
+	]): return PlayerInfo.new()
+	return PlayerInfo.new(
+		data["id"],
+		data["accessToken"],
+		data["walletId"]
+	)
 
 
 func _no_set(_value) -> void:

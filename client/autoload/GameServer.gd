@@ -14,7 +14,7 @@ const SERVER_DOMAIN = "%s%s.game-server.test"
 
 
 var _client: NakamaClient = null setget _no_set
-var _player: MetafabPlayer = null setget _no_set
+var _meta: MetaAccount = null setget _no_set
 var _account: ServerAccount = null setget _no_set
 var _exception: ServerException = null setget _no_set
 
@@ -25,23 +25,31 @@ func _init() -> void:
 	# needs to be saved and loaded from nakama
 	# Configure the servers client
 	_exception = ServerException.new()
-	if ConfigWorker.get_server_localhost():
+	if ConfigWorker.server_localhost():
 		print("[Game.Server] Using: localhost")
 		_server_setup("127.0.0.1")
 		return
-	var region = ConfigWorker.get_server_region()
-	var network = ConfigWorker.get_server_network()
+	var region = ConfigWorker.server_region()
+	var network = ConfigWorker.server_network()
 	var address = SERVER_DOMAIN % [ region, network ]
 	print("[Game.Server] Using: %s" % address)
 	_server_setup(address)
 
 
 func game_id() -> String:
-	return ConfigWorker.get_game_id()
+	return ConfigWorker.game_id()
 
 
 func game_key() -> String:
-	return ConfigWorker.get_game_key()
+	return ConfigWorker.game_key()
+
+
+func user_info() -> UserInfo:
+	return _account.user_info()
+
+
+func player_info() -> PlayerInfo:
+	return _meta.player_info()
 
 
 func authenticate():
@@ -60,18 +68,18 @@ func has_session() -> bool:
 
 func logout_async() -> int:
 	var __ = yield(_account.clear_account_async(), "completed")
-	return _player.clear_player()
+	return _meta.clear_player()
 
 
 func login_async(email: String, password: String, save_email: bool = false) -> int:
 	if OK == yield(_account.authenticate_account_async(email, password, save_email), "completed"):
-		return _player.authenticate_player(password)
+		return _meta.authenticate_player(password)
 	return -1
 
 
 func register_async(email: String, password: String, save_email: bool = false) -> int:
 	if OK == yield(_account.create_account_async(email, password, save_email), "completed"):
-		return _player.create_player(password)
+		return _meta.create_player(password)
 	return -1
 
 
@@ -84,15 +92,15 @@ func _server_setup(address: String):
 	_client = Nakama.create_client(SERVER_KEY, address, 7350, "http", 12, NakamaLogger.LOG_LEVEL.INFO)
 	_client.auto_retry = false
 	_account = ServerAccount.new(_client, _exception)
+	_meta = MetaAccount.new(_client, _account, _exception)
+	#warning-ignore: return_value_discarded
+	_meta.connect("signed_in", self, "_on_player_signed_in")
+	#warning-ignore: return_value_discarded
+	_meta.connect("signed_out", self, "_on_player_signed_out")
 	#warning-ignore: return_value_discarded
 	_account.connect("session_closed", self, "_on_account_session_closed")
 	#warning-ignore: return_value_discarded
 	_account.connect("session_created", self, "_on_account_session_created")
-	_player = MetafabPlayer.new(_client, _account, _exception)
-	#warning-ignore: return_value_discarded
-	_player.connect("signed_in", self, "_on_player_signed_in")
-	#warning-ignore: return_value_discarded
-	_player.connect("signed_out", self, "_on_player_signed_out")
 
 
 func _on_player_signed_in():

@@ -20,7 +20,7 @@ var _authenticating: bool = false
 
 
 func _init(client: NakamaClient, exception: ServerException) -> void:
-	_hash = ConfigWorker.get_client_hash()
+	_hash = ConfigWorker.client_hash()
 	_client = client
 	_session = null
 	_exception = exception
@@ -44,11 +44,11 @@ func has_user() -> bool:
 	return true
 
 
-func get_user_id() -> String:
+func user_id() -> String:
 	return _id
 
 
-func get_user_info() -> UserInfo:
+func user_info() -> UserInfo:
 	return UserInfo.new(_id, _name, _email)
 
 
@@ -95,7 +95,8 @@ func authenticate_device_async() -> int:
 	else:
 		_session = session
 		print("[Server.Account] Authenticated: %s" % session.user_id)
-		_save_session_data(false)
+		# no reason to save this
+		# _save_session_data(false)
 		emit_signal("session_created")
 		_authenticating = false
 		return OK
@@ -173,7 +174,7 @@ func _save_session_data(save_email: bool):
 
 
 func _close_session_async():
-	if _session == null: 
+	if _session == null:
 		return yield(GameServer.get_tree(), "idle_frame")
 	var session = _session
 	_session = null

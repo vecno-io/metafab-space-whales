@@ -62,6 +62,9 @@ func _no_set(_value):
 
 func _ready():
 	_load_game()
+	# Give the loader some time to finish up
+	# FixMe: The timer below should be a signal
+	# But it is not clear where that is triggered
 	yield(get_tree().create_timer(0.1), "timeout")
 	show_tutorial()
 

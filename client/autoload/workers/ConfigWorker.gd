@@ -11,7 +11,7 @@ const SERVER_REGION_DEFAULT = "main"
 const APP_FILE = "user://app.ini"
 
 
-static func get_client_hash() -> String:
+static func client_hash() -> String:
 	var file := ConfigFile.new()
 	var stamp = Time.get_ticks_msec()
 	if OK == file.load(APP_FILE):
@@ -23,7 +23,7 @@ static func get_client_hash() -> String:
 	return out
 
 
-static func get_game_id() -> String:
+static func game_id() -> String:
 	var file := ConfigFile.new()
 	var __ = file.load(APP_FILE)
 	return file.get_value("metafab", "game_id", "")
@@ -37,7 +37,7 @@ static func save_game_id(id: String) -> void:
 
 
 # Gets the public metafab key for the game
-static func get_game_key() -> String:
+static func game_key() -> String:
 	var file := ConfigFile.new()
 	var __ = file.load(APP_FILE)
 	return file.get_value("metafab", "game_key", "")
@@ -51,7 +51,7 @@ static func save_game_key(key: String) -> void:
 	_push_app_warning(file.save(APP_FILE), "save file failed")
 
 
-static func get_server_localhost() -> bool:
+static func server_localhost() -> bool:
 	var file := ConfigFile.new()
 	if OK == file.load(APP_FILE) && file.has_section_key("server", "localhost"):
 		return "true" == file.get_value("server", "localhost")
@@ -60,12 +60,12 @@ static func get_server_localhost() -> bool:
 	return true
 
 
-static func get_server_network() -> String:
+static func server_network() -> String:
 	if OS.has_feature("mainnet"): return ""
 	return ".testnet"
 
 
-static func get_server_region() -> String:
+static func server_region() -> String:
 	var file := ConfigFile.new()
 	if OK == file.load(APP_FILE) && file.has_section_key("server", "region"):
 		return file.get_value("server", "region")

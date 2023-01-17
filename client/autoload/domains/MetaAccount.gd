@@ -5,7 +5,8 @@ signal signed_in
 signal signed_out
 
 
-var _player: PlayerInfo= null setget _no_set
+var _cfg: MetaConfig = null setget _no_set
+var _player: PlayerInfo = null setget _no_set
 var _password: String = "" setget _no_set
 
 var _client: NakamaClient setget _no_set
@@ -17,6 +18,11 @@ func _init(client: NakamaClient, account: ServerAccount, exception: ServerExcept
 	_client = client
 	_account = account
 	_exception = exception
+
+
+func set_config(config: MetaConfig):
+	print("[Meta.Account] Game ID: %s" % config.game_id)
+	_cfg = config
 
 
 func player_info() -> PlayerInfo:
@@ -84,8 +90,9 @@ func _on_create_player_result(code: int, result: String) -> void:
 		_password = ""
 		_player = null
 		return
-	_player = _player_info_from_result(json.result)
-	if !_player.is_valid(): 
+	
+	_player = PlayerInfo.new()
+	if OK != _player.from_result(json.result): 
 		_push_error(-4, "meta_register json: %s - %s" % [user_id, json.result])
 		_password = ""
 		return
@@ -113,8 +120,8 @@ func _on_authenticate_player_result(code: int, result: String) -> void:
 		_push_error(-3, "meta_register json: %s - %s" % [user_id, json.result])
 		_password = ""
 		return
-	_player = _player_info_from_result(json.result)
-	if !_player.is_valid(): 
+	_player = PlayerInfo.new()
+	if OK != _player.from_result(json.result): 
 		_push_error(-4, "meta_register json: %s - %s" % [user_id, json.result])
 		_password = ""
 		return
@@ -130,18 +137,18 @@ func _get_user_metadata():
 	pass
 
 
-static func _player_info_from_result(data: Dictionary) -> PlayerInfo:
-	if data == null: return PlayerInfo.new()
-	if !data.has_all([
-		"id", 
-		"walletId", 
-		"accessToken"
-	]): return PlayerInfo.new()
-	return PlayerInfo.new(
-		data["id"],
-		data["accessToken"],
-		data["walletId"]
-	)
+# static func _player_info_from_result(data: Dictionary) -> PlayerInfo:
+# 	if data == null: return PlayerInfo.new()
+# 	if !data.has_all([
+# 		"id", 
+# 		"walletId", 
+# 		"accessToken"
+# 	]): return PlayerInfo.new()
+# 	return PlayerInfo.new(
+# 		data["id"],
+# 		data["accessToken"],
+# 		data["walletId"]
+# 	)
 
 
 func _no_set(_value) -> void:

@@ -36,7 +36,7 @@ func GameInfo(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime
 		"dust_currency": os.Getenv("METAFAB_CURRENCY_DUST"),
 		"whales_collection": os.Getenv("METAFAB_COLLECTION_WHALES"),
 		"sectors_collection": os.Getenv("METAFAB_COLLECTION_SECTORS"),
-		"boosters_collection": os.Getenv("METAFAB_COLLECTION_BOOSTERs"),
+		"boosters_collection": os.Getenv("METAFAB_COLLECTION_BOOSTERS"),
 	})
 	if err != nil {
 		logger.WithField("err", err).Error("json marshal actor")

@@ -116,4 +116,27 @@ func _on_account_session_closed():
 
 
 func _on_account_session_created():
+	yield(_load_config_async(), "completed")
 	emit_signal("session_created")
+
+
+func _load_config_async():
+	var session = yield(_account.get_session_async(), "completed")
+	var response = yield(_client.rpc_async(session, "game_info"), "completed")
+	if OK != _exception.parse_nakama(response):
+		_push_error(-1, "rpc.game_info: %s - %s" % ["failed to load"])
+		return
+	var json = JSON.parse(response.payload)
+	if OK != json.error:
+		_push_error(-2, "json.game_info: %s - %s" % [json.error, json.error_string])
+		return -3
+	var config = MetaConfig.new()
+	if OK != config.from_result(json.result): 
+		_push_error(-4, "json.game_info result: is not valid")
+		print_debug("[Game.Server] Invalid game info: %s" % json.result)
+		return -4
+	_meta.set_config(config)
+
+
+func _push_error(code: int, message: String) -> void:
+	if code != OK: push_error("[Game.Server] Code: %s - %s" % [message, code])

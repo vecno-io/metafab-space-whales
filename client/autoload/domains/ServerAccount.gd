@@ -127,7 +127,6 @@ func create_account_async(email: String, password: String, save_email: bool = fa
 		_email = ""
 		return -1
 	else:
-		# TODO Create the MetaFab Account
 		_save_session_data(save_email)
 		_authenticating = false
 		return OK
@@ -148,7 +147,6 @@ func authenticate_account_async(email: String, password: String, save_email: boo
 		_email = ""
 		return -1
 	else:
-		# TODO Load the MetaFab Account
 		_save_session_data(save_email)
 		_authenticating = false
 		return OK

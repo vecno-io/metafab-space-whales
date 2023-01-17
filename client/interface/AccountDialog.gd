@@ -33,11 +33,20 @@ onready var btn_regitser = get_node("%RegisterBtn")
 onready var edit_pass = get_node("%PassInputEdit")
 onready var edit_email = get_node("%EmailInputEdit")
 
+onready var actors_list = get_node("%ActorsList")
+onready var actors_slots = get_node("%ActorsSlots")
+
+var actor_item = preload("res://interface/actor-dialog/ActorItem.tscn")
+var actor_mint = preload("res://interface/actor-dialog/ActorMint.tscn")
+
 
 func _ready():
 	overlay.modulate = clear_color
 	if OK != regex.compile('.+\\@.+\\.[a-z][a-z]+'):
 		push_error("[%s] - email regex failed to compile" % name)
+	#warning-ignore: return_value_discarded
+	GameServer.connect("player_updated", self, "_on_player_updated")
+	# Check the initial session state
 	if !GameServer.has_session():
 		_set_server_connecting()
 	else: 
@@ -57,6 +66,7 @@ func signed_out():
 	btn_logout.hide()
 	form_login.show()
 	form_actors.hide()
+	actors_slots.hide()
 	tabs.set_tab_disabled(1, true)
 	if is_loading: _end_server_loading()
 
@@ -123,6 +133,7 @@ func _set_server_connecting():
 	box_link.show()
 	box_actors.hide()
 	box_loading.hide()
+
 
 func _on_close_pressed():
 	self.hide()
@@ -202,6 +213,29 @@ func _validate_account_input() -> bool:
 	if null == regex.search(edit_email.text): 
 		return false
 	return true
+
+
+func _on_player_updated():
+	# TODO Spam Protect: only when changed
+	# Clear all items from the list
+	for item in actors_list.get_children():
+		actors_list.remove_child(item)
+		item.queue_free()
+	# Grab the new player and update
+	var player = GameServer.player_info()
+	var actors = player.actors_map
+	var slots = player.actors_mints - player.actors_minted
+	actors_slots.text = "Mints: %s/%s" % [player.actors_minted, player.actors_mints]
+	actors_slots.show()
+	if actors.size() > 0:
+		for key in actors.keys():
+			var actor = actor_item.instance()
+			actor.set_values(actors[key])
+			actors_list.add_child(actor)
+	if slots > 0: 
+		for __ in range(0, slots):
+			var mint = actor_mint.instance()
+			actors_list.add_child(mint)
 
 
 func _push_error(message: String) -> void:

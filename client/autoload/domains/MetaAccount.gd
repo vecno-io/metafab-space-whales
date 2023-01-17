@@ -27,9 +27,7 @@ func set_config(config: MetaConfig):
 
 
 func player_info() -> PlayerInfo:
-	if _player != null: return PlayerInfo.new(
-		_player.id, _player.token, _player.wallet
-	)
+	if _player != null: return _player
 	return PlayerInfo.new()
 
 

@@ -2,6 +2,7 @@ class_name MainOverlay
 extends CanvasLayer
 
 
+onready var start_menu = get_node("%StartMenu")
 onready var server_state = get_node("%ServerState")
 onready var account_dialog = get_node("%AccountDialog")
 
@@ -17,6 +18,7 @@ func _ready():
 	GameServer.connect("signed_in", self, "_on_signed_in")
 	#initialize server authentication
 	GameServer.authenticate()
+	start_menu.manager = self
 	server_state.manager = self
 
 

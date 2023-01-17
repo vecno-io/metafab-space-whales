@@ -45,5 +45,6 @@ custom_constants/margin_left = 64
 custom_constants/margin_bottom = 192
 
 [node name="StartMenu" parent="HBoxContainer/MarginContainer/BoxStartMenu" instance=ExtResource( 4 )]
+unique_name_in_owner = true
 
 [node name="AccountDialog" parent="." instance=ExtResource( 1 )]

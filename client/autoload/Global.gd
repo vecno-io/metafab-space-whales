@@ -148,6 +148,10 @@ func show_game():
 	if overlay != null: overlay.show_game()
 
 
+func start_new_game():
+	# TODO Implement next
+	pass
+
 func show_dialog():
 	self.save_game()
 	world.reset_player()

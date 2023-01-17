@@ -67,8 +67,8 @@ func is_user_valid() -> bool:
 
 
 func is_session_valid() -> bool:
-	# Note: See get_session
-	return _session != null && _session.expired
+	# Note: Use get_session to check and refresh
+	return _session != null && !_session.expired
 
 
 func get_session_async() -> NakamaSession:

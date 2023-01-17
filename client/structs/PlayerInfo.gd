@@ -41,6 +41,10 @@ func is_valid() -> bool:
 	return true
 
 
+func has_actor_slots() -> bool:
+	return actors_mints > actors_minted
+
+
 func from_result(data: Dictionary) -> int:
 	if data == null: return -1
 	if !data.has_all([

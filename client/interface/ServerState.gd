@@ -47,7 +47,5 @@ func _on_mouse_entered():
 
 
 func _on_mouse_pressed():
-	if manager == null:
-		push_error("missing manager")
-	else:
-		manager.toggle_server_dialog()
+	if manager == null: push_error("missing manager")
+	else: manager.toggle_server_dialog()

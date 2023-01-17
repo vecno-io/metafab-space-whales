@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://prefabs/enemies/scripts/EnemyBase.gd"
 }, {
-"base": "Reference",
+"base": "CanvasLayer",
 "class": "MainOverlay",
 "language": "GDScript",
 "path": "res://interface/MainOverlay.gd"

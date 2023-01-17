@@ -2,6 +2,8 @@ class_name ServerAccount
 extends Reference
 
 
+signal user_updated
+
 signal session_closed
 signal session_created
 
@@ -26,23 +28,6 @@ func _init(client: NakamaClient, exception: ServerException) -> void:
 	_exception = exception
 
 
-func has_user() -> bool:
-	# Authentication sets the password;
-	# on failure the password is cleared.
-	if _authenticating: 
-		print(">>>> auth: %s" % _authenticating)
-		return false
-	if _id.empty(): 
-		print(">>>> _id: %s" % _id)
-		return false
-	if _email.empty():
-		print(">>>> _email: %s" % _email)
-		return false
-	if _password.empty(): 
-		print(">>>> _password: %s" % _password)
-		return false
-	return true
-
 
 func user_id() -> String:
 	return _id
@@ -52,9 +37,38 @@ func user_info() -> UserInfo:
 	return UserInfo.new(_id, _name, _email)
 
 
+func has_user() -> bool:
+	# Authentication sets the password;
+	# on failure the password is cleared.
+	if _authenticating: 
+		return false
+	if _id.empty(): 
+		return false
+	if _email.empty():
+		return false
+	if _password.empty(): 
+		return false
+	return true
+
+
 func has_session() -> bool:
 	# Note: See get_session
 	return _session != null
+
+
+func is_user_valid() -> bool:
+	if _id.empty(): 
+		return false
+	if _email.empty():
+		return false
+	if _password.empty(): 
+		return false
+	return true
+
+
+func is_session_valid() -> bool:
+	# Note: See get_session
+	return _session != null && _session.expired
 
 
 func get_session_async() -> NakamaSession:
@@ -63,11 +77,11 @@ func get_session_async() -> NakamaSession:
 	# both fail then fallback to the device account.
 	if _session != null && _session.expired:
 		_session = yield(_client.session_refresh_async(_session), "completed")
-		if OK != _exception.parse(_session):
+		if OK != _exception.parse_nakama(_session):
 			_session = yield(_client.authenticate_email_async(
 				_email, _password, _name, false
 			), "completed")
-			if OK != _exception.parse(_session):
+			if OK != _exception.parse_nakama(_session):
 				_session = null
 				yield(authenticate_device_async(), "completed")
 			else:
@@ -94,11 +108,10 @@ func authenticate_device_async() -> int:
 		return -1
 	else:
 		_session = session
-		print("[Server.Account] Authenticated: %s" % session.user_id)
-		# no reason to save this
-		# _save_session_data(false)
-		emit_signal("session_created")
 		_authenticating = false
+		print("[Server.Account] User ID: %s" % session.user_id)
+		emit_signal("session_created")
+		emit_signal("user_updated")
 		return OK
 
 
@@ -108,6 +121,7 @@ func clear_account_async() -> int:
 	yield(authenticate_device_async(), "completed")
 	_password = ""
 	_email = ""
+	_id = ""
 	return OK
 
 
@@ -119,7 +133,6 @@ func create_account_async(email: String, password: String, save_email: bool = fa
 		_authenticating = true
 	_email = email
 	_password = password.sha256_text()
-	print("[Server.Account] Link Account: %s" % email)
 	if OK != yield(_link_account_email_async(), "completed"): 
 		_authenticating = false
 		yield(authenticate_device_async(), "completed")
@@ -127,8 +140,10 @@ func create_account_async(email: String, password: String, save_email: bool = fa
 		_email = ""
 		return -1
 	else:
-		_save_session_data(save_email)
 		_authenticating = false
+		print("[Server.Account] Link Email: %s" % email)
+		_save_session_data(save_email)
+		emit_signal("user_updated")
 		return OK
 
 
@@ -139,7 +154,7 @@ func authenticate_account_async(email: String, password: String, save_email: boo
 	else: 
 		_authenticating = true
 	_email = email
-	print("[Server.Account] Auth Account: %s" % email)
+	print("[Server.Account] Auth Email: %s" % email)
 	if OK != yield(_auth_account_async(false, password), "completed"):
 		_authenticating = false
 		yield(authenticate_device_async(), "completed")
@@ -147,8 +162,11 @@ func authenticate_account_async(email: String, password: String, save_email: boo
 		_email = ""
 		return -1
 	else:
-		_save_session_data(save_email)
 		_authenticating = false
+		print("[Server.Account] User ID: %s" % _id)
+		_save_session_data(save_email)
+		emit_signal("session_created")
+		emit_signal("user_updated")
 		return OK
 
 
@@ -172,14 +190,13 @@ func _save_session_data(save_email: bool):
 
 
 func _close_session_async():
-	if _session == null:
-		return yield(GameServer.get_tree(), "idle_frame")
-	var session = _session
-	_session = null
-	var result = yield(_client.session_logout_async(session), "completed")
-	if OK != _exception.parse_nakama(result): _push_error(
-		4, "close session failed: %s" % session.user_id
-	)
+	if null != yield(get_session_async(), "completed"):
+		var session = _session
+		_session = null
+		var result = yield(_client.session_logout_async(session), "completed")
+		if OK != _exception.parse_nakama(result): _push_error(
+			4, "close session failed: %s" % session.user_id
+		)
 	emit_signal("session_closed")
 
 
@@ -194,8 +211,6 @@ func _auth_account_async(create: bool, password: String) -> int:
 		_push_error(-1, "Failed to authenticated")
 		return -1
 	_session = session
-	emit_signal("session_created")
-	print("[Server.Account] Authenticated: %s" % session.user_id)
 	return OK
 
 

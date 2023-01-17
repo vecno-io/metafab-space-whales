@@ -4,6 +4,9 @@ extends Node
 signal signed_in
 signal signed_out
 
+signal user_updated
+signal player_updated
+
 signal session_closed
 signal session_created
 
@@ -66,6 +69,18 @@ func has_session() -> bool:
 	return _account.has_session()
 
 
+func is_user_valid() -> bool:
+	return _account.is_user_valid()
+
+
+func is_player_valid() -> bool:
+	return _meta.is_player_valid()
+
+
+func is_session_valid() -> bool:
+	return _account.is_session_valid()
+
+
 func logout_async() -> int:
 	var __ = yield(_account.clear_account_async(), "completed")
 	return _meta.clear_player()
@@ -94,21 +109,33 @@ func _server_setup(address: String):
 	_account = ServerAccount.new(_client, _exception)
 	_meta = MetaAccount.new(_client, _account, _exception)
 	#warning-ignore: return_value_discarded
-	_meta.connect("signed_in", self, "_on_player_signed_in")
+	_meta.connect("signed_in", self, "_on_meta_signed_in")
 	#warning-ignore: return_value_discarded
-	_meta.connect("signed_out", self, "_on_player_signed_out")
+	_meta.connect("signed_out", self, "_on_meta_signed_out")
+	#warning-ignore: return_value_discarded
+	_meta.connect("player_updated", self, "_on_meta_player_updated")
+	#warning-ignore: return_value_discarded
+	_account.connect("user_updated", self, "_on_account_user_updated")
 	#warning-ignore: return_value_discarded
 	_account.connect("session_closed", self, "_on_account_session_closed")
 	#warning-ignore: return_value_discarded
 	_account.connect("session_created", self, "_on_account_session_created")
 
 
-func _on_player_signed_in():
+func _on_meta_signed_in():
 	emit_signal("signed_in")
 
 
-func _on_player_signed_out():
+func _on_meta_signed_out():
 	emit_signal("signed_out")
+
+
+func _on_meta_player_updated():
+	emit_signal("player_updated")
+
+
+func _on_account_user_updated():
+	emit_signal("user_updated")
 
 
 func _on_account_session_closed():

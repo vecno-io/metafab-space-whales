@@ -4,6 +4,7 @@ extends Reference
 signal signed_in
 signal signed_out
 
+signal player_updated
 
 var _cfg: MetaConfig = null setget _no_set
 var _player: PlayerInfo = null setget _no_set
@@ -30,6 +31,11 @@ func player_info() -> PlayerInfo:
 		_player.id, _player.token, _player.wallet
 	)
 	return PlayerInfo.new()
+
+
+func is_player_valid() -> bool:
+	if _player == null: return false
+	return _player.is_valid()
 
 
 func clear_player() -> int:
@@ -105,8 +111,10 @@ func _on_create_player_result(code: int, result: String) -> void:
 		_player = null
 		return
 	SessionWorker.save_player_info(user_id, _password, _player)
+	print("[Meta.Account] Player ID: %s" % _player.id)
 	emit_signal("signed_in")
-	_get_user_metadata()
+	_get_player_actors()
+	_get_player_data()
 
 
 func _on_authenticate_player_result(code: int, result: String) -> void:
@@ -126,29 +134,46 @@ func _on_authenticate_player_result(code: int, result: String) -> void:
 		_password = ""
 		return
 	SessionWorker.save_player_info(user_id, _password, _player)
+	print("[Meta.Account] Player ID: %s" % _player.id)
 	emit_signal("signed_in")
-	_get_user_metadata()
+	_get_player_actors()
+	_get_player_data()
 
 
-func _get_user_metadata():
-	# TODO Implement this next
-	# get the metadata for the user
-	# load list of actors for the user
-	pass
+func _get_player_data():
+	var __ = MetaFab.get_player_data(self, 
+		"_on_get_player_data_result", _player.id
+	)
 
 
-# static func _player_info_from_result(data: Dictionary) -> PlayerInfo:
-# 	if data == null: return PlayerInfo.new()
-# 	if !data.has_all([
-# 		"id", 
-# 		"walletId", 
-# 		"accessToken"
-# 	]): return PlayerInfo.new()
-# 	return PlayerInfo.new(
-# 		data["id"],
-# 		data["accessToken"],
-# 		data["walletId"]
-# 	)
+func _get_player_actors():
+	var __ = MetaFab.get_collection_item_balances(self, 
+		"_on_get_player_actors_result", 
+		_cfg.collection_actors, 
+		_player.wallet
+	)
+
+
+func _on_get_player_data_result(code: int, result: String):
+	var json = JSON.parse(result)
+	if code != 200: 
+		_push_error(code, "invalid data result: %s" % json.result)
+		return
+	if OK != _player.parse_player_data(json.result):
+		_push_error(code, "invalid data object: %s" % json.result)
+		return
+	emit_signal("player_updated")
+
+
+func _on_get_player_actors_result(code: int, result: String):
+	var json = JSON.parse(result)
+	if code != 200: 
+		_push_error(code, "invalid actors result: %s" % json.result)
+		return
+	if OK != _player.parse_player_actors(json.result):
+		_push_error(code, "invalid actors object: %s" % json.result)
+		return
+	emit_signal("player_updated")
 
 
 func _no_set(_value) -> void:

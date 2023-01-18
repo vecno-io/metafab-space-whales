@@ -3,17 +3,9 @@
 [ext_resource path="res://prefabs/Overlay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/World.tscn" type="PackedScene" id=2]
 [ext_resource path="res://prefabs/Backdrop.tscn" type="PackedScene" id=3]
+[ext_resource path="res://world_env.tres" type="Environment" id=4]
 [ext_resource path="res://prefabs/PlayerWhale.tscn" type="PackedScene" id=7]
 [ext_resource path="res://prefabs/Camera.tscn" type="PackedScene" id=8]
-
-[sub_resource type="Environment" id=1]
-background_mode = 4
-tonemap_mode = 2
-glow_enabled = true
-glow_bloom = 0.1
-glow_blend_mode = 1
-glow_bicubic_upscale = true
-glow_high_quality = true
 
 [node name="MainScene" type="Node"]
 
@@ -30,4 +22,4 @@ position = Vector2( -19, -24 )
 [node name="MainCamera" parent="." instance=ExtResource( 8 )]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+environment = ExtResource( 4 )

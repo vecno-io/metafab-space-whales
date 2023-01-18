@@ -17,15 +17,30 @@ func _ready():
 
 func _process(delta):
 	match Global.state:
-		Global.State.Game:
-			_process_game(delta)
-		Global.State.Dialog:
-			_process_dialog(delta)
+		Global.State.Home:
+			_process_home(delta)
+		Global.State.Sector:
+			_process_sector(delta)
+		Global.State.Tutorial:
+			_process_tutorial(delta)
 
 
-func _process_game(delta):
-	if Global.paused:
-		return
+func _process_home(delta):
+	# TODO: Pause based on home State
+	_do_follow_movement(delta)
+
+
+func _process_sector(delta):
+	if Global.paused: return
+	_do_follow_movement(delta)
+
+
+func _process_tutorial(delta):
+	# TODO: Pause based on Tutorial State
+	_do_follow_movement(delta)
+
+
+func _do_follow_movement(delta):
 	var direction = target.global_position - global_position
 	var base = global_rotation
 	var angle = direction.angle()
@@ -33,23 +48,7 @@ func _process_game(delta):
 	var angle_delta = turn_speed * delta
 	angle = clamp(angle, base - angle_delta, base + angle_delta)
 	global_rotation = angle
-
 	global_position = lerp(global_position, segment.global_position, lerp_speed)
-
-
-func _process_dialog(delta):
-	if Global.paused:
-		return
-	var direction = target.global_position - global_position
-	var base = global_rotation
-	var angle = direction.angle()
-	angle = lerp_angle(base, angle, 1.0)
-	var angle_delta = turn_speed * delta
-	angle = clamp(angle, base - angle_delta, base + angle_delta)
-	global_rotation = angle
-
-	global_position = lerp(global_position, segment.global_position, 0.24)
-
 
 func get_segment_hook():
 	return get_node("SegmentHook")

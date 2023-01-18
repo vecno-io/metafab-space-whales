@@ -50,15 +50,39 @@ func _exit_tree():
 
 func _process(delta):
 	match Global.state:
-		Global.State.Game:
-			_process_game(delta)
-		Global.State.Dialog:
-			_process_dialog(delta)
+		Global.State.Home:
+			_process_home(delta)
+		Global.State.Sector:
+			_process_sector(delta)
+		Global.State.Tutorial:
+			_process_tutorial(delta)
 
 
-func _process_game(delta):
-	if Global.paused:
-		return
+func _process_home(delta):
+	# TODO: Pause based on Menu State
+	# var direction = Vector2.ZERO - global_position
+	# global_position = lerp(global_position, Vector2.ZERO, 0.018)
+	# if velocity != Vector2.ZERO:
+	# 	var base = global_rotation
+	# 	var angle = direction.angle()
+	# 	angle = lerp_angle(base, angle, 1.0)
+	# 	var angle_delta = turn_speed * delta
+	# 	angle = clamp(angle, base - angle_delta, base + angle_delta)
+	# 	global_rotation = angle
+	pass
+
+
+func _process_sector(delta):
+	if Global.paused: return
+	_do_base_movement(delta)
+
+
+func _process_tutorial(delta):
+	# TODO: Pause based on Tutorial State
+	_do_base_movement(delta)
+
+
+func _do_base_movement(delta):
 	velocity.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
 	velocity.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	var target =  global_position + velocity.normalized() * speed * delta
@@ -67,7 +91,7 @@ func _process_game(delta):
 	if velocity != Vector2.ZERO:
 		var base = global_rotation
 		var angle = direction.angle()
-		angle = lerp_angle(base, angle, 1.0)
+		angle = lerp_angle(base, angle, 0.16)
 		var angle_delta = turn_speed * delta
 		angle = clamp(angle, base - angle_delta, base + angle_delta)
 		global_rotation = angle
@@ -79,18 +103,6 @@ func _process_game(delta):
 		self.start_speed_boost(speed_boost_timeout, speed_boost)
 	if firerate_boost_up && Input.is_action_just_pressed("boost_firerate"):
 		self.start_firerate_boost(firerate_boost_timeout, firerate_boost)
-
-
-func _process_dialog(delta):
-	var direction = Vector2.ZERO - global_position
-	global_position = lerp(global_position, Vector2.ZERO, 0.018)
-	if velocity != Vector2.ZERO:
-		var base = global_rotation
-		var angle = direction.angle()
-		angle = lerp_angle(base, angle, 1.0)
-		var angle_delta = turn_speed * delta
-		angle = clamp(angle, base - angle_delta, base + angle_delta)
-		global_rotation = angle
 
 
 func get_segment_hook():

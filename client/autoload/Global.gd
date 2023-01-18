@@ -2,16 +2,20 @@ extends Node
 
 
 enum State {
-	No,
-	Game,
-	Dialog
+	App,
+	Home,
+	Sector,
+	Tutorial
 }
-
-signal actor_died
-signal state_updated
 
 signal game_paused
 signal game_unpaused
+
+signal state_updated
+signal scene_move_ended
+signal scene_move_started
+
+signal actor_died
 
 signal updated_kills(value)
 signal updated_points(value)
@@ -26,9 +30,9 @@ signal speed_inventory_updated(value)
 signal firerate_storage_updated(value)
 signal firerate_inventory_updated(value)
 
-const SAVE_FILE := "user://savefile.data"
+const SAVE_FILE := "user://%s.save"
 
-var state = State.No setget _no_set
+var state = State.App setget _no_set
 
 var kills = 0 setget _no_set
 var points = 0 setget _no_set
@@ -66,7 +70,8 @@ func _ready():
 	# FixMe: The timer below should be a signal
 	# But it is not clear where that is triggered
 	yield(get_tree().create_timer(0.1), "timeout")
-	show_tutorial()
+	state = Global.State.App
+	emit_signal("state_updated")
 
 
 func _set_sector(value):
@@ -140,36 +145,69 @@ func _sector_updated_difficulty(value):
 	emit_signal("updated_difficulty", value)
 
 
-func show_game():
-	self.save_game()
-	state = Global.State.Game
-	emit_signal("state_updated")
-	if world != null: world.show_game()
-	if overlay != null: overlay.show_game()
-
-
-func start_new_game():
+func new_game():
 	# TODO Implement next
-	pass
-
-func show_dialog():
-	self.save_game()
-	world.reset_player()
-	camera.reset_position()
-	state = Global.State.Dialog
+	# TODO Hide The main menu
+	# TODO Close the actors dialog
+	# Spawn Tutorial Scene
+	# Move the camera over
+	state = Global.State.Tutorial
 	emit_signal("state_updated")
-	if world != null: world.show_dialog()
-	if overlay != null: overlay.show_dialog()
 
 
-func show_tutorial():
-	state = Global.State.No
+func leave_game():
+	state = Global.State.App
 	emit_signal("state_updated")
-	if world != null: world.show_tutorial()
-	if overlay != null: overlay.show_tutorial()
+
+
+func pause_game():
+	paused = true
+	emit_signal("game_paused")
+
+
+func unpause_game():
+	paused = false
+	emit_signal("game_unpaused")
+
+
+func show_home():
+	state = Global.State.Home
+	emit_signal("state_updated")
+
+
+func show_sector():
+	state = Global.State.Sector
+	emit_signal("state_updated")
+
+
+# func show_game():
+# 	self.save_game()
+# 	state = Global.State.Game
+# 	emit_signal("state_updated")
+# 	if world != null: world.show_game()
+# 	if overlay != null: overlay.show_game()
+
+# func show_dialog():
+# 	self.save_game()
+# 	world.reset_player()
+# 	camera.reset_position()
+# 	state = Global.State.Dialog
+# 	emit_signal("state_updated")
+# 	if world != null: world.show_dialog()
+# 	if overlay != null: overlay.show_dialog()
+
+
+# func show_tutorial():
+# 	state = Global.State.No
+# 	emit_signal("state_updated")
+# 	if world != null: world.show_tutorial()
+# 	if overlay != null: overlay.show_tutorial()
 
 
 func save_game():
+	# Note: This lacks a load so it needs to set all
+	var id = GameServer.actor_id()
+	if 0 >= id: return
 	var file := ConfigFile.new()
 	# Dust Currency
 	file.set_value("dust", "storage", dust_storage)
@@ -183,14 +221,16 @@ func save_game():
 	# High Score
 	file.set_value("highsocre", "latest", highsocre)
 	file.set_value("difficulty", "latest", difficulty)
-	var err = file.save(SAVE_FILE)
+	var err = file.save(SAVE_FILE % id)
 	if err != OK: 
 		push_warning("save_game: %s" % err)
 
 
 func _load_game():
+	var id = GameServer.actor_id()
+	if 0 >= id: return
 	var file := ConfigFile.new()
-	var err = file.load(SAVE_FILE)
+	var err = file.load(SAVE_FILE % id)
 	if err != OK: 
 		push_warning("_load_game: %s" % err)
 	# Dust Currency
@@ -215,14 +255,12 @@ func _load_game():
 		difficulty = file.get_value("difficulty", "latest") 
 
 
-func pause_game():
-	paused = true
-	emit_signal("game_paused")
+func scene_move_ended():
+	emit_signal("scene_move_ended")
 
 
-func unpause_game():
-	paused = false
-	emit_signal("game_unpaused")
+func scene_move_started():
+	emit_signal("scene_move_started")
 
 
 func add_kill():
@@ -238,7 +276,7 @@ func add_points(value):
 
 func actor_died():
 	emit_signal("actor_died")
-	show_dialog()
+	show_home()
 
 
 func screen_shake(intensity, time):

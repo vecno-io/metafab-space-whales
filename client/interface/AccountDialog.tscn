@@ -19,6 +19,7 @@ region = Rect2( 292, 40, 10, 32 )
 
 [node name="AccountDialog" type="Popup"]
 unique_name_in_owner = true
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -145,22 +146,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="LoginForm" type="CenterContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox"]
 unique_name_in_owner = true
-visible = false
 margin_right = 288.0
-margin_bottom = 224.0
+margin_bottom = 284.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm"]
 margin_left = 34.0
+margin_top = 30.0
 margin_right = 254.0
-margin_bottom = 224.0
+margin_bottom = 254.0
 rect_min_size = Vector2( 220, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -348,6 +346,8 @@ custom_constants/separation = 8
 
 [node name="ActorsForm" type="MarginContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox"]
 unique_name_in_owner = true
+visible = false
+margin_top = 228.0
 margin_right = 288.0
 margin_bottom = 284.0
 size_flags_horizontal = 3
@@ -357,20 +357,20 @@ custom_constants/margin_top = 12
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/ActorsForm"]
 margin_top = 12.0
 margin_right = 288.0
-margin_bottom = 284.0
+margin_bottom = 56.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Actors" type="ScrollContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/ActorsForm/VBoxContainer"]
 margin_right = 288.0
-margin_bottom = 272.0
+margin_bottom = 44.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ActorsList" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/ActorsForm/VBoxContainer/Actors"]
 unique_name_in_owner = true
 margin_right = 288.0
-margin_bottom = 272.0
+margin_bottom = 44.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 16
@@ -410,8 +410,9 @@ max_lines_visible = 1
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
-margin_right = 40.0
-margin_bottom = 4.0
+margin_left = 124.0
+margin_right = 157.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="LogOutBtn" type="Button" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer"]

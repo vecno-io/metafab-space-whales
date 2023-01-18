@@ -53,7 +53,7 @@ func _check_player_limits():
 
 
 func _on_new_game_pressed():
-	Global.start_new_game()
+	Global.new_game()
 
 
 func _on_load_game_pressed():

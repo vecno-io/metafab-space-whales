@@ -43,7 +43,7 @@ func _process(delta):
 			_process_tutorial(delta)
 
 
-func _process_home(delta):
+func _process_home(_delta):
 	# Camera follows instructor
 	pass
 

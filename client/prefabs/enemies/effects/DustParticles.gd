@@ -1,6 +1,9 @@
 extends CPUParticles2D
 
 
+signal picked_up
+
+
 var dust_amount = 0
 
 export(int) var dust_min = 50
@@ -28,4 +31,5 @@ func _on_hitbox_entered(area: Area2D):
 		player.dust_pickup(
 			dust_amount
 		)
+		emit_signal("picked_up")
 		queue_free()

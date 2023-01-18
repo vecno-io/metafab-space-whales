@@ -58,7 +58,7 @@ func _process(delta):
 			_process_tutorial(delta)
 
 
-func _process_home(delta):
+func _process_home(_delta):
 	# TODO: Pause based on Menu State
 	# var direction = Vector2.ZERO - global_position
 	# global_position = lerp(global_position, Vector2.ZERO, 0.018)
@@ -75,11 +75,14 @@ func _process_home(delta):
 func _process_sector(delta):
 	if Global.paused: return
 	_do_base_movement(delta)
-
+	if fire_up && Input.is_action_pressed("fire_main"):
+		self.fire_weapon()
 
 func _process_tutorial(delta):
 	# TODO: Pause based on Tutorial State
 	_do_base_movement(delta)
+	if fire_up && Input.is_action_pressed("fire_main"):
+		self.fire_weapon()
 
 
 func _do_base_movement(delta):
@@ -97,8 +100,6 @@ func _do_base_movement(delta):
 		global_rotation = angle
 	if Global.local_sector == null:
 		return
-	if fire_up && Input.is_action_pressed("fire_main"):
-		self.fire_weapon()
 	if speed_boost_up && Input.is_action_just_pressed("boost_speed"):
 		self.start_speed_boost(speed_boost_timeout, speed_boost)
 	if firerate_boost_up && Input.is_action_just_pressed("boost_firerate"):

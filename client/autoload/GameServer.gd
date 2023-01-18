@@ -47,8 +47,24 @@ func game_key() -> String:
 	return ConfigWorker.game_key()
 
 
+func user_id() -> String:
+	return _account.user_id()
+
+
 func user_info() -> UserInfo:
 	return _account.user_info()
+
+
+func actor_id() -> int:
+	return _meta.actor_id()
+
+
+func actor_info() -> ActorInfo:
+	return _meta.actor_info()
+
+
+func player_id() -> String:
+	return _meta.player_id()
 
 
 func player_info() -> PlayerInfo:

@@ -2,7 +2,7 @@ class_name Bullet
 extends Node2D
 
 
-var speed = 450
+var speed = 650
 var looked = false
 var velocity = Vector2(1, 0)
 

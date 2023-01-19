@@ -16,6 +16,7 @@ var speed_boost_up = true
 var speed_boost_timeout = 6.0
 
 var fire_up = true
+var trigger_down = false
 var firerate = 0.09
 var firerate_boost = 0.06
 var firerate_default = firerate
@@ -58,6 +59,21 @@ func _process(delta):
 			_process_tutorial(delta)
 
 
+func _unhandled_input(event: InputEvent):
+	match Global.state:
+		Global.State.Sector:
+			_check_combat_input(event)
+		Global.State.Tutorial:
+			_check_combat_input(event)
+
+
+func _check_combat_input(event: InputEvent):
+	if event.is_action_pressed("fire_main"):
+		trigger_down = true
+	if event.is_action_released("fire_main"):
+		trigger_down = false
+
+
 func _process_home(_delta):
 	# TODO: Pause based on Menu State
 	# var direction = Vector2.ZERO - global_position
@@ -75,13 +91,14 @@ func _process_home(_delta):
 func _process_sector(delta):
 	if Global.paused: return
 	_do_base_movement(delta)
-	if fire_up && Input.is_action_pressed("fire_main"):
+	if fire_up && trigger_down: 
 		self.fire_weapon()
+
 
 func _process_tutorial(delta):
 	# TODO: Pause based on Tutorial State
 	_do_base_movement(delta)
-	if fire_up && Input.is_action_pressed("fire_main"):
+	if fire_up && trigger_down: 
 		self.fire_weapon()
 
 

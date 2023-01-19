@@ -16,7 +16,7 @@ func _ready():
 	
 
 func _process(delta):
-	if Global.paused:
+	if disabled || Global.paused:
 		return
 	if Global.local_player == null:
 		return
@@ -40,6 +40,8 @@ func _process(delta):
 
 
 func _on_hitbox_entered(area: Area2D):
+	if disabled:
+		return
 	if ._do_base_knockback(area):
 		AudioManager.play_sfx_effect(sfx_hit)
 		# ToDo Juice: Animate hit

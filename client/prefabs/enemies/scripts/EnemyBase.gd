@@ -1,6 +1,8 @@
 class_name EnemyBase
 extends Node2D
 
+signal died
+signal escaped
 
 enum State {
 	No,
@@ -8,9 +10,12 @@ enum State {
 	Harvest,
 }
 
+export(bool) var disabled = false
+
 export(int) var hp = 4
 export(int) var speed = 100
 export(int) var knockback = 360
+export(int) var screen_time = 12
 
 export(int) var min_loot_amount = 25
 export(int) var max_loot_amount = 75
@@ -30,6 +35,8 @@ var velocity = Vector2.ZERO
 var turn_speed = PI * 2.6
 
 onready var stun_timer = get_node("%StunTimer")
+onready var screen_timer = get_node("%ScreenTimer")
+
 
 onready var dust_particles = preload("res://prefabs/enemies/effects/DustParticles.tscn")
 
@@ -45,6 +52,27 @@ func _on_stun_timeout():
 	stuned = false
 
 
+func _on_screen_exited():
+	if disabled: 
+		return
+	screen_timer.wait_time = screen_time
+	screen_timer.start()
+
+
+func _on_screen_entered():
+	screen_timer.stop()
+
+
+func _on_screen_timeout():
+	if disabled: 
+		return
+	if state == State.Flee:
+		emit_signal("escaped")
+	else:
+		emit_signal("escaped")
+	queue_free()
+
+
 func _base_start_running():
 	target = Vector2(rand_range(-8000, 8000), rand_range(-8000, 8000))
 	# ToDo Select closest Home Planet
@@ -56,6 +84,7 @@ func _has_died() -> bool:
 		return false
 	queue_free()
 	Global.add_kill()
+	emit_signal("died")
 	Global.add_points(2)
 	Global.screen_shake(48, 0.24)
 	# TODO If has loot drop loot

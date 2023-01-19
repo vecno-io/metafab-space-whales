@@ -2,8 +2,8 @@
 
 [ext_resource path="res://prefabs/Sector.gd" type="Script" id=1]
 [ext_resource path="res://prefabs/enemies/effects/DustParticles.tscn" type="PackedScene" id=2]
-[ext_resource path="res://prefabs/enemies/GamaEnemy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://prefabs/enemies/ProtoEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefabs/enemies/HaulerEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefabs/enemies/HunterEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefabs/pickups/ReloadBoost.tscn" type="PackedScene" id=7]
 [ext_resource path="res://prefabs/pickups/SpeedBoost.tscn" type="PackedScene" id=8]
 

@@ -1,0 +1,431 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://assets/gui/images/ui-pip-S01.png" type="Texture" id=1]
+[ext_resource path="res://assets/gui/images/ui-pip-M00.png" type="Texture" id=2]
+[ext_resource path="res://assets/gui/images/ui-pip-btn-d-M00.png" type="Texture" id=3]
+[ext_resource path="res://assets/gui/images/ui-pip-btn-p-M00.png" type="Texture" id=4]
+[ext_resource path="res://assets/gui/images/ui-pip-btn-d-S00.png" type="Texture" id=5]
+[ext_resource path="res://assets/gui/images/ui-pip-btn-n-M00.png" type="Texture" id=6]
+[ext_resource path="res://assets/gui/images/ui-pip-btn-h-M00.png" type="Texture" id=7]
+[ext_resource path="res://assets/gui/images/ui-pip-btn-p-S00.png" type="Texture" id=8]
+[ext_resource path="res://assets/gui/images/ui-pip-btn-n-S00.png" type="Texture" id=9]
+[ext_resource path="res://assets/gui/images/ui-pip-btn-h-S00.png" type="Texture" id=10]
+[ext_resource path="res://interface/game-hud/BottomBar.gd" type="Script" id=11]
+[ext_resource path="res://assets/gui/images/ui-pip-S04.png" type="Texture" id=12]
+[ext_resource path="res://assets/gui/images/ui-pip-S03.png" type="Texture" id=13]
+[ext_resource path="res://assets/gui/images/ui-pip-M01.png" type="Texture" id=14]
+[ext_resource path="res://assets/gui/images/ui-pip-S02.png" type="Texture" id=15]
+[ext_resource path="res://assets/gui/images/ui-pip-M02.png" type="Texture" id=16]
+[ext_resource path="res://assets/gui/images/ui-pip-M09.png" type="Texture" id=17]
+[ext_resource path="res://assets/gui/images/ui-pip-M06.png" type="Texture" id=18]
+[ext_resource path="res://assets/gui/images/ui-pip-M03.png" type="Texture" id=19]
+[ext_resource path="res://assets/gui/images/ui-pip-M07.png" type="Texture" id=20]
+[ext_resource path="res://assets/gui/images/ui-pip-M04.png" type="Texture" id=21]
+[ext_resource path="res://assets/gui/images/ui-pip-M10.png" type="Texture" id=22]
+[ext_resource path="res://assets/gui/images/ui-pip-M08.png" type="Texture" id=23]
+[ext_resource path="res://assets/gui/images/ui-pip-M05.png" type="Texture" id=24]
+
+[node name="BottomBar" type="MarginContainer"]
+margin_top = 452.0
+margin_right = 960.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_vertical = 3
+custom_constants/margin_bottom = 8
+script = ExtResource( 11 )
+pip_small_1 = ExtResource( 1 )
+pip_small_2 = ExtResource( 15 )
+pip_small_3 = ExtResource( 13 )
+pip_small_4 = ExtResource( 12 )
+pip_medium_00 = ExtResource( 2 )
+pip_medium_01 = ExtResource( 14 )
+pip_medium_02 = ExtResource( 16 )
+pip_medium_03 = ExtResource( 19 )
+pip_medium_04 = ExtResource( 21 )
+pip_medium_05 = ExtResource( 24 )
+pip_medium_06 = ExtResource( 18 )
+pip_medium_07 = ExtResource( 20 )
+pip_medium_08 = ExtResource( 23 )
+pip_medium_09 = ExtResource( 17 )
+pip_medium_10 = ExtResource( 22 )
+
+[node name="HBox" type="HBoxContainer" parent="."]
+margin_right = 960.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 64 )
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HBox"]
+margin_right = 960.0
+margin_bottom = 80.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBox/CenterContainer"]
+margin_left = 192.0
+margin_right = 768.0
+margin_bottom = 80.0
+mouse_filter = 2
+custom_constants/separation = 6
+
+[node name="ToolsBar" type="HBoxContainer" parent="HBox/CenterContainer/VBoxContainer"]
+margin_left = 94.0
+margin_right = 482.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 0, 24 )
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="BoostLeft" type="HBoxContainer" parent="HBox/CenterContainer/VBoxContainer/ToolsBar"]
+margin_right = 138.0
+margin_bottom = 28.0
+mouse_filter = 2
+custom_constants/separation = 6
+
+[node name="BoostLeft4" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/BoostLeft"]
+unique_name_in_owner = true
+margin_top = 4.0
+margin_right = 30.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 24 )
+mouse_filter = 2
+size_flags_vertical = 8
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="BoostLeft3" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/BoostLeft"]
+unique_name_in_owner = true
+margin_left = 36.0
+margin_top = 4.0
+margin_right = 66.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 24 )
+mouse_filter = 2
+size_flags_vertical = 8
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="BoostLeft2" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/BoostLeft"]
+unique_name_in_owner = true
+margin_left = 72.0
+margin_top = 4.0
+margin_right = 102.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 24 )
+mouse_filter = 2
+size_flags_vertical = 8
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="BoostLeft1" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/BoostLeft"]
+unique_name_in_owner = true
+margin_left = 108.0
+margin_top = 4.0
+margin_right = 138.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 24 )
+mouse_filter = 2
+size_flags_vertical = 8
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="HBox/CenterContainer/VBoxContainer/ToolsBar"]
+margin_left = 142.0
+margin_right = 246.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 104, 0 )
+mouse_filter = 2
+custom_constants/margin_right = 4
+custom_constants/margin_left = 4
+
+[node name="SpecialBtn" type="TextureButton" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/MarginContainer"]
+unique_name_in_owner = true
+margin_left = 4.0
+margin_right = 100.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 96, 28 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+disabled = true
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 10 )
+texture_disabled = ExtResource( 5 )
+texture_focused = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="BoostRight" type="HBoxContainer" parent="HBox/CenterContainer/VBoxContainer/ToolsBar"]
+margin_left = 250.0
+margin_right = 388.0
+margin_bottom = 28.0
+mouse_filter = 2
+custom_constants/separation = 6
+
+[node name="BoostRight1" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/BoostRight"]
+unique_name_in_owner = true
+margin_top = 4.0
+margin_right = 30.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 24 )
+mouse_filter = 2
+size_flags_vertical = 8
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+flip_h = true
+
+[node name="BoostRight2" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/BoostRight"]
+unique_name_in_owner = true
+margin_left = 36.0
+margin_top = 4.0
+margin_right = 66.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 24 )
+mouse_filter = 2
+size_flags_vertical = 8
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+flip_h = true
+
+[node name="BoostRight3" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/BoostRight"]
+unique_name_in_owner = true
+margin_left = 72.0
+margin_top = 4.0
+margin_right = 102.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 24 )
+mouse_filter = 2
+size_flags_vertical = 8
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+flip_h = true
+
+[node name="BoostRight4" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/ToolsBar/BoostRight"]
+unique_name_in_owner = true
+margin_left = 108.0
+margin_top = 4.0
+margin_right = 138.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 24 )
+mouse_filter = 2
+size_flags_vertical = 8
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 6
+flip_h = true
+
+[node name="EngineBar" type="HBoxContainer" parent="HBox/CenterContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 576.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 24 )
+mouse_filter = 2
+custom_constants/separation = -8
+
+[node name="DustLeft" type="HBoxContainer" parent="HBox/CenterContainer/VBoxContainer/EngineBar"]
+margin_right = 224.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 0, 46 )
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/separation = -8
+
+[node name="DustLeft6" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustLeft"]
+unique_name_in_owner = true
+margin_right = 44.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="DustLeft5" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustLeft"]
+unique_name_in_owner = true
+margin_left = 36.0
+margin_right = 80.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="DustLeft4" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustLeft"]
+unique_name_in_owner = true
+margin_left = 72.0
+margin_right = 116.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="DustLeft3" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustLeft"]
+unique_name_in_owner = true
+margin_left = 108.0
+margin_right = 152.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="DustLeft2" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustLeft"]
+unique_name_in_owner = true
+margin_left = 144.0
+margin_right = 188.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="DustLeft1" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustLeft"]
+unique_name_in_owner = true
+margin_left = 180.0
+margin_right = 224.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="HBox/CenterContainer/VBoxContainer/EngineBar"]
+margin_left = 216.0
+margin_right = 360.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 144, 46 )
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/margin_top = 0
+
+[node name="JumpBtn" type="TextureButton" parent="HBox/CenterContainer/VBoxContainer/EngineBar/MarginContainer"]
+unique_name_in_owner = true
+margin_right = 144.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 144, 46 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 3 )
+texture_focused = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+
+[node name="DustRight" type="HBoxContainer" parent="HBox/CenterContainer/VBoxContainer/EngineBar"]
+margin_left = 352.0
+margin_right = 576.0
+margin_bottom = 46.0
+mouse_filter = 2
+custom_constants/separation = -8
+
+[node name="DustRight1" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustRight"]
+unique_name_in_owner = true
+margin_right = 44.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+flip_h = true
+
+[node name="DustRight2" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustRight"]
+unique_name_in_owner = true
+margin_left = 36.0
+margin_right = 80.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+flip_h = true
+
+[node name="DustRight3" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustRight"]
+unique_name_in_owner = true
+margin_left = 72.0
+margin_right = 116.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+flip_h = true
+
+[node name="DustRight4" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustRight"]
+unique_name_in_owner = true
+margin_left = 108.0
+margin_right = 152.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+flip_h = true
+
+[node name="DustRight5" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustRight"]
+unique_name_in_owner = true
+margin_left = 144.0
+margin_right = 188.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+flip_h = true
+
+[node name="DustRight6" type="TextureRect" parent="HBox/CenterContainer/VBoxContainer/EngineBar/DustRight"]
+unique_name_in_owner = true
+margin_left = 180.0
+margin_right = 224.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 44, 46 )
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+flip_h = true

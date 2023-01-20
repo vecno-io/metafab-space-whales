@@ -1,5 +1,7 @@
 extends MarginContainer
 
+const DUST_PIP_MAX = 1000
+
 export(Texture) var pip_small_1: Texture
 export(Texture) var pip_small_2: Texture
 export(Texture) var pip_small_3: Texture
@@ -50,29 +52,54 @@ func _ready():
 	# Global.overlay = null
 	#warning-ignore: return_value_discarded
 	Global.connect("dust_inventory_updated", self, "_on_dust_inventory_updated")
+	#warning-ignore: return_value_discarded
+	Global.connect("speed_inventory_updated", self, "_on_speed_inventory_updated")
+	#warning-ignore: return_value_discarded
+	Global.connect("firerate_inventory_updated", self, "_on_firerate_inventory_updated")
 
 
 func _exit_tree():
 	# TODO Remove this or?
 	# Global.overlay = null
 	Global.disconnect("dust_inventory_updated", self, "_on_dust_inventory_updated")
+	#warning-ignore: return_value_discarded
+	Global.disconnect("dust_inventory_updated", self, "_on_speed_inventory_updated")
+	#warning-ignore: return_value_discarded
+	Global.disconnect("firerate_inventory_updated", self, "_on_firerate_inventory_updated")
 
 
-const DUST_PIP_MAX = 1000
+func _on_speed_inventory_updated(value):
+	if value >= 1: boost_right_a.texture = pip_small_4
+	else: boost_right_a.texture = pip_small_1
+	if value >= 2: boost_right_b.texture = pip_small_4
+	else: boost_right_b.texture = pip_small_1
+	if value >= 3: boost_right_c.texture = pip_small_4
+	else: boost_right_c.texture = pip_small_1
+	if value >= 4: boost_right_d.texture = pip_small_4
+	else: boost_right_d.texture = pip_small_1
+
+
+func _on_firerate_inventory_updated(value):
+	if value >= 1: boost_left_a.texture = pip_small_4
+	else: boost_left_a.texture = pip_small_1
+	if value >= 2: boost_left_b.texture = pip_small_4
+	else: boost_left_b.texture = pip_small_1
+	if value >= 3: boost_left_c.texture = pip_small_4
+	else: boost_left_c.texture = pip_small_1
+	if value >= 4: boost_left_d.texture = pip_small_4
+	else: boost_left_d.texture = pip_small_1
+
+
 func _on_dust_inventory_updated(value):
 	var count =  value / DUST_PIP_MAX
 	var leftover = value % DUST_PIP_MAX
+	_set_dust_buttons(count, leftover)
 	_chk_dust_pip_value(1, count, leftover)
 	_chk_dust_pip_value(2, count, leftover)
 	_chk_dust_pip_value(3, count, leftover)
 	_chk_dust_pip_value(4, count, leftover)
 	_chk_dust_pip_value(5, count, leftover)
 	_chk_dust_pip_value(6, count, leftover)
-	_set_dust_buttons_value(count, leftover)
-	print_debug(
-		">> %s >> %s >> %s" % 
-		[value, count, leftover]
-	)
 
 
 func _chk_dust_pip_value(idx, count, leftover):
@@ -84,7 +111,7 @@ func _chk_dust_pip_value(idx, count, leftover):
 		_set_dust_pip_value(idx, 0)
 
 
-func _set_dust_buttons_value(count, leftover):
+func _set_dust_buttons(count, leftover):
 	# Refine this for initial pick-up
 	# Some indication on the background
 	if count > 0:

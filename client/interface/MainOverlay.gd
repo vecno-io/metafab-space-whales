@@ -4,6 +4,9 @@ extends CanvasLayer
 # FixMe: Tweak the gameserver delegate patern
 # Update it to the delegate manager setup below
 
+var shake_screen = false
+var shake_intensity = 0
+
 onready var game_hud = get_node("%GameHud")
 onready var tutor_hud = get_node("%TutorHud")
 
@@ -11,6 +14,7 @@ onready var start_menu = get_node("%StartMenu")
 onready var server_state = get_node("%ServerState")
 onready var account_dialog = get_node("%AccountDialog")
 
+onready var shake_timer = get_node("%ShakeTimer")
 
 func _ready():
 	#warning-ignore: return_value_discarded
@@ -30,8 +34,44 @@ func _ready():
 	server_state.show()
 	start_menu.manager = self
 	start_menu.show()
+	Global.overlay = self
 	#initialize server authentication
 	GameServer.authenticate()
+
+
+func _exit_tree():
+	Global.overlay = null
+	start_menu.manager = null
+	server_state.manager = null
+	Global.disconnect("state_updated", self, "_on_state_updated")
+	Global.disconnect("scene_move_ended", self, "_on_scene_move_ended")
+	Global.disconnect("signed_in", self, "_on_signed_in")
+	Global.disconnect("signed_out", self, "_on_signed_out")
+	Global.disconnect("session_closed", self, "_on_session_closed")
+	Global.disconnect("session_created", self, "_on_session_created")
+
+
+func _process(delta):
+	game_hud.rect_scale = lerp(game_hud.rect_scale, Vector2(1, 1), 0.24)
+	if shake_screen:
+		var x = rand_range(-shake_intensity, shake_intensity)
+		var y = rand_range(-shake_intensity, shake_intensity)
+		game_hud.rect_position += Vector2(x, y) * delta
+	else:
+		game_hud.rect_position = lerp(game_hud.rect_position, Vector2(0, 0), 0.24)
+
+
+func screen_shake(intensity, time):
+	game_hud.rect_scale = Vector2.ONE - Vector2(intensity * 0.0006, intensity * 0.0006)
+	shake_intensity = intensity * 0.75
+	shake_timer.wait_time = time
+	shake_screen = true
+	shake_timer.start()
+
+
+func _on_shake_timeout():
+	shake_intensity = 0
+	shake_screen = false
 
 
 func toggle_server_dialog() -> void:

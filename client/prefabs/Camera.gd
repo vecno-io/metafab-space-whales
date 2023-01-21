@@ -7,7 +7,8 @@ var shake_intensity = 0
 
 var target_position = Vector2.ZERO
 
-export(Vector2) var menu_position = Vector2(480, 270)
+export(Vector2) var app_position = Vector2(480, 270)
+export(Vector2) var home_position = Vector2(480, 270)
 export(Vector2) var sector_position = Vector2(1440, 1620)
 export(Vector2) var tutorial_position = Vector2(2400, 270)
 
@@ -17,8 +18,8 @@ onready var scene_tween = get_node("%SceneTween")
 func _ready():
 	randomize()
 	Global.camera = self
-	global_position = menu_position
-	target_position = menu_position
+	global_position = app_position - Vector2(40.0, 0)
+	target_position = app_position - Vector2(40.0, 0)
 	#warning-ignore: return_value_discarded
 	Global.connect("actor_died", self, "_on_actor_died")
 	#warning-ignore: return_value_discarded
@@ -60,23 +61,6 @@ func _process_tutorial(delta):
 	_follow_player_update()
 	_movement_update(delta)
 
-
-## ========
-## No longer used
-# func _process_none(_delta):
-# 	if Global.local_player == null:
-# 		return
-# 	var target = Global.local_player.global_position - Vector2(40.0, 0)
-# 	global_position = lerp(global_position, target, 0.24)
-
-
-# func _process_dialog(_delta):
-# 	if Global.local_player == null:
-# 		return
-# 	var target = Global.local_player.global_position - Vector2(40.0, 0)
-# 	global_position = lerp(global_position, target, 0.24)
-## No longer used
-## ========
 
 func _follow_player_update():
 	if Global.local_player == null:
@@ -125,13 +109,13 @@ func _on_state_updated():
 	var tween_to = global_position
 	match Global.state:
 		Global.State.App:
-			tween_to = menu_position
+			tween_to = app_position - Vector2(40.0, 0)
 		Global.State.Home:
-			tween_to = menu_position
+			tween_to = home_position - Vector2(40.0, 0)
 		Global.State.Sector:
-			tween_to = sector_position
+			tween_to = sector_position - Vector2(40.0, 0)
 		Global.State.Tutorial:
-			tween_to = tutorial_position
+			tween_to = tutorial_position - Vector2(40.0, 0)
 	target_position = tween_to
 	scene_tween.interpolate_property(
 		self, "global_position",

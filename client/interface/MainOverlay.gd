@@ -16,6 +16,7 @@ onready var account_dialog = get_node("%AccountDialog")
 
 onready var shake_timer = get_node("%ShakeTimer")
 
+
 func _ready():
 	#warning-ignore: return_value_discarded
 	GameServer.connect("session_created", self, "_on_session_created")
@@ -45,10 +46,10 @@ func _exit_tree():
 	server_state.manager = null
 	Global.disconnect("state_updated", self, "_on_state_updated")
 	Global.disconnect("scene_move_ended", self, "_on_scene_move_ended")
-	Global.disconnect("signed_in", self, "_on_signed_in")
-	Global.disconnect("signed_out", self, "_on_signed_out")
-	Global.disconnect("session_closed", self, "_on_session_closed")
-	Global.disconnect("session_created", self, "_on_session_created")
+	GameServer.disconnect("signed_in", self, "_on_signed_in")
+	GameServer.disconnect("signed_out", self, "_on_signed_out")
+	GameServer.disconnect("session_closed", self, "_on_session_closed")
+	GameServer.disconnect("session_created", self, "_on_session_created")
 
 
 func _process(delta):
@@ -118,8 +119,9 @@ func _on_scene_move_ended():
 	match Global.state:
 		Global.State.App:
 			start_menu.show()
-		# Global.State.Home:
+		Global.State.Home:
 		#	# ToDo Home Gui
+			game_hud.show()
 		Global.State.Sector:
 			game_hud.show()
 		Global.State.Tutorial:

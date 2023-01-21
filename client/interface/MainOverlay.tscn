@@ -74,3 +74,8 @@ unique_name_in_owner = true
 
 [node name="AccountDialog" parent="." instance=ExtResource( 1 )]
 visible = false
+
+[node name="ShakeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timeout"]

@@ -2,6 +2,8 @@ class_name PlayerBrains
 extends Node2D
 
 
+signal jumping_ended
+
 # ToDo Juice: Hook up visual indicators
 # Boosted particle efects and item glows
 signal speed_boost_start
@@ -16,7 +18,9 @@ var speed_boost_up = true
 var speed_boost_timeout = 6.0
 
 var fire_up = true
+var jumping = false
 var trigger_down = false
+
 var firerate = 0.09
 var firerate_boost = 0.06
 var firerate_default = firerate
@@ -30,11 +34,14 @@ var turn_speed = PI * 2.2
 export(int) var bullet_cost_min = 8
 export(int) var bullet_cost_max = 12
 
+onready var jump_tween = get_node("JumpTween")
+
 onready var firerate_timer = get_node("%Firerate")
 onready var speed_boost_timer = get_node("%SpeedBoost")
 onready var firerate_boost_timer = get_node("%FirerateBoost")
 
 onready var fire_sfx = get_node("%SfxrStreamFire")
+onready var jumps_sfx = get_node("%SfxrStreamJumps")
 
 var bullet = preload("res://prefabs/Bullet.tscn")
 
@@ -43,13 +50,18 @@ func _ready():
 	destroyed = false
 	Global.local_player = self
 	firerate_timer.wait_time = firerate
+	#warning-ignore: return_value_discarded
+	Global.connect("player_jumping", self, "_on_player_jumping")
 
 
 func _exit_tree():
 	Global.local_player = null
+	Global.disconnect("player_jumping", self, "_on_player_jumping")
 
 
 func _process(delta):
+	if jumping:
+		return
 	match Global.state:
 		Global.State.Home:
 			_process_home(delta)
@@ -59,33 +71,13 @@ func _process(delta):
 			_process_tutorial(delta)
 
 
-func _unhandled_input(event: InputEvent):
-	match Global.state:
-		Global.State.Sector:
-			_check_combat_input(event)
-		Global.State.Tutorial:
-			_check_combat_input(event)
-
-
-func _check_combat_input(event: InputEvent):
-	if event.is_action_pressed("fire_main"):
-		trigger_down = true
-	if event.is_action_released("fire_main"):
-		trigger_down = false
-
-
-func _process_home(_delta):
-	# TODO: Pause based on Menu State
-	# var direction = Vector2.ZERO - global_position
-	# global_position = lerp(global_position, Vector2.ZERO, 0.018)
-	# if velocity != Vector2.ZERO:
-	# 	var base = global_rotation
-	# 	var angle = direction.angle()
-	# 	angle = lerp_angle(base, angle, 1.0)
-	# 	var angle_delta = turn_speed * delta
-	# 	angle = clamp(angle, base - angle_delta, base + angle_delta)
-	# 	global_rotation = angle
-	pass
+func _process_home(delta):
+	if Global.paused: return
+	# TODO: Pause based on Home State
+	# Open Boxes and shops needs to pause
+	_do_base_movement(delta)
+	if fire_up && trigger_down: 
+		self.fire_weapon()
 
 
 func _process_sector(delta):
@@ -96,6 +88,7 @@ func _process_sector(delta):
 
 
 func _process_tutorial(delta):
+	if Global.paused: return
 	# TODO: Pause based on Tutorial State
 	_do_base_movement(delta)
 	if fire_up && trigger_down: 
@@ -123,6 +116,59 @@ func _do_base_movement(delta):
 		self.start_firerate_boost(firerate_boost_timeout, firerate_boost)
 
 
+
+func _unhandled_input(event: InputEvent):
+	if jumping:
+		return
+	match Global.state:
+		Global.State.Home:
+			_check_home_input(event)
+		Global.State.Sector:
+			_check_combat_input(event)
+		Global.State.Tutorial:
+			_check_combat_input(event)
+
+
+func _check_home_input(event: InputEvent):
+	if event.is_action_pressed("jump"):
+		_handle_jump_event()
+		return
+		
+
+func _check_combat_input(event: InputEvent):
+	if event.is_action_pressed("jump"):
+		_handle_jump_event()
+		return
+	if event.is_action_pressed("fire_main"):
+		trigger_down = true
+		return
+	if event.is_action_released("fire_main"):
+		trigger_down = false
+		return
+
+
+func _handle_jump_event():
+	if Global.jump_out():
+		AudioManager.play_sfx_effect(jumps_sfx)
+		# TODO Juice: Jump GXF
+
+
+func _on_player_jumping(position: Vector2):
+	jumping = true
+	# TODO Look at and move to jump direction
+	jump_tween.interpolate_property(
+		self, "global_position",
+		global_position, position, 0.8,
+		Tween.TRANS_QUINT, Tween.EASE_IN_OUT
+	)
+	jump_tween.start()
+	jumping = true
+
+func _on_jump_tween_completed():
+	jumping = false
+	emit_signal("jumping_ended")
+
+
 func get_segment_hook():
 	return get_node("SegmentHook")
 
@@ -131,12 +177,20 @@ func dust_pickup(amount):
 	Global.dust_inventory += amount
 
 
-func speed_boost_pickup(amount):
-	Global.speed_inventory += amount
+func speed_boost_pickup(amount) -> bool:
+	if Global.speed_inventory >= Global.MAX_INVENTORY_BOOST:
+		return false
+	else:
+		Global.speed_inventory += amount
+		return true
 
 
 func firerate_boost_pickup(amount):
-	Global.firerate_inventory += amount
+	if Global.firerate_inventory >= Global.MAX_INVENTORY_BOOST:
+		return false
+	else:
+		Global.firerate_inventory += amount
+		return true
 
 
 func fire_weapon():
@@ -209,6 +263,9 @@ func _on_hitbox_entered(area:Area2D):
 		Global.speed_inventory = 0
 		Global.pause_game()
 		Global.save_game()
+
+
+func world_death():
 		destroyed = true
 		# TODO Juice: Explode into dust
 		# TODO Juice: Jump head off screen

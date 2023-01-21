@@ -63,7 +63,7 @@ func _exit_tree():
 	# Global.overlay = null
 	Global.disconnect("dust_inventory_updated", self, "_on_dust_inventory_updated")
 	#warning-ignore: return_value_discarded
-	Global.disconnect("dust_inventory_updated", self, "_on_speed_inventory_updated")
+	Global.disconnect("speed_inventory_updated", self, "_on_speed_inventory_updated")
 	#warning-ignore: return_value_discarded
 	Global.disconnect("firerate_inventory_updated", self, "_on_firerate_inventory_updated")
 

@@ -1,5 +1,7 @@
 extends Node
 
+const MAX_INVENTORY_DUST = 6000
+const MAX_INVENTORY_BOOST = 4
 
 enum State {
 	App,
@@ -19,7 +21,11 @@ signal actor_died
 
 signal updated_kills(value)
 signal updated_points(value)
+signal updated_can_jump(value)
 signal updated_difficulty(value)
+
+signal player_jumped(value)
+signal player_jumping(value)
 
 signal dust_storage_updated(value)
 signal dust_inventory_updated(value)
@@ -39,6 +45,8 @@ var points = 0 setget _no_set
 var paused = true setget _no_set
 var highsocre = 0 setget _no_set
 
+var can_jump = false setget _set_can_jump
+
 var dust_storage = 0 setget _set_dust_storage
 var dust_inventory = 0 setget _set_dust_inventory
 
@@ -54,7 +62,7 @@ var world = null
 var camera = null
 var overlay = null
 
-var local_player = null
+var local_player = null setget _set_player
 var local_sector = null setget _set_sector
 
 var difficulty = 1
@@ -74,12 +82,23 @@ func _ready():
 	emit_signal("state_updated")
 
 
+func _set_player(value):
+	_player_disconnect()
+	local_player = value
+	_player_connect()
+
+
 func _set_sector(value):
 	_sector_disconnect()
 	local_sector = value
 	_sector_connect()
 	_sector_reset()
 	unpause_game()
+
+
+func _set_can_jump(value):
+	can_jump = value
+	emit_signal("updated_can_jump", value)
 
 
 func _set_dust_storage(value):
@@ -129,15 +148,27 @@ func _sector_reset():
 	emit_signal("updated_difficulty", 0)
 
 
+func _player_connect():
+	if local_player == null: return
+	local_player.connect("jumping_ended", self, "_on_jumping_ended")
+
+
+func _player_disconnect():
+	if local_player == null: return
+	local_player.disconnect("jumping_ended", self, "_on_jumping_ended")
+
+
+func _on_jumping_ended():
+	emit_signal("player_jumped")
+
+
 func _sector_connect():
-	if local_sector == null:
-		return
+	if local_sector == null: return
 	local_sector.connect("updated_difficulty", self, "_sector_updated_difficulty")
 
 
 func _sector_disconnect():
-	if local_sector == null:
-		return
+	if local_sector == null: return
 	local_sector.disconnect("updated_difficulty", self, "_sector_updated_difficulty")
 
 
@@ -202,6 +233,47 @@ func show_sector():
 # 	emit_signal("state_updated")
 # 	if world != null: world.show_tutorial()
 # 	if overlay != null: overlay.show_tutorial()
+
+func jump_out() -> bool:
+	if paused: 
+		return false
+	if !can_jump:
+		return false
+	match state:
+		State.Home:
+			return _jump_out_home()
+		State.Sector:
+			return _jump_out_sector()
+		State.Tutorial:
+			return _jump_out_tutorial()
+	return false
+
+
+func _jump_out_home() -> bool:
+	# Note: The camera jumps on state change
+	state = Global.State.Sector
+	emit_signal("state_updated")
+	# FixMe This is a bit of a hack
+	emit_signal("player_jumping", camera.sector_position)
+	return true
+
+
+func _jump_out_sector() -> bool:
+	# Note: The camera jumps on state change
+	state = Global.State.Home
+	emit_signal("state_updated")
+	# FixMe This is a bit of a hack
+	emit_signal("player_jumping", camera.home_position)
+	return true
+
+
+func _jump_out_tutorial() -> bool:
+	# Note: The camera jumps on state change
+	state = Global.State.Home
+	emit_signal("state_updated")
+	# FixMe This is a bit of a hack
+	emit_signal("player_jumping", camera.home_position)
+	return true
 
 
 func save_game():
@@ -275,8 +347,22 @@ func add_points(value):
 
 
 func actor_died():
-	emit_signal("actor_died")
-	show_home()
+	if state == State.Tutorial:
+		handle_tutorial_death()
+		return
+	handle_world_death()
+
+
+func handle_world_death():
+	if local_player != null:
+		local_player.world_death()
+		emit_signal("actor_died")
+		local_player = null
+		show_home()
+
+
+func handle_tutorial_death():
+	paused = true
 
 
 func screen_shake(intensity, time):

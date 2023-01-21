@@ -11,6 +11,8 @@ extents = Vector2( 6.5, 9 )
 
 [node name="Hunter" type="Node2D"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+z_index = 10
+z_as_relative = false
 script = ExtResource( 2 )
 hp = 2
 speed = 120

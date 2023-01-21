@@ -52,7 +52,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="BoxState" type="VBoxContainer" parent="HBoxContainer/RightBox"]
-margin_left = 262.0
+margin_left = 254.0
 margin_right = 478.0
 margin_bottom = 540.0
 mouse_filter = 2
@@ -60,17 +60,20 @@ size_flags_horizontal = 8
 size_flags_vertical = 3
 
 [node name="ServerState" parent="HBoxContainer/RightBox/BoxState" instance=ExtResource( 3 )]
+margin_right = 224.0
 
 [node name="BoxStartMenu" type="MarginContainer" parent="HBoxContainer/RightBox"]
 margin_right = 478.0
 margin_bottom = 540.0
 mouse_filter = 2
 custom_constants/margin_top = 72
-custom_constants/margin_left = 64
-custom_constants/margin_bottom = 192
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 156
 
 [node name="StartMenu" parent="HBoxContainer/RightBox/BoxStartMenu" instance=ExtResource( 4 )]
 unique_name_in_owner = true
+margin_left = 0.0
+margin_bottom = 384.0
 
 [node name="AccountDialog" parent="." instance=ExtResource( 1 )]
 visible = false

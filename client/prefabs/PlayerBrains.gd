@@ -6,6 +6,7 @@ signal jumping_ended
 
 # ToDo Juice: Hook up visual indicators
 # Boosted particle efects and item glows
+
 signal speed_boost_start
 signal speed_boost_stoped
 signal firerate_boost_start
@@ -261,8 +262,9 @@ func _on_hitbox_entered(area:Area2D):
 		Global.dust_inventory -= int(Global.dust_inventory * 0.6)
 		Global.firerate_inventory = 0
 		Global.speed_inventory = 0
-		Global.pause_game()
-		Global.save_game()
+		if Global.actor_died():
+			Global.pause_game()
+			Global.save_game()
 
 
 func world_death():
@@ -272,4 +274,3 @@ func world_death():
 		yield(get_tree().create_timer(1.4), "timeout")
 		# TODO FixMe: Double call, null after timeout
 		get_parent().queue_free()
-		Global.actor_died()

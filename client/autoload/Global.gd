@@ -346,23 +346,25 @@ func add_points(value):
 	emit_signal("updated_points", points)
 
 
-func actor_died():
+func actor_died() -> bool:
 	if state == State.Tutorial:
-		handle_tutorial_death()
-		return
-	handle_world_death()
+		return handle_tutorial_death()
+	else:
+		return handle_world_death()
 
 
-func handle_world_death():
+func handle_world_death() -> bool:
 	if local_player != null:
 		local_player.world_death()
 		emit_signal("actor_died")
 		local_player = null
 		show_home()
+		return true
+	return false
 
 
-func handle_tutorial_death():
-	paused = true
+func handle_tutorial_death() -> bool:
+	return local_sector.player_death()
 
 
 func screen_shake(intensity, time):

@@ -15,20 +15,18 @@ export(Vector2) var tutorial_position = Vector2(2400, 270)
 onready var shake_timer = get_node("%ShakeTimer")
 onready var scene_tween = get_node("%SceneTween")
 
+
 func _ready():
 	randomize()
 	Global.camera = self
 	global_position = app_position - Vector2(40.0, 0)
 	target_position = app_position - Vector2(40.0, 0)
 	#warning-ignore: return_value_discarded
-	Global.connect("actor_died", self, "_on_actor_died")
-	#warning-ignore: return_value_discarded
 	Global.connect("state_updated", self, "_on_state_updated")
 
 
 func _exit_tree():
 	Global.camera = null
-	Global.disconnect("actor_died", self, "_on_actor_died")
 	Global.disconnect("state_updated", self, "_on_state_updated")
 
 
@@ -95,14 +93,9 @@ func _on_shake_timeout():
 	shake_screen = false
 
 
-func _on_actor_died():
-	yield(get_tree().create_timer(0.1), "timeout")
-	global_position = Vector2.ZERO
-
-
 func _on_state_updated():
 	if scene_tween.is_active():
-		scene_tween.stop()
+		scene_tween.stop_all()
 	# As the state updates, the camera moves to
 	# transition and bring state elements in view.
 	scene_move = true

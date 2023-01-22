@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id=1]
 
 [node name="StorageLink" type="Sprite"]
-light_mask = 32
+light_mask = 33
 z_index = -45
 texture = ExtResource( 3 )
 script = ExtResource( 2 )

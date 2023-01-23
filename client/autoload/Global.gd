@@ -1,5 +1,6 @@
 extends Node
 
+
 const MAX_INVENTORY_DUST = 6000
 const MAX_INVENTORY_BOOST = 4
 
@@ -62,6 +63,7 @@ var world = null
 var camera = null
 var overlay = null
 
+var local_store = null
 var local_player = null setget _set_player
 var local_sector = null setget _set_sector
 

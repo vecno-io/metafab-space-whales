@@ -1,5 +1,10 @@
 extends Control
 
+# TODO CleanUp: This is no longer used
+# Structure have internal interfaces now
+# - Storage Link
+# - Refining Hubs
+# - Production Hubs
 
 onready var dust_storage = get_node("%DustStorage")
 onready var dust_inventory = get_node("%DustInventory")

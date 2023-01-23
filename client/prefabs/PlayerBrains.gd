@@ -132,13 +132,13 @@ func _unhandled_input(event: InputEvent):
 
 func _check_home_input(event: InputEvent):
 	if event.is_action_pressed("jump"):
-		_handle_jump_event()
+		jump_out()
 		return
-		
+
 
 func _check_combat_input(event: InputEvent):
 	if event.is_action_pressed("jump"):
-		_handle_jump_event()
+		jump_out()
 		return
 	if event.is_action_pressed("fire_main"):
 		trigger_down = true
@@ -148,7 +148,7 @@ func _check_combat_input(event: InputEvent):
 		return
 
 
-func _handle_jump_event():
+func jump_out():
 	if Global.jump_out():
 		AudioManager.play_sfx_effect(jumps_sfx)
 		# TODO Juice: Jump GXF

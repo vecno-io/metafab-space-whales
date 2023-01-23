@@ -46,20 +46,20 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer"]
+[node name="LeftBox" type="CenterContainer" parent="HBoxContainer"]
 margin_right = 478.0
 margin_bottom = 540.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+[node name="RightBox" type="CenterContainer" parent="HBoxContainer"]
 margin_left = 482.0
 margin_right = 960.0
 margin_bottom = 540.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TabContainer" type="TabContainer" parent="HBoxContainer/CenterContainer"]
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/RightBox"]
 unique_name_in_owner = true
 margin_left = 79.0
 margin_top = 80.0
@@ -71,7 +71,7 @@ custom_styles/tab_disabled = ExtResource( 4 )
 custom_styles/tab_bg = ExtResource( 4 )
 custom_styles/panel = ExtResource( 5 )
 
-[node name="Actors" type="Tabs" parent="HBoxContainer/CenterContainer/TabContainer"]
+[node name="Actors" type="Tabs" parent="HBoxContainer/RightBox/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
@@ -81,19 +81,19 @@ margin_bottom = -8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LinkBox" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors"]
+[node name="LinkBox" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors"]
 unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/LinkBox"]
 margin_right = 288.0
 margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/LinkBox/CenterContainer"]
 margin_left = 24.0
 margin_top = 121.0
 margin_right = 264.0
@@ -102,14 +102,14 @@ rect_min_size = Vector2( 240, 0 )
 size_flags_horizontal = 3
 custom_constants/separation = 32
 
-[node name="Title" type="Label" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox/CenterContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="HBoxContainer/RightBox/TabContainer/Actors/LinkBox/CenterContainer/VBoxContainer"]
 margin_right = 240.0
 margin_bottom = 16.0
 custom_fonts/font = ExtResource( 3 )
 text = "> CONNECTING <"
 align = 1
 
-[node name="LoadingMsg" type="Label" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox/CenterContainer/VBoxContainer"]
+[node name="LoadingMsg" type="Label" parent="HBoxContainer/RightBox/TabContainer/Actors/LinkBox/CenterContainer/VBoxContainer"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 margin_top = 48.0
 margin_right = 240.0
@@ -121,18 +121,18 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/LinkBox"]
 margin_top = 308.0
 margin_right = 288.0
 margin_bottom = 334.0
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/LinkBox/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 257.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="CloseButton" type="Button" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox/HBoxContainer"]
+[node name="CloseButton" type="Button" parent="HBoxContainer/RightBox/TabContainer/Actors/LinkBox/HBoxContainer"]
 margin_left = 261.0
 margin_right = 288.0
 margin_bottom = 26.0
@@ -140,31 +140,31 @@ text = "x"
 align = 2
 icon_align = 1
 
-[node name="ActorsBox" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors"]
+[node name="ActorsBox" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors"]
 unique_name_in_owner = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="LoginForm" type="CenterContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox"]
+[node name="LoginForm" type="CenterContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox"]
 unique_name_in_owner = true
+visible = false
 margin_right = 288.0
-margin_bottom = 284.0
+margin_bottom = 224.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm"]
 margin_left = 34.0
-margin_top = 30.0
 margin_right = 254.0
-margin_bottom = 254.0
+margin_bottom = 224.0
 rect_min_size = Vector2( 220, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 8
 
-[node name="Label" type="Label" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
 modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
 margin_right = 220.0
 margin_bottom = 16.0
@@ -172,7 +172,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Credentials"
 align = 1
 
-[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0.25098 )
 margin_left = 20.0
 margin_top = 24.0
@@ -182,17 +182,17 @@ rect_min_size = Vector2( 180, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 16
 
-[node name="EmaiInput" type="HBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
+[node name="EmaiInput" type="HBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
 margin_top = 48.0
 margin_right = 220.0
 margin_bottom = 80.0
 
-[node name="TRectLeft" type="TextureRect" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput"]
+[node name="TRectLeft" type="TextureRect" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput"]
 margin_right = 10.0
 margin_bottom = 32.0
 texture = SubResource( 1 )
 
-[node name="EmailInputEdit" type="LineEdit" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput"]
+[node name="EmailInputEdit" type="LineEdit" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput"]
 unique_name_in_owner = true
 margin_left = 14.0
 margin_right = 206.0
@@ -207,23 +207,23 @@ placeholder_alpha = 0.2
 caret_blink = true
 caret_blink_speed = 0.75
 
-[node name="TRectRight" type="TextureRect" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput"]
+[node name="TRectRight" type="TextureRect" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput"]
 margin_left = 210.0
 margin_right = 220.0
 margin_bottom = 32.0
 texture = SubResource( 2 )
 
-[node name="PassInput" type="HBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
+[node name="PassInput" type="HBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
 margin_top = 88.0
 margin_right = 220.0
 margin_bottom = 120.0
 
-[node name="TRectLeft" type="TextureRect" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput"]
+[node name="TRectLeft" type="TextureRect" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput"]
 margin_right = 10.0
 margin_bottom = 32.0
 texture = SubResource( 1 )
 
-[node name="PassInputEdit" type="LineEdit" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput"]
+[node name="PassInputEdit" type="LineEdit" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput"]
 unique_name_in_owner = true
 margin_left = 14.0
 margin_right = 206.0
@@ -238,13 +238,13 @@ placeholder_text = "Pass"
 placeholder_alpha = 0.2
 caret_blink_speed = 0.75
 
-[node name="TRectRight" type="TextureRect" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput"]
+[node name="TRectRight" type="TextureRect" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput"]
 margin_left = 210.0
 margin_right = 220.0
 margin_bottom = 32.0
 texture = SubResource( 2 )
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
 modulate = Color( 1, 1, 1, 0.25098 )
 margin_left = 20.0
 margin_top = 128.0
@@ -254,26 +254,26 @@ rect_min_size = Vector2( 180, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 16
 
-[node name="LoginBtn" type="HBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
+[node name="LoginBtn" type="HBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
 margin_top = 152.0
 margin_right = 220.0
 margin_bottom = 184.0
 size_flags_vertical = 4
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 45.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
 
-[node name="TRectLeft" type="TextureRect" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
+[node name="TRectLeft" type="TextureRect" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
 margin_left = 49.0
 margin_right = 59.0
 margin_bottom = 32.0
 texture = SubResource( 1 )
 
-[node name="LogInBtn" type="Button" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
+[node name="LogInBtn" type="Button" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
 unique_name_in_owner = true
 margin_left = 63.0
 margin_right = 156.0
@@ -286,13 +286,13 @@ disabled = true
 shortcut_in_tooltip = false
 text = "SIGN-IN"
 
-[node name="TRectRight" type="TextureRect" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
+[node name="TRectRight" type="TextureRect" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
 margin_left = 160.0
 margin_right = 170.0
 margin_bottom = 32.0
 texture = SubResource( 2 )
 
-[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 174.0
 margin_right = 220.0
@@ -300,26 +300,26 @@ margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
 
-[node name="RegisterBtn" type="HBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
+[node name="RegisterBtn" type="HBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer"]
 margin_top = 192.0
 margin_right = 220.0
 margin_bottom = 224.0
 size_flags_vertical = 4
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 38.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
 
-[node name="TRectLeft" type="TextureRect" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
+[node name="TRectLeft" type="TextureRect" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
 margin_left = 42.0
 margin_right = 52.0
 margin_bottom = 32.0
 texture = SubResource( 1 )
 
-[node name="RegisterBtn" type="Button" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
+[node name="RegisterBtn" type="Button" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
 unique_name_in_owner = true
 margin_left = 56.0
 margin_right = 163.0
@@ -330,13 +330,13 @@ disabled = true
 shortcut_in_tooltip = false
 text = "REGISTER"
 
-[node name="TRectRight" type="TextureRect" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
+[node name="TRectRight" type="TextureRect" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
 margin_left = 167.0
 margin_right = 177.0
 margin_bottom = 32.0
 texture = SubResource( 2 )
 
-[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 181.0
 margin_right = 220.0
@@ -344,38 +344,36 @@ margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_constants/separation = 8
 
-[node name="ActorsForm" type="MarginContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox"]
+[node name="ActorsForm" type="MarginContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox"]
 unique_name_in_owner = true
-visible = false
-margin_top = 228.0
 margin_right = 288.0
 margin_bottom = 284.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_top = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/ActorsForm"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/ActorsForm"]
 margin_top = 12.0
 margin_right = 288.0
-margin_bottom = 56.0
+margin_bottom = 284.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Actors" type="ScrollContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/ActorsForm/VBoxContainer"]
+[node name="Actors" type="ScrollContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/ActorsForm/VBoxContainer"]
 margin_right = 288.0
-margin_bottom = 44.0
+margin_bottom = 272.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ActorsList" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/ActorsForm/VBoxContainer/Actors"]
+[node name="ActorsList" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/ActorsForm/VBoxContainer/Actors"]
 unique_name_in_owner = true
 margin_right = 288.0
-margin_bottom = 44.0
+margin_bottom = 272.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 16
 
-[node name="ActorsMsg" type="Label" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox"]
+[node name="ActorsMsg" type="Label" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox"]
 unique_name_in_owner = true
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 margin_top = 288.0
@@ -389,12 +387,12 @@ valign = 1
 clip_text = true
 max_lines_visible = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox"]
 margin_top = 306.0
 margin_right = 288.0
 margin_bottom = 334.0
 
-[node name="ActorsSlots" type="Label" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer"]
+[node name="ActorsSlots" type="Label" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/HBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 margin_right = 120.0
@@ -408,14 +406,14 @@ valign = 1
 clip_text = true
 max_lines_visible = 1
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 124.0
 margin_right = 157.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 
-[node name="LogOutBtn" type="Button" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer"]
+[node name="LogOutBtn" type="Button" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/HBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 0.815686, 0.815686, 0.815686, 1 )
 margin_left = 161.0
@@ -427,7 +425,7 @@ text = "sign-out"
 align = 2
 icon_align = 1
 
-[node name="CloseButton" type="Button" parent="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer"]
+[node name="CloseButton" type="Button" parent="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/HBoxContainer"]
 margin_left = 261.0
 margin_right = 288.0
 margin_bottom = 28.0
@@ -435,19 +433,19 @@ text = "x"
 align = 2
 icon_align = 1
 
-[node name="LoadingBox" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors"]
+[node name="LoadingBox" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors"]
 unique_name_in_owner = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LoadingBox"]
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/LoadingBox"]
 margin_right = 288.0
 margin_bottom = 304.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LoadingBox/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/LoadingBox/CenterContainer"]
 margin_left = 24.0
 margin_top = 121.0
 margin_right = 264.0
@@ -456,14 +454,14 @@ rect_min_size = Vector2( 240, 0 )
 size_flags_horizontal = 3
 custom_constants/separation = 32
 
-[node name="Title" type="Label" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LoadingBox/CenterContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="HBoxContainer/RightBox/TabContainer/Actors/LoadingBox/CenterContainer/VBoxContainer"]
 margin_right = 240.0
 margin_bottom = 16.0
 custom_fonts/font = ExtResource( 3 )
 text = "> LOADING  <"
 align = 1
 
-[node name="LoadingMsg" type="Label" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LoadingBox/CenterContainer/VBoxContainer"]
+[node name="LoadingMsg" type="Label" parent="HBoxContainer/RightBox/TabContainer/Actors/LoadingBox/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 margin_top = 48.0
@@ -476,18 +474,18 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LoadingBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/RightBox/TabContainer/Actors/LoadingBox"]
 margin_top = 308.0
 margin_right = 288.0
 margin_bottom = 334.0
 
-[node name="HSeparator" type="HSeparator" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LoadingBox/HBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/RightBox/TabContainer/Actors/LoadingBox/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 257.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="CloseButton" type="Button" parent="HBoxContainer/CenterContainer/TabContainer/Actors/LoadingBox/HBoxContainer"]
+[node name="CloseButton" type="Button" parent="HBoxContainer/RightBox/TabContainer/Actors/LoadingBox/HBoxContainer"]
 margin_left = 261.0
 margin_right = 288.0
 margin_bottom = 26.0
@@ -495,7 +493,7 @@ text = "x"
 align = 2
 icon_align = 1
 
-[node name="History" type="Tabs" parent="HBoxContainer/CenterContainer/TabContainer"]
+[node name="History" type="Tabs" parent="HBoxContainer/RightBox/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -506,13 +504,13 @@ margin_bottom = -8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/History"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/History"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TransactionsEmpty" type="Label" parent="HBoxContainer/CenterContainer/TabContainer/History/VBoxContainer"]
+[node name="TransactionsEmpty" type="Label" parent="HBoxContainer/RightBox/TabContainer/History/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 margin_top = 69.0
@@ -524,21 +522,21 @@ text = "No Transactions Found"
 align = 1
 valign = 1
 
-[node name="Transactions" type="ScrollContainer" parent="HBoxContainer/CenterContainer/TabContainer/History/VBoxContainer"]
+[node name="Transactions" type="ScrollContainer" parent="HBoxContainer/RightBox/TabContainer/History/VBoxContainer"]
 margin_top = 155.0
 margin_right = 258.0
 margin_bottom = 306.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TransactionList" type="VBoxContainer" parent="HBoxContainer/CenterContainer/TabContainer/History/VBoxContainer/Transactions"]
+[node name="TransactionList" type="VBoxContainer" parent="HBoxContainer/RightBox/TabContainer/History/VBoxContainer/Transactions"]
 unique_name_in_owner = true
 margin_right = 258.0
 margin_bottom = 151.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CloseBtn" type="Button" parent="HBoxContainer/CenterContainer/TabContainer/History/VBoxContainer"]
+[node name="CloseBtn" type="Button" parent="HBoxContainer/RightBox/TabContainer/History/VBoxContainer"]
 margin_top = 310.0
 margin_right = 258.0
 margin_bottom = 336.0
@@ -547,14 +545,14 @@ align = 2
 icon_align = 1
 
 [connection signal="timeout" from="AuthTimer" to="." method="_on_auth_timer_timeout"]
-[connection signal="pressed" from="HBoxContainer/CenterContainer/TabContainer/Actors/LinkBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
-[connection signal="text_changed" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput/EmailInputEdit" to="." method="_on_email_text_changed"]
-[connection signal="text_entered" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput/EmailInputEdit" to="." method="_on_email_entered"]
-[connection signal="text_changed" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput/PassInputEdit" to="." method="_on_pass_text_changed"]
-[connection signal="text_entered" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput/PassInputEdit" to="." method="_on_pass_entered"]
-[connection signal="pressed" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn/LogInBtn" to="." method="_on_login_pressed"]
-[connection signal="pressed" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn/RegisterBtn" to="." method="_on_register_pressed"]
-[connection signal="pressed" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer/LogOutBtn" to="." method="_on_logout_pressed"]
-[connection signal="pressed" from="HBoxContainer/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
-[connection signal="pressed" from="HBoxContainer/CenterContainer/TabContainer/Actors/LoadingBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
-[connection signal="pressed" from="HBoxContainer/CenterContainer/TabContainer/History/VBoxContainer/CloseBtn" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightBox/TabContainer/Actors/LinkBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="text_changed" from="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput/EmailInputEdit" to="." method="_on_email_text_changed"]
+[connection signal="text_entered" from="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/EmaiInput/EmailInputEdit" to="." method="_on_email_entered"]
+[connection signal="text_changed" from="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput/PassInputEdit" to="." method="_on_pass_text_changed"]
+[connection signal="text_entered" from="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/PassInput/PassInputEdit" to="." method="_on_pass_entered"]
+[connection signal="pressed" from="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/LoginBtn/LogInBtn" to="." method="_on_login_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/LoginForm/VBoxContainer/RegisterBtn/RegisterBtn" to="." method="_on_register_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/HBoxContainer/LogOutBtn" to="." method="_on_logout_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightBox/TabContainer/Actors/ActorsBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightBox/TabContainer/Actors/LoadingBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightBox/TabContainer/History/VBoxContainer/CloseBtn" to="." method="_on_close_pressed"]

@@ -76,7 +76,6 @@ margin_left = 0.0
 margin_bottom = 384.0
 
 [node name="AccountDialog" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="ShakeTimer" type="Timer" parent="."]
 unique_name_in_owner = true

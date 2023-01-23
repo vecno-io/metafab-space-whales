@@ -213,29 +213,6 @@ func show_sector():
 	emit_signal("state_updated")
 
 
-# func show_game():
-# 	self.save_game()
-# 	state = Global.State.Game
-# 	emit_signal("state_updated")
-# 	if world != null: world.show_game()
-# 	if overlay != null: overlay.show_game()
-
-# func show_dialog():
-# 	self.save_game()
-# 	world.reset_player()
-# 	camera.reset_position()
-# 	state = Global.State.Dialog
-# 	emit_signal("state_updated")
-# 	if world != null: world.show_dialog()
-# 	if overlay != null: overlay.show_dialog()
-
-
-# func show_tutorial():
-# 	state = Global.State.No
-# 	emit_signal("state_updated")
-# 	if world != null: world.show_tutorial()
-# 	if overlay != null: overlay.show_tutorial()
-
 func jump_out() -> bool:
 	if paused: 
 		return false

@@ -1,0 +1,213 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/fonts/Text-10-O1.tres" type="DynamicFont" id=1]
+[ext_resource path="res://prefabs/sectors/tutorial-steps/Step02.gd" type="Script" id=2]
+[ext_resource path="res://prefabs/enemies/effects/DustParticles.gd" type="Script" id=3]
+[ext_resource path="res://prefabs/enemies/effects/DustParticles.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefabs/enemies/HaulerEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefabs/enemies/HunterEnemy.tscn" type="PackedScene" id=6]
+
+[node name="Step02" type="Node2D"]
+z_index = -99
+script = ExtResource( 2 )
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LeftBox" type="MarginContainer" parent="Overlay/HBoxContainer"]
+margin_right = 478.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 24
+custom_constants/margin_left = 24
+
+[node name="InfoEnter-02A" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+unique_name_in_owner = true
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 446.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02A"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 422.0
+margin_bottom = 99.0
+custom_fonts/font = ExtResource( 1 )
+text = "The Haulers, they are a bit slow but will try to harvest large amounts of dust from you. They will run off with a full cargo to bring it home.
+
+Ready to kill it?"
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02A"]
+margin_top = 123.0
+margin_right = 422.0
+margin_bottom = 149.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="Box" type="MarginContainer" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02A/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 32, 0 )
+mouse_filter = 2
+
+[node name="Ready-02A" type="Button" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02A/HBoxContainer"]
+unique_name_in_owner = true
+show_behind_parent = true
+margin_left = 48.0
+margin_right = 121.0
+margin_bottom = 26.0
+size_flags_horizontal = 8
+size_flags_vertical = 3
+disabled = true
+text = "Ready"
+
+[node name="InfoEnter-02B" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+unique_name_in_owner = true
+visible = false
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 446.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02B"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 422.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 1 )
+text = "The Hunters, fast and agile they will stick on you and try to slow you down so haulers can catch up.
+
+Kill it fast when ready."
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02B"]
+margin_top = 106.0
+margin_right = 422.0
+margin_bottom = 132.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="Box" type="MarginContainer" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02B/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 32, 0 )
+mouse_filter = 2
+
+[node name="Ready-02B" type="Button" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02B/HBoxContainer"]
+unique_name_in_owner = true
+show_behind_parent = true
+margin_left = 48.0
+margin_right = 121.0
+margin_bottom = 26.0
+size_flags_horizontal = 8
+size_flags_vertical = 3
+disabled = true
+text = "Ready"
+
+[node name="InfoExit-02" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+unique_name_in_owner = true
+visible = false
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 446.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoExit-02"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 422.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 1 )
+text = "As mentioned before, all we do uses Dust so aim well and waisting bullets. The goal is to bring home dust and build out your base to hold them back."
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoExit-02"]
+margin_top = 89.0
+margin_right = 422.0
+margin_bottom = 115.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="Box" type="MarginContainer" parent="Overlay/HBoxContainer/LeftBox/InfoExit-02/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 32, 0 )
+mouse_filter = 2
+
+[node name="Next-02" type="Button" parent="Overlay/HBoxContainer/LeftBox/InfoExit-02/HBoxContainer"]
+unique_name_in_owner = true
+show_behind_parent = true
+margin_left = 48.0
+margin_right = 109.0
+margin_bottom = 26.0
+size_flags_horizontal = 8
+size_flags_vertical = 3
+disabled = true
+text = "Next"
+
+[node name="RightBox" type="VBoxContainer" parent="Overlay/HBoxContainer"]
+margin_left = 482.0
+margin_right = 960.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Dust-01" parent="." instance=ExtResource( 4 )]
+position = Vector2( 95, -176 )
+rotation = 5.34716
+script = ExtResource( 3 )
+dust_min = 300
+dust_max = 600
+
+[node name="Dust-02" parent="." instance=ExtResource( 4 )]
+position = Vector2( -339, 89 )
+rotation = 2.60578
+script = ExtResource( 3 )
+dust_min = 300
+dust_max = 600
+
+[node name="Dust-03" parent="." instance=ExtResource( 4 )]
+position = Vector2( 204, 159 )
+rotation = 0.371755
+script = ExtResource( 3 )
+dust_min = 300
+dust_max = 600
+
+[node name="Hunter" parent="." instance=ExtResource( 6 )]
+unique_name_in_owner = true
+position = Vector2( 334, -99 )
+rotation = 2.60578
+disabled = true
+
+[node name="Hauler" parent="." instance=ExtResource( 5 )]
+unique_name_in_owner = true
+position = Vector2( 334, 110 )
+rotation = 3.48019
+disabled = true

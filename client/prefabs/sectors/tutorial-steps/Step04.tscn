@@ -1,0 +1,171 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/fonts/Text-10-O1.tres" type="DynamicFont" id=1]
+[ext_resource path="res://prefabs/sectors/tutorial-steps/Step04.gd" type="Script" id=2]
+[ext_resource path="res://prefabs/enemies/HunterEnemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://prefabs/enemies/HaulerEnemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefabs/enemies/effects/DustParticles.gd" type="Script" id=5]
+[ext_resource path="res://prefabs/enemies/effects/DustParticles.tscn" type="PackedScene" id=6]
+
+[node name="Step04" type="Node2D"]
+z_index = -99
+script = ExtResource( 2 )
+
+[node name="Overlay" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LeftBox" type="MarginContainer" parent="Overlay/HBoxContainer"]
+margin_right = 478.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 24
+custom_constants/margin_left = 24
+
+[node name="InfoEnter-02" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+visible = false
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 446.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 422.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+
+[node name="InfoExit-04" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 446.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoExit-04"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 422.0
+margin_bottom = 99.0
+custom_fonts/font = ExtResource( 1 )
+text = "So lets try, you can use your boosters by using Q/X to boost weapons or E/C to boost speed. Make sure to jump out when you are done or get in trouble. (TAB to Jump)
+
+Keep moving. Ready?"
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoExit-04"]
+margin_top = 123.0
+margin_right = 422.0
+margin_bottom = 149.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="Box" type="MarginContainer" parent="Overlay/HBoxContainer/LeftBox/InfoExit-04/HBoxContainer"]
+margin_right = 32.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 32, 0 )
+mouse_filter = 2
+
+[node name="Ready-04" type="Button" parent="Overlay/HBoxContainer/LeftBox/InfoExit-04/HBoxContainer"]
+unique_name_in_owner = true
+show_behind_parent = true
+margin_left = 48.0
+margin_right = 121.0
+margin_bottom = 26.0
+size_flags_horizontal = 8
+size_flags_vertical = 3
+disabled = true
+text = "Ready"
+
+[node name="RightBox" type="VBoxContainer" parent="Overlay/HBoxContainer"]
+margin_left = 482.0
+margin_right = 960.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Hunter-01" parent="." instance=ExtResource( 3 )]
+unique_name_in_owner = true
+position = Vector2( 66, 107 )
+rotation = -2.38586
+
+[node name="Hunter-02" parent="." instance=ExtResource( 3 )]
+unique_name_in_owner = true
+position = Vector2( 244, 22 )
+rotation = 3.10145
+
+[node name="Hunter-03" parent="." instance=ExtResource( 3 )]
+unique_name_in_owner = true
+position = Vector2( 109, -99 )
+rotation = 2.38586
+
+[node name="Hunter-04" parent="." instance=ExtResource( 3 )]
+unique_name_in_owner = true
+position = Vector2( 204, 118 )
+rotation = -2.70351
+
+[node name="Hunter-05" parent="." instance=ExtResource( 3 )]
+unique_name_in_owner = true
+position = Vector2( 35, -131 )
+rotation = 2.14675
+
+[node name="Hauler-01" parent="." instance=ExtResource( 4 )]
+unique_name_in_owner = true
+position = Vector2( 277, -140 )
+rotation = 2.46615
+
+[node name="Hauler-02" parent="." instance=ExtResource( 4 )]
+unique_name_in_owner = true
+position = Vector2( 294, 86 )
+rotation = 3.49939
+
+[node name="Hauler-03" parent="." instance=ExtResource( 4 )]
+unique_name_in_owner = true
+position = Vector2( 77, -174 )
+rotation = 1.75057
+
+[node name="Dust-01" parent="." instance=ExtResource( 6 )]
+position = Vector2( -42, -124 )
+rotation = 5.34716
+script = ExtResource( 5 )
+dust_min = 300
+dust_max = 600
+
+[node name="Dust-02" parent="." instance=ExtResource( 6 )]
+position = Vector2( -476, 141 )
+rotation = 2.60578
+script = ExtResource( 5 )
+dust_min = 300
+dust_max = 600
+
+[node name="Dust-03" parent="." instance=ExtResource( 6 )]
+position = Vector2( 310, 196 )
+rotation = 0.371755
+script = ExtResource( 5 )
+dust_min = 300
+dust_max = 600
+
+[node name="Dust-04" parent="." instance=ExtResource( 6 )]
+position = Vector2( 198, -86 )
+rotation = 0.371755
+script = ExtResource( 5 )
+dust_min = 300
+dust_max = 600

@@ -179,11 +179,6 @@ func _sector_updated_difficulty(value):
 
 
 func new_game():
-	# TODO Implement next
-	# TODO Hide The main menu
-	# TODO Close the actors dialog
-	# Spawn Tutorial Scene
-	# Move the camera over
 	state = Global.State.Tutorial
 	emit_signal("state_updated")
 
@@ -194,13 +189,15 @@ func leave_game():
 
 
 func pause_game():
-	paused = true
-	emit_signal("game_paused")
+	if !paused:
+		paused = true
+		emit_signal("game_paused")
 
 
 func unpause_game():
-	paused = false
-	emit_signal("game_unpaused")
+	if paused:
+		paused = false
+		emit_signal("game_unpaused")
 
 
 func show_home():

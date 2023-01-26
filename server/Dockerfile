@@ -7,7 +7,9 @@ WORKDIR /backend
 
 COPY go.mod .
 COPY main.go .
+COPY actor/ actor/
 COPY meta/ meta/
+COPY sector/ sector/
 COPY vendor/ vendor/
 
 RUN go build --trimpath --mod=vendor --buildmode=plugin -o ./backend.so

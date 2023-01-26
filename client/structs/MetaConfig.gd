@@ -7,7 +7,7 @@ const KEY_PUBLIC_KEY = "public_key"
 const KEY_WALLET_GAME = "game_wallet"
 const KEY_WALLET_FUNDING = "funding_wallet"
 const KEY_CURRENCY_DUST = "dust_currency"
-const KEY_COLLECTION_WHALES = "whales_collection"
+const KEY_COLLECTION_ACTORS = "actors_collection"
 const KEY_COLLECTION_SECTORS = "sectors_collection"
 const KEY_COLLECTION_BOOSTERS = "boosters_collection"
 
@@ -50,7 +50,7 @@ func from_result(data: Dictionary) -> int:
 		KEY_WALLET_GAME,
 		KEY_WALLET_FUNDING,
 		KEY_CURRENCY_DUST,
-		KEY_COLLECTION_WHALES,
+		KEY_COLLECTION_ACTORS,
 		KEY_COLLECTION_SECTORS ,
 		KEY_COLLECTION_BOOSTERS,
 	]): return -2
@@ -59,7 +59,7 @@ func from_result(data: Dictionary) -> int:
 	wallet_game = data[KEY_WALLET_GAME]
 	wallet_funding = data[KEY_WALLET_FUNDING]
 	currency_dust = data[KEY_CURRENCY_DUST]
-	collection_actors = data[KEY_COLLECTION_WHALES]
+	collection_actors = data[KEY_COLLECTION_ACTORS]
 	collection_sectors = data[KEY_COLLECTION_SECTORS]
 	collection_boosters = data[KEY_COLLECTION_BOOSTERS]
 	if !is_valid(): 

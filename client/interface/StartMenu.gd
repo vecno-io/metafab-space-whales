@@ -3,11 +3,20 @@ extends Node
 
 var manager: MainOverlay = null
 
+onready var new_game = get_node("%NewGame")
+onready var load_game = get_node("%LoadGame")
+
 onready var new_game_btn = get_node("%NewGameBtn")
 onready var load_game_btn = get_node("%LoadGameBtn")
 
+onready var connect_game = get_node("%ConnectLabel")
+onready var connect_label = get_node("%ConnectGame")
 
 func _ready():
+	new_game.hide()
+	load_game.hide()
+	connect_game.show()
+	connect_label.show()
 	new_game_btn.disabled = true
 	load_game_btn.disabled = true
 	#warning-ignore: return_value_discarded
@@ -19,10 +28,18 @@ func _ready():
 
 
 func _on_session_closed():
+	new_game.hide()
+	load_game.hide()
+	connect_game.show()
+	connect_label.show()
 	load_game_btn.disabled = true
 
 
 func _on_session_created():
+	new_game.show()
+	load_game.show()
+	connect_game.hide()
+	connect_label.hide()
 	# Device sessions can load a game but
 	# only start a game if no player is set
 	load_game_btn.disabled = false
@@ -59,3 +76,7 @@ func _on_new_game_pressed():
 func _on_load_game_pressed():
 	if manager == null: push_error("missing manager")
 	else: manager.toggle_server_dialog()
+
+
+func _on_reconnect_pressed():
+	GameServer.authenticate()

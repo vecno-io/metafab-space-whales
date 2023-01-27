@@ -1,7 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
+[ext_resource path="res://assets/gui/images/ui-elements-v1-1.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Text-10-O1.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/Title-14-O1.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/fonts/Text-8-O1.tres" type="DynamicFont" id=4]
 [ext_resource path="res://prefabs/sectors/tutorial-steps/Step05.gd" type="Script" id=5]
+[ext_resource path="res://assets/gui/images/ui-opt-color-btn-n.png" type="Texture" id=6]
+[ext_resource path="res://prefabs/ColorSelector.gd" type="Script" id=7]
+[ext_resource path="res://assets/gui/images/ui-opt-color-btn-s.png" type="Texture" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 202, 40, 10, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 292, 40, 10, 32 )
 
 [node name="Step-05" type="Node2D"]
 position = Vector2( 229, 279 )
@@ -9,6 +23,9 @@ z_index = -99
 script = ExtResource( 5 )
 
 [node name="Overlay" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="LoadingTimer" type="Timer" parent="Overlay"]
 unique_name_in_owner = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Overlay"]
@@ -19,61 +36,38 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="LeftBox" type="MarginContainer" parent="Overlay/HBoxContainer"]
-margin_right = 478.0
+margin_right = 366.0
 margin_bottom = 540.0
 mouse_filter = 2
 size_flags_horizontal = 3
-custom_constants/margin_right = 32
+custom_constants/margin_right = 0
 custom_constants/margin_top = 24
-custom_constants/margin_left = 24
+custom_constants/margin_left = 16
 
-[node name="InfoEnter-05" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
-unique_name_in_owner = true
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 446.0
-margin_bottom = 540.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 24
-
-[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-05"]
-modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-show_behind_parent = true
-margin_right = 422.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 2 )
-text = "This is a storage link, you can use it
-to transfer dust and other items
-between you and storage.
-
-Fly close to open it,"
-
-[node name="InfoExit-05" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+[node name="InfoFinal" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
 unique_name_in_owner = true
 visible = false
-margin_left = 24.0
+margin_left = 16.0
 margin_top = 24.0
-margin_right = 446.0
+margin_right = 366.0
 margin_bottom = 540.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 24
 
-[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoExit-05"]
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoFinal"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
 margin_right = 422.0
 margin_bottom = 99.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 4 )
 text = "When ready press jump, your drive is set to a low thread space. Try to clear all treaths, to claim the sector to deploy your own storagelink.
 
 Good luck!"
 autowrap = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoExit-05"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoFinal"]
 margin_top = 123.0
 margin_right = 422.0
 margin_bottom = 123.0
@@ -81,12 +75,12 @@ mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/separation = 16
 
-[node name="Box" type="MarginContainer" parent="Overlay/HBoxContainer/LeftBox/InfoExit-05/HBoxContainer"]
+[node name="Box" type="MarginContainer" parent="Overlay/HBoxContainer/LeftBox/InfoFinal/HBoxContainer"]
 margin_right = 32.0
 rect_min_size = Vector2( 32, 0 )
 mouse_filter = 2
 
-[node name="Next-05" type="Button" parent="Overlay/HBoxContainer/LeftBox/InfoExit-05/HBoxContainer"]
+[node name="Next-05" type="Button" parent="Overlay/HBoxContainer/LeftBox/InfoFinal/HBoxContainer"]
 visible = false
 show_behind_parent = true
 margin_left = 48.0
@@ -97,10 +91,1171 @@ size_flags_vertical = 3
 disabled = true
 text = "Next"
 
-[node name="RightBox" type="VBoxContainer" parent="Overlay/HBoxContainer"]
-margin_left = 482.0
+[node name="InfoStore" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+unique_name_in_owner = true
+visible = false
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 366.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoStore"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 422.0
+margin_bottom = 99.0
+custom_fonts/font = ExtResource( 4 )
+text = "When ready press jump, your drive is set to a low thread space. Try to clear all treaths, to claim the sector to deploy your own storagelink.
+
+Good luck!"
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoStore"]
+margin_top = 123.0
+margin_right = 422.0
+margin_bottom = 123.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="Box" type="MarginContainer" parent="Overlay/HBoxContainer/LeftBox/InfoStore/HBoxContainer"]
+margin_right = 32.0
+rect_min_size = Vector2( 32, 0 )
+mouse_filter = 2
+
+[node name="Next-05" type="Button" parent="Overlay/HBoxContainer/LeftBox/InfoStore/HBoxContainer"]
+visible = false
+show_behind_parent = true
+margin_left = 48.0
+margin_right = 109.0
+margin_bottom = 26.0
+size_flags_horizontal = 8
+size_flags_vertical = 3
+disabled = true
+text = "Next"
+
+[node name="InfoNoUser" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+unique_name_in_owner = true
+visible = false
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 366.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoNoUser"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 301.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 4 )
+text = "This is a local storage link. To access the link you need to be verified. 
+
+Please sign-in or register."
+autowrap = true
+
+[node name="InfoNoActor" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+unique_name_in_owner = true
+visible = false
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 366.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoNoActor"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 301.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 4 )
+text = "This is a local storage link. To optimize the link whale setup is needed.. 
+
+Provide us with some info."
+autowrap = true
+
+[node name="InfoNoSlots" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
+unique_name_in_owner = true
+visible = false
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 366.0
+margin_bottom = 540.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoNoSlots"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_right = 422.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 4 )
+text = "Sorry, it seems you already have several setups. At this point in time we do not offer extra slots. Try again later, as capacity grows slots might be auctioned off. 
+
+Pick an existing slot."
+autowrap = true
+
+[node name="MidleBox" type="MarginContainer" parent="Overlay/HBoxContainer"]
+margin_left = 370.0
+margin_right = 590.0
+margin_bottom = 540.0
+rect_min_size = Vector2( 220, 0 )
+custom_constants/margin_top = 16
+
+[node name="RightBox" type="MarginContainer" parent="Overlay/HBoxContainer"]
+margin_left = 594.0
 margin_right = 960.0
 margin_bottom = 540.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/margin_top = 16
+custom_constants/margin_left = 0
+custom_constants/margin_bottom = 32
+
+[node name="ActorForm" type="CenterContainer" parent="Overlay/HBoxContainer/RightBox"]
+unique_name_in_owner = true
+margin_top = 16.0
+margin_right = 366.0
+margin_bottom = 508.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm"]
+margin_left = 73.0
+margin_top = 33.0
+margin_right = 293.0
+margin_bottom = 459.0
+rect_min_size = Vector2( 220, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 6
+
+[node name="Label" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
+margin_right = 220.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 3 )
+text = "Configure"
+align = 1
+
+[node name="HSeparator5" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 20.0
+margin_top = 22.0
+margin_right = 200.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 4
+custom_constants/separation = 16
+
+[node name="NameInput" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 44.0
+margin_right = 220.0
+margin_bottom = 76.0
+
+[node name="TRectLeft" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/NameInput"]
+margin_right = 10.0
+margin_bottom = 32.0
+texture = SubResource( 1 )
+
+[node name="NameEdit" type="LineEdit" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/NameInput"]
+unique_name_in_owner = true
+margin_left = 14.0
+margin_right = 206.0
+margin_bottom = 32.0
+focus_previous = NodePath("../../ConfirmBtn/ConfirmBtn")
+size_flags_horizontal = 3
+align = 1
+max_length = 64
+placeholder_text = "Name"
+placeholder_alpha = 0.2
+caret_blink = true
+caret_blink_speed = 0.75
+
+[node name="TRectRight" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/NameInput"]
+margin_left = 210.0
+margin_right = 220.0
+margin_bottom = 32.0
+texture = SubResource( 2 )
+
+[node name="HSeparator4" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 20.0
+margin_top = 82.0
+margin_right = 200.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 4
+custom_constants/separation = 16
+
+[node name="ColorSelector" type="GridContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+unique_name_in_owner = true
+margin_left = 1.0
+margin_top = 104.0
+margin_right = 219.0
+margin_bottom = 154.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/vseparation = 6
+custom_constants/hseparation = 6
+columns = 8
+script = ExtResource( 7 )
+
+[node name="Color01" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.368627, 0.192157, 0.356863, 1 )
+margin_right = 22.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color02" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.54902, 0.247059, 0.364706, 1 )
+margin_left = 28.0
+margin_right = 50.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color03" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.729412, 0.380392, 0.337255, 1 )
+margin_left = 56.0
+margin_right = 78.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color04" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 1, 0.894118, 0.470588, 1 )
+margin_left = 84.0
+margin_right = 106.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color05" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.811765, 1, 0.439216, 1 )
+margin_left = 112.0
+margin_right = 134.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color06" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.235294, 0.639216, 0.439216, 1 )
+margin_left = 140.0
+margin_right = 162.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color07" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.278431, 0.231373, 0.470588, 1 )
+margin_left = 168.0
+margin_right = 190.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color08" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.294118, 0.356863, 0.670588, 1 )
+margin_left = 196.0
+margin_right = 218.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color09" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.301961, 0.65098, 1, 1 )
+margin_top = 28.0
+margin_right = 22.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color10" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.760784, 0.760784, 0.819608, 1 )
+margin_left = 28.0
+margin_top = 28.0
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color11" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.376471, 0.376471, 0.439216, 1 )
+margin_left = 56.0
+margin_top = 28.0
+margin_right = 78.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color12" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.921569, 0.337255, 0.294118, 1 )
+margin_left = 84.0
+margin_top = 28.0
+margin_right = 106.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color13" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 1, 0.568627, 0.4, 1 )
+margin_left = 112.0
+margin_top = 28.0
+margin_right = 134.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color14" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.690196, 0.188235, 0.360784, 1 )
+margin_left = 140.0
+margin_top = 28.0
+margin_right = 162.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color15" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 0.501961, 0.211765, 0.419608, 1 )
+margin_left = 168.0
+margin_top = 28.0
+margin_right = 190.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="Color16" type="TextureButton" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ColorSelector"]
+unique_name_in_owner = true
+modulate = Color( 1, 0.419608, 0.592157, 1 )
+margin_left = 196.0
+margin_top = 28.0
+margin_right = 218.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 22, 22 )
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+expand = true
+
+[node name="StatsInfo" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 160.0
+margin_right = 220.0
+margin_bottom = 176.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator3" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/StatsInfo"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_right = 60.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+
+[node name="StatsValue" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/StatsInfo"]
+unique_name_in_owner = true
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_left = 64.0
+margin_top = 2.0
+margin_right = 156.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 92, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "12/12"
+align = 1
+
+[node name="HSeparator4" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/StatsInfo"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 160.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+
+[node name="AgilityBox" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 182.0
+margin_right = 220.0
+margin_bottom = 198.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="Label" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/AgilityBox"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_top = 2.0
+margin_right = 92.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 92, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "Agility"
+
+[node name="AgilitySlider" type="HSlider" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/AgilityBox"]
+unique_name_in_owner = true
+margin_left = 100.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="StrengthBox" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 204.0
+margin_right = 220.0
+margin_bottom = 220.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="Label" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/StrengthBox"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_top = 2.0
+margin_right = 92.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 92, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "Strength"
+
+[node name="StrengthSlider" type="HSlider" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/StrengthBox"]
+unique_name_in_owner = true
+margin_left = 100.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="VitalityBox" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 226.0
+margin_right = 220.0
+margin_bottom = 242.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="Label" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/VitalityBox"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_top = 2.0
+margin_right = 92.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 92, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "Vitality"
+
+[node name="VitalitySlider" type="HSlider" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/VitalityBox"]
+unique_name_in_owner = true
+margin_left = 100.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="SkillInfo" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 248.0
+margin_right = 220.0
+margin_bottom = 264.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator1" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/SkillInfo"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_right = 60.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+
+[node name="SkillsValue" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/SkillInfo"]
+unique_name_in_owner = true
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_left = 64.0
+margin_top = 2.0
+margin_right = 156.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 92, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "12/12"
+align = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/SkillInfo"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 160.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+
+[node name="CombatBox" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 270.0
+margin_right = 220.0
+margin_bottom = 286.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="Label" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/CombatBox"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_top = 2.0
+margin_right = 92.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 92, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "Combat"
+
+[node name="CombatSlider" type="HSlider" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/CombatBox"]
+unique_name_in_owner = true
+margin_left = 100.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="IndustryBox" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 292.0
+margin_right = 220.0
+margin_bottom = 308.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="Label" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/IndustryBox"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_top = 2.0
+margin_right = 92.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 92, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "Industry"
+
+[node name="IndustrySlider" type="HSlider" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/IndustryBox"]
+unique_name_in_owner = true
+margin_left = 100.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="ExplorationBox" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 314.0
+margin_right = 220.0
+margin_bottom = 330.0
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="Label" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ExplorationBox"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_top = 2.0
+margin_right = 92.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 92, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "Exploration"
+
+[node name="ExplorationSlider" type="HSlider" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ExplorationBox"]
+unique_name_in_owner = true
+margin_left = 100.0
+margin_right = 220.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 8.0
+value = 4.0
+
+[node name="HSeparator" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_top = 336.0
+margin_right = 220.0
+margin_bottom = 352.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 3
+custom_constants/separation = 16
+
+[node name="ConfirmBtn" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 358.0
+margin_right = 220.0
+margin_bottom = 390.0
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ConfirmBtn"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 45.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="TRectLeft" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ConfirmBtn"]
+margin_left = 49.0
+margin_right = 59.0
+margin_bottom = 32.0
+texture = SubResource( 1 )
+
+[node name="ConfirmBtn" type="Button" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ConfirmBtn"]
+unique_name_in_owner = true
+margin_left = 63.0
+margin_right = 157.0
+margin_bottom = 32.0
+focus_next = NodePath("../../NameInput/NameEdit")
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+disabled = true
+shortcut_in_tooltip = false
+text = "CONFIRM"
+
+[node name="TRectRight" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ConfirmBtn"]
+margin_left = 161.0
+margin_right = 171.0
+margin_bottom = 32.0
+texture = SubResource( 2 )
+
+[node name="HSeparator2" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ConfirmBtn"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 175.0
+margin_right = 220.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer"]
+margin_top = 396.0
+margin_right = 220.0
+margin_bottom = 426.0
+custom_constants/margin_top = 8
+custom_constants/margin_bottom = 8
+
+[node name="ConfigMessage" type="Label" parent="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/MarginContainer"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_top = 8.0
+margin_right = 220.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 14 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+autowrap = true
+max_lines_visible = 1
+
+[node name="LoginForm" type="CenterContainer" parent="Overlay/HBoxContainer/RightBox"]
+unique_name_in_owner = true
+visible = false
+margin_top = 16.0
+margin_right = 366.0
+margin_bottom = 508.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/HBoxContainer/RightBox/LoginForm"]
+margin_left = 73.0
+margin_top = 122.0
+margin_right = 293.0
+margin_bottom = 370.0
+rect_min_size = Vector2( 220, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 6
+
+[node name="Label" type="Label" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
+margin_right = 220.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 3 )
+text = "Credentials"
+align = 1
+
+[node name="HSeparator2" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 20.0
+margin_top = 22.0
+margin_right = 200.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 4
+custom_constants/separation = 16
+
+[node name="EmaiInput" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer"]
+margin_top = 44.0
+margin_right = 220.0
+margin_bottom = 76.0
+
+[node name="TRectLeft" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/EmaiInput"]
+margin_right = 10.0
+margin_bottom = 32.0
+texture = SubResource( 1 )
+
+[node name="EmailEdit" type="LineEdit" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/EmaiInput"]
+unique_name_in_owner = true
+margin_left = 14.0
+margin_right = 206.0
+margin_bottom = 32.0
+focus_next = NodePath("../../PassInput/PassEdit")
+focus_previous = NodePath("../../LoginBtn/LogInBtn")
+size_flags_horizontal = 3
+align = 1
+max_length = 64
+placeholder_text = "E-Mail"
+placeholder_alpha = 0.2
+caret_blink = true
+caret_blink_speed = 0.75
+
+[node name="TRectRight" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/EmaiInput"]
+margin_left = 210.0
+margin_right = 220.0
+margin_bottom = 32.0
+texture = SubResource( 2 )
+
+[node name="PassInput" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer"]
+margin_top = 82.0
+margin_right = 220.0
+margin_bottom = 114.0
+
+[node name="TRectLeft" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/PassInput"]
+margin_right = 10.0
+margin_bottom = 32.0
+texture = SubResource( 1 )
+
+[node name="PassEdit" type="LineEdit" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/PassInput"]
+unique_name_in_owner = true
+margin_left = 14.0
+margin_right = 206.0
+margin_bottom = 32.0
+focus_next = NodePath("../../LoginBtn/LogInBtn")
+focus_previous = NodePath("../../EmaiInput/EmailEdit")
+size_flags_horizontal = 3
+align = 1
+max_length = 128
+secret = true
+placeholder_text = "Pass"
+placeholder_alpha = 0.2
+caret_blink_speed = 0.75
+
+[node name="TRectRight" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/PassInput"]
+margin_left = 210.0
+margin_right = 220.0
+margin_bottom = 32.0
+texture = SubResource( 2 )
+
+[node name="HSeparator" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer"]
+modulate = Color( 1, 1, 1, 0.25098 )
+margin_left = 20.0
+margin_top = 120.0
+margin_right = 200.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 4
+custom_constants/separation = 16
+
+[node name="LoginBtn" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer"]
+margin_top = 142.0
+margin_right = 220.0
+margin_bottom = 174.0
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/LoginBtn"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 45.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="TRectLeft" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/LoginBtn"]
+margin_left = 49.0
+margin_right = 59.0
+margin_bottom = 32.0
+texture = SubResource( 1 )
+
+[node name="LogInBtn" type="Button" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/LoginBtn"]
+unique_name_in_owner = true
+margin_left = 63.0
+margin_right = 156.0
+margin_bottom = 32.0
+focus_next = NodePath("../../EmaiInput/EmailEdit")
+focus_previous = NodePath("../../PassInput/PassEdit")
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+disabled = true
+shortcut_in_tooltip = false
+text = "SIGN-IN"
+
+[node name="TRectRight" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/LoginBtn"]
+margin_left = 160.0
+margin_right = 170.0
+margin_bottom = 32.0
+texture = SubResource( 2 )
+
+[node name="HSeparator2" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/LoginBtn"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 174.0
+margin_right = 220.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="RegisterBtn" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer"]
+margin_top = 180.0
+margin_right = 220.0
+margin_bottom = 212.0
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/RegisterBtn"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 38.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="TRectLeft" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/RegisterBtn"]
+margin_left = 42.0
+margin_right = 52.0
+margin_bottom = 32.0
+texture = SubResource( 1 )
+
+[node name="RegisterBtn" type="Button" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/RegisterBtn"]
+unique_name_in_owner = true
+margin_left = 56.0
+margin_right = 163.0
+margin_bottom = 32.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+disabled = true
+shortcut_in_tooltip = false
+text = "REGISTER"
+
+[node name="TRectRight" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/RegisterBtn"]
+margin_left = 167.0
+margin_right = 177.0
+margin_bottom = 32.0
+texture = SubResource( 2 )
+
+[node name="HSeparator2" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/RegisterBtn"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 181.0
+margin_right = 220.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer"]
+margin_top = 218.0
+margin_right = 220.0
+margin_bottom = 248.0
+custom_constants/margin_top = 8
+custom_constants/margin_bottom = 8
+
+[node name="LoginMessage" type="Label" parent="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+margin_top = 8.0
+margin_right = 220.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 0, 14 )
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+autowrap = true
+max_lines_visible = 1
+
+[node name="SelectForm" type="CenterContainer" parent="Overlay/HBoxContainer/RightBox"]
+unique_name_in_owner = true
+visible = false
+margin_top = 16.0
+margin_right = 366.0
+margin_bottom = 508.0
+
+[node name="ServerForm" type="CenterContainer" parent="Overlay/HBoxContainer/RightBox"]
+unique_name_in_owner = true
+visible = false
+margin_top = 16.0
+margin_right = 366.0
+margin_bottom = 508.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Overlay/HBoxContainer/RightBox/ServerForm"]
+margin_left = 73.0
+margin_top = 182.0
+margin_right = 293.0
+margin_bottom = 309.0
+rect_min_size = Vector2( 220, 0 )
+size_flags_horizontal = 3
+custom_constants/separation = 24
+
+[node name="Title" type="Label" parent="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer"]
+modulate = Color( 0.815686, 0.815686, 0.815686, 1 )
+margin_right = 240.0
+margin_bottom = 16.0
+custom_fonts/font = ExtResource( 3 )
+text = "> CONNECTING <"
+align = 1
+
+[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+show_behind_parent = true
+margin_top = 40.0
+margin_right = 240.0
+margin_bottom = 71.0
+custom_fonts/font = ExtResource( 2 )
+text = "Check network and
+server status."
+align = 1
+autowrap = true
+
+[node name="LoginBtn" type="HBoxContainer" parent="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer"]
+margin_top = 95.0
+margin_right = 240.0
+margin_bottom = 127.0
+size_flags_vertical = 4
+
+[node name="HSeparator" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer/LoginBtn"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 42.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="TRectLeft" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer/LoginBtn"]
+margin_left = 46.0
+margin_right = 56.0
+margin_bottom = 32.0
+texture = SubResource( 1 )
+
+[node name="ReconnectBtn" type="Button" parent="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer/LoginBtn"]
+margin_left = 60.0
+margin_right = 179.0
+margin_bottom = 32.0
+focus_next = NodePath("../../EmaiInput/EmailInputEdit")
+focus_previous = NodePath("../../PassInput/PassInputEdit")
+focus_mode = 0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 4
+shortcut_in_tooltip = false
+text = "RECONNECT"
+
+[node name="TRectRight" type="TextureRect" parent="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer/LoginBtn"]
+margin_left = 183.0
+margin_right = 193.0
+margin_bottom = 32.0
+texture = SubResource( 2 )
+
+[node name="HSeparator2" type="HSeparator" parent="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer/LoginBtn"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 197.0
+margin_right = 240.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+
+[node name="LoadingForm" type="CenterContainer" parent="Overlay/HBoxContainer/RightBox"]
+unique_name_in_owner = true
+visible = false
+margin_top = 16.0
+margin_right = 366.0
+margin_bottom = 508.0
+
+[connection signal="timeout" from="Overlay/LoadingTimer" to="." method="_on_loading_timeout"]
+[connection signal="pressed" from="Overlay/HBoxContainer/RightBox/ActorForm/VBoxContainer/ConfirmBtn/ConfirmBtn" to="." method="_on_confirm_pressed"]
+[connection signal="text_changed" from="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/EmaiInput/EmailEdit" to="." method="_on_email_text_changed"]
+[connection signal="text_entered" from="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/EmaiInput/EmailEdit" to="." method="_on_email_entered"]
+[connection signal="text_changed" from="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/PassInput/PassEdit" to="." method="_on_pass_text_changed"]
+[connection signal="text_entered" from="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/PassInput/PassEdit" to="." method="_on_pass_entered"]
+[connection signal="pressed" from="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/LoginBtn/LogInBtn" to="." method="_on_login_pressed"]
+[connection signal="pressed" from="Overlay/HBoxContainer/RightBox/LoginForm/VBoxContainer/RegisterBtn/RegisterBtn" to="." method="_on_register_pressed"]
+[connection signal="pressed" from="Overlay/HBoxContainer/RightBox/ServerForm/VBoxContainer/LoginBtn/ReconnectBtn" to="." method="_on_reconnect_pressed"]

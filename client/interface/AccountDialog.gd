@@ -210,6 +210,10 @@ func _check_account_buttons():
 func _validate_account_input() -> bool:
 	if edit_pass.text.length() < 8: 
 		return false
+	if edit_pass.text.length() > 128:
+		return false
+	if edit_email.text.length() > 64:
+		return false
 	if null == regex.search(edit_email.text): 
 		return false
 	return true

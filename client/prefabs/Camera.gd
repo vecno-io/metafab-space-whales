@@ -108,7 +108,7 @@ func _on_state_updated():
 		Global.State.Sector:
 			tween_to = sector_position - Vector2(40.0, 0)
 		Global.State.Tutorial:
-			tween_to = tutorial_position - Vector2(40.0, 0)
+			tween_to = Global.local_player.global_position - Vector2(40.0, 0)
 	target_position = tween_to
 	scene_tween.interpolate_property(
 		self, "global_position",

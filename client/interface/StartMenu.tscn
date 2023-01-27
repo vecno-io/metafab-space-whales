@@ -25,7 +25,7 @@ script = ExtResource( 2 )
 
 [node name="BoxTop" type="MarginContainer" parent="."]
 margin_right = 414.0
-margin_bottom = 41.0
+margin_bottom = 122.0
 mouse_filter = 2
 size_flags_vertical = 3
 
@@ -125,6 +125,7 @@ custom_constants/separation = 8
 
 [node name="ConnectLabel" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 margin_top = 73.0
 margin_right = 414.0
@@ -139,9 +140,10 @@ valign = 1
 
 [node name="ConnectGame" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
-margin_top = 170.0
+visible = false
+margin_top = 122.0
 margin_right = 414.0
-margin_bottom = 202.0
+margin_bottom = 154.0
 mouse_filter = 2
 
 [node name="HSeparator" type="HSeparator" parent="ConnectGame"]
@@ -182,7 +184,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 8
 
 [node name="BoxBottom" type="MarginContainer" parent="."]
-margin_top = 234.0
+margin_top = 154.0
 margin_right = 414.0
 margin_bottom = 276.0
 mouse_filter = 2

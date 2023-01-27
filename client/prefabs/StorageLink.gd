@@ -82,6 +82,9 @@ func _on_link_area_entered(area: Area2D):
 
 
 func _show_storage():
+	if !GameServer.has_user():
+		return
+	# TODO Only show if actor registered
 	overlay.show()
 	Global.can_jump = false
 	emit_signal("link_opened")

@@ -1,6 +1,7 @@
 [gd_resource type="DynamicFont" load_steps=2 format=2]
 
-[ext_resource path="res://assets/fonts/PressStart.ttf" type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/fonts/PressStart.ttf"
 
 [resource]
 size = 10
@@ -8,4 +9,4 @@ outline_size = 1
 outline_color = Color( 0.00784314, 0.00784314, 0.00784314, 0.752941 )
 use_mipmaps = true
 extra_spacing_bottom = 4
-font_data = ExtResource( 1 )
+font_data = SubResource( 1 )

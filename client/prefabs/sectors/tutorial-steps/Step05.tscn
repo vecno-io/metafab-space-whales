@@ -212,6 +212,7 @@ margin_left = 370.0
 margin_right = 590.0
 margin_bottom = 540.0
 rect_min_size = Vector2( 220, 0 )
+mouse_filter = 2
 custom_constants/margin_top = 16
 
 [node name="RightBox" type="MarginContainer" parent="Overlay/HBoxContainer"]

@@ -97,6 +97,7 @@ margin_left = 370.0
 margin_right = 590.0
 margin_bottom = 540.0
 rect_min_size = Vector2( 220, 0 )
+mouse_filter = 2
 size_flags_horizontal = 4
 
 [node name="RightBox" type="VBoxContainer" parent="Overlay/HBoxContainer"]

@@ -326,8 +326,8 @@ func _on_name_text_changed(_text):
 	_validate_actor_input()
 
 
-func _on_color_selected(_color):
-	# TODO Implement visual update?
+func _on_color_selected(color):
+	Global.color = color
 	_validate_actor_input()
 
 

@@ -20,6 +20,8 @@ signal scene_move_started
 
 signal actor_died
 
+signal color_updated(value)
+
 signal updated_kills(value)
 signal updated_points(value)
 signal updated_can_jump(value)
@@ -40,6 +42,8 @@ signal firerate_inventory_updated(value)
 const SAVE_FILE := "user://%s.save"
 
 var state = State.App setget _no_set
+
+var color = Color.white setget _set_color
 
 var kills = 0 setget _no_set
 var points = 0 setget _no_set
@@ -96,6 +100,11 @@ func _set_sector(value):
 	_sector_connect()
 	_sector_reset()
 	unpause_game()
+
+
+func _set_color(value):
+	color = value
+	emit_signal("color_updated", value)
 
 
 func _set_can_jump(value):

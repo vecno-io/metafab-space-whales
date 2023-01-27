@@ -40,6 +40,8 @@ func _ready():
 	firerate_storage.text = "%04d" % Global.firerate_storage
 	firerate_inventory.text = "%02d/08" % Global.firerate_inventory
 	#warning-ignore: return_value_discarded
+	Global.connect("color_updated", self, "_on_color_updated")
+	#warning-ignore: return_value_discarded
 	Global.connect("dust_storage_updated", self, "_on_dust_storage_updated")
 	#warning-ignore: return_value_discarded
 	Global.connect("dust_inventory_updated", self, "_on_dust_inventory_updated")
@@ -54,6 +56,7 @@ func _ready():
 
 
 func _exit_tree():
+	Global.disconnect("color_updated", self, "_on_color_updated")
 	Global.disconnect("dust_storage_updated", self, "_on_dust_storage_updated")
 	Global.disconnect("dust_inventory_updated", self, "_on_dust_inventory_updated")
 	Global.disconnect("speed_storage_updated", self, "_on_speed_storage_updated")
@@ -140,6 +143,11 @@ func _on_store_firerate():
 		return
 	Global.firerate_storage += 1
 	Global.firerate_inventory -= 1
+
+
+func _on_color_updated(value):
+	var light = get_node("Light2D")
+	light.color = value
 
 
 func _on_dust_storage_updated(value):

@@ -17,10 +17,13 @@ func _ready():
 	target = get_node("../%s" % target_name)
 	segment = target.get_segment_hook()
 	#warning-ignore: return_value_discarded
+	Global.connect("color_updated", self, "_on_color_updated")
+	#warning-ignore: return_value_discarded
 	Global.connect("player_jumping", self, "_on_player_jumping")
 
 
 func _exit_tree():
+	Global.disconnect("color_updated", self, "_on_color_updated")
 	Global.disconnect("player_jumping", self, "_on_player_jumping")
 
 
@@ -74,6 +77,11 @@ func _on_player_jumping(position: Vector2):
 
 func _on_jump_tween_completed():
 	jumping = false
+
+
+func _on_color_updated(value):
+	var back = get_node("BackDrop")
+	back.modulate = value
 
 
 func get_segment_hook():

@@ -12,6 +12,8 @@ signal speed_boost_stoped
 signal firerate_boost_start
 signal firerate_boost_stoped
 
+var high_color = Color.white
+
 var speed = 140
 var speed_boost = 240
 var speed_default = speed
@@ -52,11 +54,14 @@ func _ready():
 	Global.local_player = self
 	firerate_timer.wait_time = firerate
 	#warning-ignore: return_value_discarded
+	Global.connect("color_updated", self, "_on_color_updated")
+	#warning-ignore: return_value_discarded
 	Global.connect("player_jumping", self, "_on_player_jumping")
 
 
 func _exit_tree():
 	Global.local_player = null
+	Global.disconnect("color_updated", self, "_on_color_updated")
 	Global.disconnect("player_jumping", self, "_on_player_jumping")
 
 
@@ -203,7 +208,8 @@ func fire_weapon():
 		return
 	fire_up = false
 	Global.dust_inventory -= cost
-	Global.instance_node(bullet, Global.local_sector, global_position)
+	var node = Global.instance_node(bullet, Global.local_sector, global_position)
+	node.modulate = high_color
 	AudioManager.play_sfx_effect(fire_sfx)
 	firerate_timer.wait_time = firerate
 	firerate_timer.start()
@@ -265,6 +271,12 @@ func _on_hitbox_entered(area:Area2D):
 		if Global.actor_died():
 			Global.pause_game()
 			Global.save_game()
+
+
+func _on_color_updated(value):
+	var back = get_node("BackDrop")
+	back.modulate = value
+	high_color = value
 
 
 func world_death():

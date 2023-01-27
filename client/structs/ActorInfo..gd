@@ -2,18 +2,31 @@ class_name ActorInfo
 extends Reference
 
 
-var id: int
-
+var id: String
 var name: String
-var info: String
 
 var stats: Stats
 var skills: Skills
 var attribs: Attribs
 
-func _init(_id = -1) -> void:
+func _init(_id) -> void:
 	id = _id
-	# TODO NExt Load Actor data
+	stats = Stats.new()
+	skills = Skills.new()
+	attribs = Attribs.new()
+
+func attribs_set_color(color: Color):
+	attribs.color = color.to_html()
+
+func attribs_randomize():
+	var rand = RandomNumberGenerator.new()
+	rand.seed = Time.get_ticks_msec()
+	# Note: Origin and Color are predefined
+	attribs.back = "%03d" % rand.randi_range(0, 255)
+	attribs.face = "%03d" % rand.randi_range(0, 255)
+	attribs.shape = "%03d" % rand.randi_range(0, 255)
+	attribs.props = "%03d" % rand.randi_range(0, 255)
+	attribs.origin = "%03d" % rand.randi_range(0, 255)
 
 
 class Stats:
@@ -30,20 +43,21 @@ class Stats:
 
 class Skills:
 	var combat: int
-	var defence: int
 	var industry: int
 	var exploration: int
 
 
-	func _init(_combat = 0, _defence = 0, _industry = 0, _exploration = 0) -> void:
+	func _init(_combat = 0, _industry = 0, _exploration = 0) -> void:
 		combat = _combat
-		defence = _defence
 		industry = _industry
 		exploration = _exploration
 
 
 class Attribs:
 	var back: String
+	var face: String
+	var shape: String
+	var props: String
 	var color: String
 	var origin: String
 

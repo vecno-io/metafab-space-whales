@@ -17,6 +17,9 @@ const SERVER_DOMAIN = "%s%s.game-server.test"
 
 
 var _client: NakamaClient = null setget _no_set
+
+var actor: GameActor = null setget _no_set
+
 var _meta: MetaAccount = null setget _no_set
 var _account: ServerAccount = null setget _no_set
 var _exception: ServerException = null setget _no_set
@@ -55,7 +58,7 @@ func user_info() -> UserInfo:
 	return _account.user_info()
 
 
-func actor_id() -> int:
+func actor_id() -> String:
 	return _meta.actor_id()
 
 
@@ -123,6 +126,7 @@ func _server_setup(address: String):
 	_client = Nakama.create_client(SERVER_KEY, address, 7350, "http", 12, NakamaLogger.LOG_LEVEL.INFO)
 	_client.auto_retry = false
 	_account = ServerAccount.new(_client, _exception)
+	actor = GameActor.new(_client, _account, _exception)
 	_meta = MetaAccount.new(_client, _account, _exception)
 	#warning-ignore: return_value_discarded
 	_meta.connect("signed_in", self, "_on_meta_signed_in")

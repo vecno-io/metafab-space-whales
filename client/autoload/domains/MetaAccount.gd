@@ -27,14 +27,14 @@ func set_config(config: MetaConfig):
 	_cfg = config
 
 
-func actor_id() -> int:
-	if _actor == null: return -1
+func actor_id() -> String:
+	if _actor == null: return ""
 	return _actor.id
 
 
 func actor_info() -> ActorInfo:
 	if _actor != null: return _actor
-	return ActorInfo.new()
+	return ActorInfo.new("")
 
 
 func player_id() -> String:
@@ -117,7 +117,7 @@ func _on_create_player_result(code: int, result: String) -> void:
 		_password = ""
 		return
 	if OK != _exception.parse_nakama(yield(_client.rpc_async(session, "meta_register", JSON.print({
-		"wallet_id": _player.walletId,
+		"wallet_id": _player.wallet,
 		"metafab_id": _player.id,
 	})), "completed")):
 		_push_error(-5, "meta_register rpc: %s - %s" % [user_id, json.result])

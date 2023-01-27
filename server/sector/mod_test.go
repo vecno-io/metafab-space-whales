@@ -19,7 +19,7 @@ func TestIdKey(t *testing.T) {
 
 func TestIdType(t *testing.T) {
 	id := NewId(1, 2, 3, 4, 5, 6)
-	val := id.Type()
+	val := id.Kind()
 	if val != 2 {
 		t.Errorf("id.Type() = %d; want 2", val)
 	}
@@ -35,7 +35,7 @@ func TestIdVersion(t *testing.T) {
 
 func TestIdRoot(t *testing.T) {
 	id := NewId(1, 2, 3, 4, 5, 6)
-	val_X, val_y := id.Root()
+	val_X, val_y := id.Origin()
 	if val_X != 3 || val_y != 4 {
 		t.Errorf("id.Root() = %d, %d; want 3, 4", val_X, val_y)
 	}

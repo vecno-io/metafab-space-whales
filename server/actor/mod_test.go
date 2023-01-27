@@ -9,10 +9,10 @@ import (
 func TestIdKey(t *testing.T) {
 	id := Id{
 		Value: 7,
-		Origin: sector.NewId(1, 2, 3, 4, 5, 6),
+		Sector: sector.NewId(1, 2, 3, 4, 5, 6),
 	}
 	key := id.Key()
-	res := "001:002:003:004:00005:00006|0000000007"
+	res := "001:002:003:004:00005:00006::0000000007"
 	if key != res {
 		t.Errorf("id.Key() = %s; want %s", key, res)
 	}
@@ -21,13 +21,13 @@ func TestIdKey(t *testing.T) {
 func TestIdMarshalJSON(t *testing.T) {
 	id := Id{
 		Value: 7,
-		Origin: sector.NewId(1, 2, 3, 4, 5, 6),
+		Sector: sector.NewId(1, 2, 3, 4, 5, 6),
 	}
 	val, err := id.MarshalJSON()
 	if nil != err {
 		t.Errorf("tag.MarshalJSON() got error: %s; want nil", err)
 	}
-	res := []byte("\"001:002:003:004:00005:00006|0000000007\"")
+	res := []byte("\"001:002:003:004:00005:00006::0000000007\"")
 	if len(val) != len(res) {
 		t.Errorf("tag.MarshalJSON() invalid len: %d; want %d", len(val), len(res))
 	}
@@ -38,19 +38,19 @@ func TestIdMarshalJSON(t *testing.T) {
 
 func TestIdUnmarshalJSON(t *testing.T) {
 	id := Id{}
-	err := id.UnmarshalJSON([]byte("\"001:002:003:004:00005:00006|0000000007\""))
+	err := id.UnmarshalJSON([]byte("\"001:002:003:004:00005:00006::0000000007\""))
 	if nil != err {
 		t.Errorf("id.UnmarshalJSON() got error: %s; want nil", err)
 	}
 	res := Id{
 		Value: 7,
-		Origin: sector.NewId(1, 2, 3, 4, 5, 6),
+		Sector: sector.NewId(1, 2, 3, 4, 5, 6),
 	}
 	if id.Value != res.Value {
 		t.Errorf("id.UnmarshalJSON() Value = %d; want %d", id.Value, res.Value)
 	}
-	if id.Origin != res.Origin {
-		t.Errorf("id.UnmarshalJSON() Origin = %d; want %d", id.Origin, res.Origin)
+	if id.Sector != res.Sector {
+		t.Errorf("id.UnmarshalJSON() Origin = %d; want %d", id.Sector, res.Sector)
 	}
 }
 
@@ -76,7 +76,7 @@ func TestTagMarshalJSON(t *testing.T) {
 	if nil != err {
 		t.Errorf("tag.MarshalJSON() got error: %s; want nil", err)
 	}
-	res := []byte("\"Name#00420\"")
+	res := []byte("\"Name#0420\"")
 	if len(val) != len(res) {
 		t.Errorf("tag.MarshalJSON() invalid len: %d; want %d", len(val), len(res))
 	}
@@ -87,7 +87,7 @@ func TestTagMarshalJSON(t *testing.T) {
 
 func TestTagUnmarshalJSON(t *testing.T) {
 	tag := Tag{}
-	err := tag.UnmarshalJSON([]byte("\"Name#00420\""))
+	err := tag.UnmarshalJSON([]byte("\"Name#0420\""))
 	if nil != err {
 		t.Errorf("id.UnmarshalJSON() got error: %s; want nil", err)
 	}

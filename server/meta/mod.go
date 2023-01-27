@@ -10,20 +10,13 @@ import (
 	"github.com/heroiclabs/nakama-common/runtime"
 )
 
+type AccountId struct {
+	Value string `json:"value"`
+}
+
 type RegisterReq struct {
 	WalletId string `json:"wallet_id"`
 	MetafabId string `json:"metafab_id"`
-}
-
-type Transaction struct {
-	Id string `json:"id"`
-	Hash string `json:"hash"`
-	Function string `json:"function"`
-	WalletId string `json:"walletId"`
-	ContractId string `json:"contractId"`
-	UpdatedAt string `json:"updatedAt"`
-	CreatedAt string `json:"createdAt"`
-	Arguments []interface{} `json:"args"`
 }
 
 type AccountData struct {
@@ -61,7 +54,7 @@ func (ref *AccountData) to_map() map[string]interface{} {
 	}
 }
 
-func (ref *AccountData) from_json(data string, user_id string, logger runtime.Logger) error {
+func (ref *AccountData) from_json(user_id string, logger runtime.Logger, data string) error {
 	err := json.Unmarshal([]byte(data), ref)
 	if err != nil {
 		logger.WithFields(map[string]interface{}{
@@ -72,13 +65,19 @@ func (ref *AccountData) from_json(data string, user_id string, logger runtime.Lo
 	return nil
 }
 
-func (ref *RegisterReq) from_payload(data string, user_id string, logger runtime.Logger) error {
+func (ref *RegisterReq) from_payload(user_id string, logger runtime.Logger, data string) error {
 	err := json.Unmarshal([]byte(data), ref)
 	if err != nil {
 		logger.WithFields(map[string]interface{}{
 			"err": err, "user": user_id,
 		}).Error("decode request data")
 		return errors.New("invalid request data")
+	}
+	if len(ref.WalletId) < 32 {
+		return errors.New("invalid wallet in request (min size)")
+	}
+	if len(ref.MetafabId) < 32 {
+		return errors.New("invalid account in request (min size)")
 	}
 	return nil
 }

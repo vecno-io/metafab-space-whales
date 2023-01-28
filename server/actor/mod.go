@@ -331,9 +331,10 @@ func _has_actor_meta(ctx context.Context, nk runtime.NakamaModule, key string) (
 	return len(records), nil
 }
 
-func _read_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule, key string) (*Meta, string, string, error) {
+func _read_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule, user_id string, key string) (*Meta, string, string, error) {
 	records, err:= nk.StorageRead(ctx, []*runtime.StorageRead {{
 		Collection: STORAGE_ACTOR_META,
+		UserID: user_id,
 		Key:  key,
 	}})
 	if err != nil {
@@ -359,7 +360,7 @@ func _read_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.Nak
 	return result, records[0].UserId, records[0].Version, nil
 }
 
-func _write_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule, user_id string, version string, metadata *Meta) (string, error) {
+func _write_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule, user_id string, version string, key string, metadata *Meta) (string, error) {
 	data, err := json.Marshal(metadata)
 	if err != nil {
 		logger.WithField("err", err).Error("marshal metadata")
@@ -367,9 +368,10 @@ func _write_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.Na
 	}
 	ack, err := nk.StorageWrite(ctx, []*runtime.StorageWrite {{
 		Collection: STORAGE_ACTOR_META,
-		Key: metadata.Id,
-		Value: string(data),
 		Version: version,
+		UserID: user_id,
+		Key: key,
+		Value: string(data),
 		PermissionRead: 2,
 		PermissionWrite: 0,
 	}})
@@ -391,10 +393,11 @@ func _write_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.Na
 	return ack[0].Version, nil
 }
 
-func _delete_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule, key string, version string) error {
+func _delete_actor_meta(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule, user_id string, key string, version string) error {
 	err := nk.StorageDelete(ctx, []*runtime.StorageDelete {{
 		Collection: STORAGE_ACTOR_META,
 		Version: version,
+		UserID: user_id,
 		Key: key,
 	}})
 	if err != nil {

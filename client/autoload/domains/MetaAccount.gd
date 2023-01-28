@@ -127,8 +127,9 @@ func _on_create_player_result(code: int, result: String) -> void:
 	SessionWorker.save_player_info(user_id, _password, _player)
 	print("[Meta.Account] Player ID: %s" % _player.id)
 	emit_signal("signed_in")
-	_get_player_actors()
 	_get_player_data()
+	if OK == yield(_get_reserved_actors_async(), "completed"):
+		emit_signal("player_updated")
 
 
 func _on_authenticate_player_result(code: int, result: String) -> void:
@@ -150,8 +151,9 @@ func _on_authenticate_player_result(code: int, result: String) -> void:
 	SessionWorker.save_player_info(user_id, _password, _player)
 	print("[Meta.Account] Player ID: %s" % _player.id)
 	emit_signal("signed_in")
-	_get_player_actors()
 	_get_player_data()
+	if OK == yield(_get_reserved_actors_async(), "completed"):
+		emit_signal("player_updated")
 
 
 func _get_player_data():
@@ -160,12 +162,45 @@ func _get_player_data():
 	)
 
 
-func _get_player_actors():
-	var __ = MetaFab.get_collection_item_balances(self, 
-		"_on_get_player_actors_result", 
-		_cfg.collection_actors, 
-		_player.wallet
-	)
+func _get_minted_actors() -> int:
+	# Note: This call is broken, the returned size is to big
+	# var __ = MetaFab.get_collection_item_balances(self, 
+	# 	"_on_get_player_actors_result", 
+	# 	_cfg.collection_actors, 
+	# 	_player.wallet
+	# )
+	return OK
+
+const STORAGE_ACTOR_MINTED_ID = "ACTOR_MINTED_ID"
+const STORAGE_ACTOR_RESERVED_ID = "ACTOR_RESERVED_ID"
+
+func _get_reserved_actors_async() -> int:
+	var session = yield(_account.get_session_async(), "completed")
+	if session == null:
+		return -1
+	# Load the reserved actor ids from nakama
+	var limit = 48
+	var reserved_list= yield(_client.list_storage_objects_async(
+		session, STORAGE_ACTOR_MINTED_ID, session.user_id, limit
+	), "completed")
+	if reserved_list.is_exception():
+			print("An error occurred: %s" % reserved_list)
+			return
+	print("Minted actors: ")
+	for o in reserved_list.objects:
+			print("%s" % o.key)
+			_player.minted_list.append(o.key)
+	reserved_list = yield(_client.list_storage_objects_async(
+		session, STORAGE_ACTOR_RESERVED_ID, session.user_id, limit
+	), "completed")
+	if reserved_list.is_exception():
+			print("An error occurred: %s" % reserved_list)
+			return
+	print("Reserved actors: ")
+	for o in reserved_list.objects:
+			print("%s" % o.key)
+			_player.reserved_list.append(o.key)
+	return OK
 
 
 func _on_get_player_data_result(code: int, result: String):
@@ -179,15 +214,15 @@ func _on_get_player_data_result(code: int, result: String):
 	emit_signal("player_updated")
 
 
-func _on_get_player_actors_result(code: int, result: String):
-	var json = JSON.parse(result)
-	if code != 200: 
-		_push_error(code, "invalid actors result: %s" % json.result)
-		return
-	if OK != _player.parse_player_actors(json.result):
-		_push_error(code, "invalid actors object: %s" % json.result)
-		return
-	emit_signal("player_updated")
+# func _on_get_minted_actors_result(code: int, result: String):
+# 	var json = JSON.parse(result)
+# 	if code != 200: 
+# 		_push_error(code, "invalid actors result: %s" % json.result)
+# 		return
+# 	if OK != _player.parse_minted_actors(json.result):
+# 		_push_error(code, "invalid actors object: %s" % json.result)
+# 		return
+# 	emit_signal("player_updated")
 
 
 func _no_set(_value) -> void:

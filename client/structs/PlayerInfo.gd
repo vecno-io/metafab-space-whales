@@ -15,6 +15,8 @@ var actors_map: Dictionary
 var actors_mints: int
 var actors_minted: int
 
+var minted_list: Array
+var reserved_list: Array
 
 func _init(_id = "", _token = "", _wallet = "", _mints = 0, _minted = 0) -> void:
 	id = _id
@@ -23,6 +25,8 @@ func _init(_id = "", _token = "", _wallet = "", _mints = 0, _minted = 0) -> void
 	actors_map = {}
 	actors_mints = _mints
 	actors_minted = _minted
+	minted_list = []
+	reserved_list = []
 
 
 func is_valid() -> bool:
@@ -80,21 +84,36 @@ func parse_player_data(data: Dictionary) -> int:
 
 # Parses the dictionary returned by a call to metafab
 # that gets the balance of the players actors collection
-func parse_player_actors(data: Dictionary) -> int:
-	actors_map = {}
+# Note: This call is broken, the returned size is to big
+# func parse_minted_actors(data: Dictionary) -> int:
+# 	minted_list = []
+# 	print_debug(">> Data %s" % data)
+# 	for key in data.keys():
+# 		if typeof(key) == TYPE_STRING:
+# 			continue
+# 		# FixMe: 256 bit ints, replace with regex
+# 		# if !key.is_valid_integer():
+# 		# 	continue
+# 		var value = data[key]
+# 		if typeof(value) == TYPE_STRING:
+# 			continue
+# 		if !value.is_valid_integer():
+# 			continue
+# 		if value == "1":
+# 			minted_list.append(key)
+# 	print_debug(">> List %s" % minted_list.size())
+# 	return OK
+
+# TODO Implement call below
+func parse_reserved_actors(data: Dictionary) -> int:
+	reserved_list = []
+	print_debug(">> Data %s" % data)
 	for key in data.keys():
-		if typeof(key) == TYPE_STRING:
-			continue
-		if !key.is_valid_integer():
-			continue
 		var value = data[key]
 		if typeof(value) == TYPE_STRING:
 			continue
 		if !value.is_valid_integer():
 			continue
 		if value == "1":
-			var actor_id = key.to_int() 
-			actors_map[actor_id] = ActorInfo.new(
-				actor_id
-			)
+			reserved_list.append(key)
 	return OK

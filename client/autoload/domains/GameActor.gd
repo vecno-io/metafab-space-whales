@@ -26,7 +26,7 @@ func set_config(config: MetaConfig):
 
 
 func mint_async() -> int:
-	var session = _account.get_session()
+	var session = yield(_account.get_session_async(), "completed")
 	if session == null:
 		return -1
 	var result = yield(_client.rpc_async(

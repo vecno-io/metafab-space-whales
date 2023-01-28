@@ -3,3 +3,6 @@
 shutdown_grace_sec: 24
 logger:
     level: DEBUG
+console:
+    username: admin
+    password: password

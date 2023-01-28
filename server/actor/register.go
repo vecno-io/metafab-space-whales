@@ -382,23 +382,23 @@ func MintRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.
 		return "{}", runtime.NewError("invalid request", 500)
 	}
 	// Verify that the actor id is not minted and created by the user
-	chk, user, _, err := _read_actor_meta(ctx, logger, nk, request.Id);
-	if chk == nil ||  err != nil {
+	chk, _, _, err := _read_actor_meta(ctx, logger, nk, user_id, request.Id);
+	if err != nil {
 		logger.WithFields(map[string]interface{}{
 			"err": err,
 			"code": 401,
 			"user": user_id,
 			"data": payload,
-			}).Error("invalid id")
+			}).Error("invalid id (error)")
 		return "{}", runtime.NewError("invalid id", 401)
 	}
-	if user != user_id {
+	if chk == nil {
 		logger.WithFields(map[string]interface{}{
 			"code": 401,
 			"user": user_id,
 			"data": payload,
-		}).Error("invalid user")
-		return "{}", runtime.NewError("invalid user", 401)
+			}).Error("invalid id (check)")
+		return "{}", runtime.NewError("invalid id", 401)
 	}
 	result, err := _mint_actor_item(ctx, logger, nk, user_id, game_secret, game_password, actor_collection, id, account)
 	if err != nil {
@@ -437,7 +437,7 @@ func _create_actor_item(ctx context.Context, logger runtime.Logger, nk runtime.N
 	if cnt > 0 {
 		return "{}", errors.New("actor already created")
 	}
-	ver, err := _write_actor_meta(ctx, logger, nk, user_id, "*", metadata)
+	ver, err := _write_actor_meta(ctx, logger, nk, user_id, "*", id.Key(), metadata)
 	if err != nil {
 		logger.WithFields(map[string]interface{}{
 			"err": err,
@@ -450,7 +450,7 @@ func _create_actor_item(ctx context.Context, logger runtime.Logger, nk runtime.N
 	client := meta.CreateHttpClient()
 	req, err := http.NewRequest("POST", make_url, bytes.NewReader(payload))
 	if err != nil { 
-		_ = _delete_actor_meta(ctx, logger, nk, metadata.Id, ver)
+		_ = _delete_actor_meta(ctx, logger, nk, user_id, metadata.Id, ver)
 		logger.WithFields(map[string]interface{}{
 			"err": err,
 			"user": user_id,
@@ -464,7 +464,7 @@ func _create_actor_item(ctx context.Context, logger runtime.Logger, nk runtime.N
 	req.Header.Add("X-Authorization", secret)
 	res, err := client.Do(req)
 	if err != nil { 
-		_ = _delete_actor_meta(ctx, logger, nk, metadata.Id, ver)
+		_ = _delete_actor_meta(ctx, logger, nk, user_id, metadata.Id, ver)
 		logger.WithFields(map[string]interface{}{
 			"err": err,
 			"user": user_id,
@@ -475,7 +475,7 @@ func _create_actor_item(ctx context.Context, logger runtime.Logger, nk runtime.N
 	defer res.Body.Close()
 	body, _ := io.ReadAll(res.Body)
 	if res.StatusCode != 200 {
-		_ = _delete_actor_meta(ctx, logger, nk, metadata.Id, ver)
+		_ = _delete_actor_meta(ctx, logger, nk, user_id, metadata.Id, ver)
 		logger.WithFields(map[string]interface{}{
 			"user": user_id,
 			"body": body,

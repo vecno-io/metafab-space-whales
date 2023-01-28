@@ -32,9 +32,9 @@ size_flags_vertical = 3
 [node name="NewGame" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-margin_top = 58.0
+margin_top = 122.0
 margin_right = 414.0
-margin_bottom = 90.0
+margin_bottom = 154.0
 mouse_filter = 2
 
 [node name="HSeparator" type="HSeparator" parent="NewGame"]
@@ -79,9 +79,9 @@ custom_constants/separation = 8
 [node name="LoadGame" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 visible = false
-margin_top = 90.0
+margin_top = 122.0
 margin_right = 414.0
-margin_bottom = 122.0
+margin_bottom = 154.0
 mouse_filter = 2
 
 [node name="HSeparator" type="HSeparator" parent="LoadGame"]
@@ -127,9 +127,9 @@ custom_constants/separation = 8
 unique_name_in_owner = true
 visible = false
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-margin_top = 73.0
+margin_top = 105.0
 margin_right = 414.0
-margin_bottom = 138.0
+margin_bottom = 170.0
 custom_fonts/font = ExtResource( 3 )
 text = "Unable to create session.
 

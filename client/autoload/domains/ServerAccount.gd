@@ -56,6 +56,10 @@ func has_session() -> bool:
 	return _session != null
 
 
+func is_authenticating() -> bool:
+	return _authenticating
+
+
 func is_user_valid() -> bool:
 	if _id.empty(): 
 		return false

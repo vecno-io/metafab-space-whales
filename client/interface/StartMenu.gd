@@ -30,8 +30,10 @@ func _ready():
 func _on_session_closed():
 	new_game.hide()
 	load_game.hide()
-	connect_game.show()
-	connect_label.show()
+	# FixMe: Private variable access to check
+	if !GameServer._account.is_authenticating():
+		connect_game.show()
+		connect_label.show()
 	load_game_btn.disabled = true
 
 

@@ -18,15 +18,17 @@ margin_top = 72.0
 margin_right = 478.0
 margin_bottom = 348.0
 mouse_filter = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 4
 size_flags_vertical = 3
 custom_constants/separation = 32
 script = ExtResource( 2 )
 
 [node name="BoxTop" type="MarginContainer" parent="."]
-margin_right = 414.0
-margin_bottom = 122.0
+margin_left = 207.0
+margin_right = 207.0
+margin_bottom = 41.0
 mouse_filter = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
 
 [node name="NewGame" type="HBoxContainer" parent="."]
@@ -36,6 +38,7 @@ margin_top = 122.0
 margin_right = 414.0
 margin_bottom = 154.0
 mouse_filter = 2
+size_flags_horizontal = 4
 
 [node name="HSeparator" type="HSeparator" parent="NewGame"]
 modulate = Color( 1, 1, 1, 0 )
@@ -83,6 +86,7 @@ margin_top = 122.0
 margin_right = 414.0
 margin_bottom = 154.0
 mouse_filter = 2
+size_flags_horizontal = 4
 
 [node name="HSeparator" type="HSeparator" parent="LoadGame"]
 modulate = Color( 1, 1, 1, 0 )
@@ -125,25 +129,25 @@ custom_constants/separation = 8
 
 [node name="ConnectLabel" type="Label" parent="."]
 unique_name_in_owner = true
-visible = false
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
-margin_top = 105.0
-margin_right = 414.0
-margin_bottom = 170.0
+margin_left = 97.0
+margin_top = 73.0
+margin_right = 317.0
+margin_bottom = 138.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 3 )
-text = "Unable to create session.
+text = "Unable to connect.
 
-Check your network connection 
-and the server state on our website."
+Check your network 
+and the server status."
 align = 1
 valign = 1
 
 [node name="ConnectGame" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
-visible = false
-margin_top = 122.0
+margin_top = 170.0
 margin_right = 414.0
-margin_bottom = 154.0
+margin_bottom = 202.0
 mouse_filter = 2
 
 [node name="HSeparator" type="HSeparator" parent="ConnectGame"]
@@ -184,7 +188,7 @@ size_flags_horizontal = 3
 custom_constants/separation = 8
 
 [node name="BoxBottom" type="MarginContainer" parent="."]
-margin_top = 154.0
+margin_top = 234.0
 margin_right = 414.0
 margin_bottom = 276.0
 mouse_filter = 2

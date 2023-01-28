@@ -32,7 +32,8 @@ enum Forms {
 }
 
 var done = false
-var regex = RegEx.new()
+var regex_name = RegEx.new()
+var regex_email = RegEx.new()
 
 # FixMe: This is a bit of hack to save time
 var actor_id = ""
@@ -87,7 +88,9 @@ onready var actor_exploration_slider = get_node("%ExplorationSlider")
 
 
 func _ready():
-	if OK != regex.compile('.+\\@.+\\.[a-z][a-z]+'):
+	if OK != regex_name.compile('^[A-Za-z0-9]*$'):
+		push_error("[%s] - name regex failed to compile" % name)
+	if OK != regex_email.compile('.+\\@.+\\.[a-z][a-z]+'):
 		push_error("[%s] - email regex failed to compile" % name)
 	_set_info(State.None)
 	_set_server_state()
@@ -319,10 +322,21 @@ func _handle_actor_created(_tx):
 	is_reserving_id = false
 	# TODO Clear Error Message
 	GameServer.actor.disconnect("actor_created", self, "_handle_actor_created")
+	GameServer.actor.connect("actor_minted", self, "_handle_actor_minted")
+	var code = yield(GameServer.actor.mint_async(), "completed")
+	if OK != code:
+		is_reserving_id = false
+		# TODO Set Error Message
+		print_debug("Error: Failed to mint actor: %s" % code)
+
+
+func _handle_actor_minted(_tx):
+	is_minting_id = false
+	# TODO Clear Error Message
+
 
 
 func _on_name_text_changed(_text):
-	# TODO Implement visual update?
 	_validate_actor_input()
 
 
@@ -393,7 +407,7 @@ func _validate_account_input() -> bool:
 	if login_edit_pass.text.length() > 128:
 		login_is_valid = false
 		return false
-	if null == regex.search(login_edit_email.text): 
+	if null == regex_email.search(login_edit_email.text):
 		login_is_valid = false
 		return false
 	if login_edit_email.text.length() > 64:
@@ -407,6 +421,12 @@ func _validate_actor_input() -> bool:
 	if !has_actor_id:
 		actor_btn_confirm.disabled = true
 		return false
+	if null == regex_name.search(actor_name_edit.text):
+		actor_name_edit.modulate = Color("#ff3b5f")
+		actor_btn_confirm.disabled = true
+		return false
+	else:
+		actor_name_edit.modulate = Color("#ffffff")
 	if actor_name_edit.text.length() < 3:
 		actor_btn_confirm.disabled = true
 		return false

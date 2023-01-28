@@ -36,6 +36,8 @@ var regex_name = RegEx.new()
 var regex_email = RegEx.new()
 
 # FixMe: This is a bit of hack to save time
+var actor_map = {}
+var selected_id =  ""
 var actor_id = ""
 var has_actor = false
 var has_actor_id = false
@@ -49,8 +51,8 @@ var total_skills = 12
 var login_is_valid = false
 var loading_from = Forms.None
 
-# TODO Select Form Setup
 # TODO Loading Form Setup
+# TODO Fix: Invisible lock jump without taking to litle from store
 
 onready var actor_form = get_node("%ActorForm")
 onready var login_form = get_node("%LoginForm")
@@ -85,6 +87,11 @@ onready var actor_skills_value = get_node("%SkillsValue")
 onready var actor_combat_slider = get_node("%CombatSlider")
 onready var actor_industry_slider = get_node("%IndustrySlider")
 onready var actor_exploration_slider = get_node("%ExplorationSlider")
+
+onready var select_actor_msg = get_node("%ActorMsg")
+onready var select_actors_list = get_node("%ActorsList")
+
+var actor_item = preload("res://interface/actor-dialog/ActorItem.tscn")
 
 
 func _ready():
@@ -164,12 +171,56 @@ func _set_player_state():
 
 func _set_actor_mint_state():
 	var info = GameServer.player_info()
+	print_debug("_set_actor_mint_state: %s" % info.actors_map.size())
 	if !info.has_actor_slots():
 		Global.pause_game()
+		_build_select_list(info)
 		_set_form(Forms.Select)
 		_set_info(State.NoSlots)
 	else:
 		_set_actor_state()
+
+
+func _build_select_list(info):
+	# Clear all items from the list
+	for item in select_actors_list.get_children():
+		select_actors_list.remove_child(item)
+		item.queue_free()
+	# Rebuild map from actor list
+	for key in info.actors_map.keys():
+		var actor = actor_item.instance()
+		actor.set_values(info.actors_map[key])
+		actor_map[key] = actor
+		select_actors_list.add_child(actor)
+		actor.connect("actor_selected", self, "_on_actor_selected")
+		actor.connect("actor_activated", self, "_on_actor_activated")
+
+
+func _on_actor_selected(actor):
+	if selected_id.length() > 0:
+		actor_map[selected_id].set_active(false)
+	if actor == null:
+		select_actor_msg.text = ""
+		return
+	select_actor_msg.text = "Double click to start"
+	Global.color = Color(actor.attribs.color)
+	actor_map[actor.id].set_active(true)
+	selected_id = actor.id
+
+
+func _on_actor_activated(actor):
+	print_debug(">> activate: %s" % actor.id)
+	# TODO Start Game with Actor
+	select_actor_msg.text = ""
+	actor_id = actor.id
+	has_actor_id = true
+	is_minting_id = false
+	is_creating_id = false
+	is_reserving_id = false
+	if 0 < actor.name.length():
+		has_actor = true
+	_set_actor_state()
+
 
 
 func _set_actor_state():
@@ -293,7 +344,7 @@ func _on_confirm_pressed():
 	if is_creating_id:
 		return
 	is_creating_id = true
-	var info =	ActorInfo.new(actor_id)
+	var info =	ActorInfo.new(actor_id, false)
 	info.attribs_randomize()
 	info.name = actor_name_edit.text
 	var rand = RandomNumberGenerator.new()

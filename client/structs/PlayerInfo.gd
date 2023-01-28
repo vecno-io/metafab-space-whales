@@ -15,6 +15,7 @@ var actors_map: Dictionary
 var actors_mints: int
 var actors_minted: int
 
+var owned_list: Array
 var minted_list: Array
 var reserved_list: Array
 
@@ -25,6 +26,7 @@ func _init(_id = "", _token = "", _wallet = "", _mints = 0, _minted = 0) -> void
 	actors_map = {}
 	actors_mints = _mints
 	actors_minted = _minted
+	owned_list = []
 	minted_list = []
 	reserved_list = []
 
@@ -59,6 +61,9 @@ func from_result(data: Dictionary) -> int:
 	id = data[KEY_ID]
 	token = data[KEY_TOKEN]
 	wallet = data[KEY_WALLET]
+	owned_list = []
+	minted_list = []
+	reserved_list = []
 	if !is_valid(): 
 		return -3
 	return OK
@@ -81,39 +86,49 @@ func parse_player_data(data: Dictionary) -> int:
 	actors_minted = protected["actorMinted"]
 	return OK
 
-
 # Parses the dictionary returned by a call to metafab
 # that gets the balance of the players actors collection
 # Note: This call is broken, the returned size is to big
-# func parse_minted_actors(data: Dictionary) -> int:
-# 	minted_list = []
-# 	print_debug(">> Data %s" % data)
-# 	for key in data.keys():
-# 		if typeof(key) == TYPE_STRING:
-# 			continue
-# 		# FixMe: 256 bit ints, replace with regex
-# 		# if !key.is_valid_integer():
-# 		# 	continue
-# 		var value = data[key]
-# 		if typeof(value) == TYPE_STRING:
-# 			continue
-# 		if !value.is_valid_integer():
-# 			continue
-# 		if value == "1":
-# 			minted_list.append(key)
-# 	print_debug(">> List %s" % minted_list.size())
-# 	return OK
-
-# TODO Implement call below
-func parse_reserved_actors(data: Dictionary) -> int:
-	reserved_list = []
-	print_debug(">> Data %s" % data)
+func parse_owned_actors(data: Dictionary) -> int:
+	owned_list = []
+	print("Owned Actors:")
 	for key in data.keys():
+		if typeof(key) != TYPE_STRING:
+			continue
 		var value = data[key]
-		if typeof(value) == TYPE_STRING:
+		if typeof(key) != TYPE_STRING:
 			continue
 		if !value.is_valid_integer():
 			continue
-		if value == "1":
-			reserved_list.append(key)
+		if 0 >= value.to_int():
+			continue
+		var val = key_to_account_id(key)
+		if 0 >= val.length():
+			continue
+		print(val)
+		owned_list.append(val)
+		actors_map[val] = ActorInfo.new(val, true)
 	return OK
+
+
+func key_to_account_id(val: String):
+	var start = 0
+	match val.length():
+		30: start = 1
+		31: start = 2
+		32: start = 3
+	if start == 0:
+		return ""
+	var ver = val.substr(0, start)
+	var kind = val.substr(start, 3)
+	var org_x = val.substr(start+3, 3)
+	var org_y = val.substr(start+6, 3)
+	var pos_x = val.substr(start+9, 5)
+	var pos_y = val.substr(start+14, 5)
+	var actor = val.substr(start+19, 10)
+	if !ver.is_valid_integer():
+		return ""
+	return "%03d:%s:%s:%s:%s:%s::%s"	% [
+		ver.to_int(), kind , org_x, org_y, pos_x, pos_y, actor
+	]
+	

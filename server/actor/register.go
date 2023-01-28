@@ -151,7 +151,7 @@ func ReserveRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runti
 	// Update the player account to reflect the change
 	player.ProtectedData.ActorMinted += 1
 	if err := meta.SetPlayerData(logger, account.MetafabId, player); nil != err {
-		_ = _delete_reserved_actor_for_id(ctx, logger, nk, idx.Key(), ver)
+		_ = _delete_reserved_actor_for_id(ctx, logger, nk, user_id, idx.Key(), ver)
 		logger.WithFields(map[string]interface{}{
 			"err": err,
 			"user": user_id,
@@ -274,8 +274,8 @@ func CreateRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtim
 		Id: id.Number(),
 		Name: tag.Key(),
 		Description: "An actor in this space.", 
-		ImageUrl: fmt.Sprintf("%s/%s", image_url_actor, request.Id),
-		ExternalUrl: fmt.Sprintf("%s/%s", extern_url_actor, request.Id),
+		ImageUrl: fmt.Sprintf("%s/%s", image_url_actor, id.Number()),
+		ExternalUrl: fmt.Sprintf("%s/%s", extern_url_actor, id.Number()),
 		Data: Data{
 			Stats: []Stat{{
 					Type: "Agility",
@@ -536,6 +536,13 @@ func _mint_actor_item(ctx context.Context, logger runtime.Logger, nk runtime.Nak
 		}).Error("write actor mint id")
 		return "{}", errors.New("save actor mint id failed")
 	}
+	if err := _delete_reserved_actor_for_id(ctx, logger, nk, user_id, id.Key(), "*"); err != nil {
+		logger.WithFields(map[string]interface{}{
+			"err": err,
+			"user": user_id,
+			"actor": id.Key(),
+		}).Error("delete actor reserved id")
+	}
 	// Mint the actor item into the players account
 	client := meta.CreateHttpClient()
 	req, err := http.NewRequest("POST", mint_url, bytes.NewReader(payload))
@@ -739,10 +746,10 @@ func _write_reserved_actor_for_id(ctx context.Context, logger runtime.Logger, nk
 	return ack[0].Version, nil
 }
 
-func _delete_reserved_actor_for_id(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule, key string, version string) error {
+func _delete_reserved_actor_for_id(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule, user_id string, key string, version string) error {
 	err := nk.StorageDelete(ctx, []*runtime.StorageDelete {{
 		Collection: STORAGE_ACTOR_RESERVED_ID,
-		Version: version,
+		UserID: user_id,
 		Key: key,
 	}})
 	if err != nil {

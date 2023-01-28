@@ -34,7 +34,7 @@ func actor_id() -> String:
 
 func actor_info() -> ActorInfo:
 	if _actor != null: return _actor
-	return ActorInfo.new("")
+	return ActorInfo.new("", false)
 
 
 func player_id() -> String:
@@ -152,6 +152,7 @@ func _on_authenticate_player_result(code: int, result: String) -> void:
 	print("[Meta.Account] Player ID: %s" % _player.id)
 	emit_signal("signed_in")
 	_get_player_data()
+	_get_owned_actors()
 	if OK == yield(_get_reserved_actors_async(), "completed"):
 		emit_signal("player_updated")
 
@@ -162,13 +163,13 @@ func _get_player_data():
 	)
 
 
-func _get_minted_actors() -> int:
+func _get_owned_actors() -> int:
 	# Note: This call is broken, the returned size is to big
-	# var __ = MetaFab.get_collection_item_balances(self, 
-	# 	"_on_get_player_actors_result", 
-	# 	_cfg.collection_actors, 
-	# 	_player.wallet
-	# )
+	var __ = MetaFab.get_collection_item_balances(self, 
+		"_on_get_owned_actors_result", 
+		_cfg.collection_actors, 
+		_player.wallet
+	)
 	return OK
 
 const STORAGE_ACTOR_MINTED_ID = "ACTOR_MINTED_ID"
@@ -180,17 +181,18 @@ func _get_reserved_actors_async() -> int:
 		return -1
 	# Load the reserved actor ids from nakama
 	var limit = 48
-	var reserved_list= yield(_client.list_storage_objects_async(
-		session, STORAGE_ACTOR_MINTED_ID, session.user_id, limit
-	), "completed")
-	if reserved_list.is_exception():
-			print("An error occurred: %s" % reserved_list)
-			return
-	print("Minted actors: ")
-	for o in reserved_list.objects:
-			print("%s" % o.key)
-			_player.minted_list.append(o.key)
-	reserved_list = yield(_client.list_storage_objects_async(
+	# Note: On initial load we do not care for minted, later on maybe
+	# var reserved_list= yield(_client.list_storage_objects_async(
+	# 	session, STORAGE_ACTOR_MINTED_ID, session.user_id, limit
+	# ), "completed")
+	# if reserved_list.is_exception():
+	# 		print("An error occurred: %s" % reserved_list)
+	# 		return
+	# print("Minted actors: ")
+	# for o in reserved_list.objects:
+	# 		print("%s" % o.key)
+	# 		_player.minted_list.append(o.key)
+	var reserved_list = yield(_client.list_storage_objects_async(
 		session, STORAGE_ACTOR_RESERVED_ID, session.user_id, limit
 	), "completed")
 	if reserved_list.is_exception():
@@ -200,6 +202,7 @@ func _get_reserved_actors_async() -> int:
 	for o in reserved_list.objects:
 			print("%s" % o.key)
 			_player.reserved_list.append(o.key)
+			_player.actors_map[o.key] = ActorInfo.new(o.key, false)
 	return OK
 
 
@@ -214,15 +217,15 @@ func _on_get_player_data_result(code: int, result: String):
 	emit_signal("player_updated")
 
 
-# func _on_get_minted_actors_result(code: int, result: String):
-# 	var json = JSON.parse(result)
-# 	if code != 200: 
-# 		_push_error(code, "invalid actors result: %s" % json.result)
-# 		return
-# 	if OK != _player.parse_minted_actors(json.result):
-# 		_push_error(code, "invalid actors object: %s" % json.result)
-# 		return
-# 	emit_signal("player_updated")
+func _on_get_owned_actors_result(code: int, result: String):
+	var json = JSON.parse(result)
+	if code != 200:
+		_push_error(code, "invalid actors result: %s" % json.result)
+		return
+	if OK != _player.parse_owned_actors(json.result):
+		_push_error(code, "invalid actors object: %s" % json.result)
+		return
+	emit_signal("player_updated")
 
 
 func _no_set(_value) -> void:

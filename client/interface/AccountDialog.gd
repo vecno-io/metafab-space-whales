@@ -5,6 +5,8 @@ extends Popup
 # Needs to fit the clear color
 const clear_color = Color("#9c0e0c12")
 
+var actor_map = {}
+var selected_id =  ""
 
 var regex = RegEx.new()
 var is_loading: bool = false
@@ -229,17 +231,44 @@ func _on_player_updated():
 	var player = GameServer.player_info()
 	var actors = player.actors_map
 	var slots = player.actors_mints - player.actors_minted
-	actors_slots.text = "Mints: %s/%s" % [player.actors_minted, player.actors_mints]
+	actors_slots.text = "Claims: %s/%s" % [player.actors_minted, player.actors_mints]
 	actors_slots.show()
 	if actors.size() > 0:
 		for key in actors.keys():
 			var actor = actor_item.instance()
 			actor.set_values(actors[key])
+			actor_map[key] = actor
 			actors_list.add_child(actor)
+			actor.connect("actor_selected", self, "_on_actor_selected")
+			actor.connect("actor_activated", self, "_on_actor_activated")
 	if slots > 0: 
 		for __ in range(0, slots):
 			var mint = actor_mint.instance()
 			actors_list.add_child(mint)
+
+
+func _on_actor_selected(actor):
+	if selected_id.length() > 0:
+		actor_map[selected_id].set_active(false)
+	if actor == null:
+		msg_actors.text = ""
+		return
+	msg_actors.text = "Double click to start"
+	actor_map[actor.id].set_active(true)
+	selected_id = actor.id
+
+
+func _on_actor_activated(actor):
+	print_debug(">> activate: %s" % actor.id)
+	# TODO Start Game with Actor
+	msg_actors.text = ""
+	if 0 < actor.name.length():
+		# TODO Jump in to tutorial 5:
+		# see: _on_actor_activated
+		pass
+	else:
+		# TODO Jump to home, no tutorial
+		pass
 
 
 func _push_error(message: String) -> void:

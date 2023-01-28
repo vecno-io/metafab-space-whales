@@ -81,12 +81,11 @@ custom_constants/margin_bottom = 156
 
 [node name="StartMenu" parent="HBoxContainer/RightBox/BoxStartMenu" instance=ExtResource( 4 )]
 unique_name_in_owner = true
-margin_left = 0.0
-margin_right = 366.0
+margin_left = 73.0
+margin_right = 293.0
 margin_bottom = 384.0
 
 [node name="AccountDialog" parent="." instance=ExtResource( 1 )]
-visible = false
 
 [node name="ShakeTimer" type="Timer" parent="."]
 unique_name_in_owner = true

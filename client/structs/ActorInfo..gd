@@ -64,7 +64,12 @@ func load_actor_data():
 
 func _on_collection_item_result(code: int, result: String):
 	var json = JSON.parse(result)
-	if code != 200: return
+	if code != 200:
+		stats.reset()
+		skills.reset()
+		attribs_randomize()
+		emit_signal("actor_loaded", id)
+		return
 	name = json.result["name"]
 	var data = json.result.data
 	for obj in data["stats"]:
@@ -130,7 +135,7 @@ func _id_as_number() -> String:
 
 func _push_error(code: int, message: String) -> void:
 	if code != OK: push_error("[ActorInfo] Code: %s - %s" % [message, code])
-		
+
 
 
 class Id:
@@ -153,6 +158,13 @@ class Stats:
 		strength = _strength
 		vitality = _vitality
 
+	func reset():
+		# Hack: No known defaults?
+		# FixeMe Randomize setup values
+		agility = 128
+		strength = 128
+		vitality = 128
+
 
 class Skills:
 	var combat: int
@@ -163,6 +175,13 @@ class Skills:
 		combat = _combat
 		industry = _industry
 		exploration = _exploration
+
+	func reset():
+		# Hack: No known defaults?
+		# FixeMe Randomize setup values
+		combat = 128
+		industry = 128
+		exploration = 128
 
 
 class Attribs:

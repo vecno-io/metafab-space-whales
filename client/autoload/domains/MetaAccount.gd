@@ -153,14 +153,13 @@ func _get_player_data():
 	)
 
 
-func _get_owned_actors() -> int:
+func _get_owned_actors():
 	# Note: This call is broken, the returned size is to big
 	var __ = MetaFab.get_collection_item_balances(self, 
 		"_on_get_owned_actors_result", 
 		_cfg.collection_actors, 
 		_player.wallet
 	)
-	return OK
 
 const STORAGE_ACTOR_MINTED_ID = "ACTOR_MINTED_ID"
 const STORAGE_ACTOR_RESERVED_ID = "ACTOR_RESERVED_ID"

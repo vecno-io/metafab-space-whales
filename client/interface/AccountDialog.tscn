@@ -400,7 +400,6 @@ margin_bottom = 302.0
 rect_min_size = Vector2( 0, 14 )
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 9 )
-text = "help"
 align = 1
 valign = 1
 clip_text = true
@@ -512,24 +511,31 @@ text = "x"
 align = 2
 icon_align = 1
 
-[node name="History" type="Tabs" parent="HBoxContainer/RightBox/CenterContainer/TabContainer"]
+[node name="TempHideSpot" type="TabContainer" parent="HBoxContainer/RightBox/CenterContainer"]
+visible = false
+margin_left = 175.0
+margin_top = 217.0
+margin_right = 191.0
+margin_bottom = 259.0
+
+[node name="History" type="Tabs" parent="HBoxContainer/RightBox/CenterContainer/TempHideSpot"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 36.0
+margin_right = -8.0
+margin_bottom = -6.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightBox/CenterContainer/TempHideSpot/History"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 36.0
-margin_right = -16.0
-margin_bottom = -8.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/RightBox/CenterContainer/TabContainer/History"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TransactionsEmpty" type="Label" parent="HBoxContainer/RightBox/CenterContainer/TabContainer/History/VBoxContainer"]
+[node name="TransactionsEmpty" type="Label" parent="HBoxContainer/RightBox/CenterContainer/TempHideSpot/History/VBoxContainer"]
 unique_name_in_owner = true
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 margin_top = 69.0
@@ -541,21 +547,21 @@ text = "No Transactions Found"
 align = 1
 valign = 1
 
-[node name="Transactions" type="ScrollContainer" parent="HBoxContainer/RightBox/CenterContainer/TabContainer/History/VBoxContainer"]
+[node name="Transactions" type="ScrollContainer" parent="HBoxContainer/RightBox/CenterContainer/TempHideSpot/History/VBoxContainer"]
 margin_top = 155.0
 margin_right = 258.0
 margin_bottom = 306.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TransactionList" type="VBoxContainer" parent="HBoxContainer/RightBox/CenterContainer/TabContainer/History/VBoxContainer/Transactions"]
+[node name="TransactionList" type="VBoxContainer" parent="HBoxContainer/RightBox/CenterContainer/TempHideSpot/History/VBoxContainer/Transactions"]
 unique_name_in_owner = true
 margin_right = 258.0
 margin_bottom = 151.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CloseBtn" type="Button" parent="HBoxContainer/RightBox/CenterContainer/TabContainer/History/VBoxContainer"]
+[node name="CloseBtn" type="Button" parent="HBoxContainer/RightBox/CenterContainer/TempHideSpot/History/VBoxContainer"]
 margin_top = 310.0
 margin_right = 258.0
 margin_bottom = 336.0
@@ -574,4 +580,4 @@ icon_align = 1
 [connection signal="pressed" from="HBoxContainer/RightBox/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer/LogOutBtn" to="." method="_on_logout_pressed"]
 [connection signal="pressed" from="HBoxContainer/RightBox/CenterContainer/TabContainer/Actors/ActorsBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="HBoxContainer/RightBox/CenterContainer/TabContainer/Actors/LoadingBox/HBoxContainer/CloseButton" to="." method="_on_close_pressed"]
-[connection signal="pressed" from="HBoxContainer/RightBox/CenterContainer/TabContainer/History/VBoxContainer/CloseBtn" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="HBoxContainer/RightBox/CenterContainer/TempHideSpot/History/VBoxContainer/CloseBtn" to="." method="_on_close_pressed"]

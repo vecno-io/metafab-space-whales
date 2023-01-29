@@ -1,6 +1,8 @@
-extends Node
+extends Control
 
+# TODO: Gracefull load up, remove poping
 
+signal actor_loaded(actor)
 signal actor_selected(actor)
 signal actor_activated(actor)
 
@@ -19,7 +21,8 @@ func _ready():
 	#warning-ignore: return_value_discarded
 	_info.connect("actor_loaded", self, "_on_actor_loaded")
 	actor_origin.text = _info.origin()
-	actor_name.text = "---"
+	actor_name.text = "< LOADING >"
+	visible = false
 	_info.load_actor_data()
 
 
@@ -38,8 +41,13 @@ func set_values(actor: ActorInfo):
 
 
 func _on_actor_loaded(_id):
-	actor_name.text = _info.name
+	visible = true
+	if _info.name.length() > 0:
+		actor_name.text = _info.name
+	else:
+		actor_name.text = "<NEW WHALE SLOT>"
 	actor_color.modulate = Color(_info.attribs.color)
+	emit_signal("actor_loaded", _info)
 
 
 func _on_gui_input(event):

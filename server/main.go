@@ -25,6 +25,7 @@ func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runti
 		logger.Error("Unable to register rpc: meta_register: %v", err)
 		return err
 	}
+
 	if err := initializer.RegisterRpc("actor_mint", actor.MintRpc); err != nil {
 		logger.Error("Unable to register rpc: actor_mint: %v", err)
 		return err
@@ -37,24 +38,30 @@ func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runti
 		logger.Error("Unable to register rpc: actor_reserve: %v", err)
 		return err
 	}
+
 	if err := initializer.RegisterRpc("actor_inventory", actor.InventoryRpc); err != nil {
-		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		logger.Error("Unable to register rpc: actor_inventory: %v", err)
 		return err
 	}
 	if err := initializer.RegisterRpc("actor_take_coin", actor.TakeCoinRpc); err != nil {
-		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		logger.Error("Unable to register rpc: actor_take_coin: %v", err)
 		return err
 	}
 	if err := initializer.RegisterRpc("actor_store_coin", actor.StoreCoinRpc); err != nil {
-		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		logger.Error("Unable to register rpc: actor_store_coin: %v", err)
 		return err
 	}
 	if err := initializer.RegisterRpc("actor_take_booster", actor.TakeBoosterRpc); err != nil {
-		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		logger.Error("Unable to register rpc: actor_take_booster: %v", err)
 		return err
 	}
 	if err := initializer.RegisterRpc("actor_store_booster", actor.StoreBoosterRpc); err != nil {
-		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		logger.Error("Unable to register rpc: actor_store_booster: %v", err)
+		return err
+	}
+
+	if err := initializer.RegisterRpc("actor_combat_outcome", actor.CombatOutcomeRpc); err != nil {
+		logger.Error("Unable to register rpc: actor_combat_outcome: %v", err)
 		return err
 	}
 	return nil

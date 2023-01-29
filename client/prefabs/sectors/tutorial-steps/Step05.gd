@@ -73,6 +73,11 @@ onready var login_btn_regitser = get_node("%RegisterBtn")
 
 onready var loading_timer = get_node("%LoadingTimer")
 
+onready var actor_create_msg = get_node("%CreateMsg")
+onready var actor_create_form = get_node("%CreateForm")
+onready var actor_create_again = get_node("%TryAgainBtn")
+onready var actor_create_loading = get_node("%CreateLoading")
+
 onready var actor_name_edit = get_node("%NameEdit")
 onready var actor_btn_confirm = get_node("%ConfirmBtn")
 onready var actor_color_selector = get_node("%ColorSelector")
@@ -326,7 +331,6 @@ func _on_register_pressed():
 		login_edit_email.text, login_edit_pass.text, true
 	), "completed")
 	if OK != result:
-		login_message.text = "Register failed, check info."
 		push_error("register account: %s" % result)
 		_set_form(Forms.Login)
 		return
@@ -355,12 +359,17 @@ func _on_confirm_pressed():
 	info.attribs_set_color(
 		actor_color_selector.color()
 	)
+	actor_create_msg.text = "creating"
+	actor_create_form.hide()
+	actor_create_loading.show()
 	GameServer.actor.connect("actor_created", self, "_handle_actor_created")
 	var code = yield(GameServer.actor.create_async(info), "completed")
 	if OK != code:
-		is_reserving_id = false
-		# TODO Set Error Message
+		is_creating_id = false
+		actor_create_again.disabled = false
 		print_debug("Error: Failed to create actor: %s" % code)
+		actor_create_msg.text = "Create Error, try again. (%s)" % code
+		GameServer.actor.disconnect("actor_created", self, "_handle_actor_created")
 	_set_actor_state()
 
 
@@ -369,26 +378,33 @@ func _handle_actor_reserved(id):
 	has_actor_id = true
 	is_reserving_id = false
 	_validate_actor_input()
-	# TODO Clear Error Message
+	actor_create_msg.text = ""
 	GameServer.actor.disconnect("actor_reserved", self, "_handle_actor_reserved")
 
 
 func _handle_actor_created(_tx):
-	is_reserving_id = false
-	# TODO Clear Error Message
+	is_creating_id = false
+	actor_create_msg.text = "minting"
 	GameServer.actor.disconnect("actor_created", self, "_handle_actor_created")
 	GameServer.actor.connect("actor_minted", self, "_handle_actor_minted")
 	var code = yield(GameServer.actor.mint_async(), "completed")
 	if OK != code:
 		is_reserving_id = false
-		# TODO Set Error Message
+		actor_create_again.disabled = false
+		actor_create_msg.text = "Mint Error. (%s)" % code
 		print_debug("Error: Failed to mint actor: %s" % code)
 
 
 func _handle_actor_minted(_tx):
 	is_minting_id = false
-	# TODO Clear Error Message
+	actor_create_msg.text = ""
+	GameServer.sector.end_combat()
 
+
+func _on_try_again():
+	actor_create_form.show()
+	actor_create_loading.hide()
+	actor_create_again.disabled = true
 
 
 func _on_name_text_changed(_text):

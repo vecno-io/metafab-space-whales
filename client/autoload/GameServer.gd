@@ -20,6 +20,7 @@ const SERVER_DOMAIN = "%s%s.game-server.test"
 var _client: NakamaClient = null setget _no_set
 
 var actor: GameActor = null setget _no_set
+var sector: GameSector = null setget _no_set
 
 var _meta: MetaAccount = null setget _no_set
 var _account: ServerAccount = null setget _no_set
@@ -119,10 +120,9 @@ func _server_setup(address: String):
 	_client = Nakama.create_client(SERVER_KEY, address, 7350, "http", 12, NakamaLogger.LOG_LEVEL.INFO)
 	_client.auto_retry = false
 	_account = ServerAccount.new(_client, _exception)
-	actor = GameActor.new(_client, _account, _exception)
 	_meta = MetaAccount.new(_client, _account, _exception)
-	#warning-ignore: return_value_discarded
-	actor.connect("info_updated", self, "_on_actor_info_updated")
+	actor = GameActor.new(_client, _account, _exception)
+	sector = GameSector.new(_client, _account, _exception)
 	#warning-ignore: return_value_discarded
 	_meta.connect("signed_in", self, "_on_meta_signed_in")
 	#warning-ignore: return_value_discarded
@@ -135,6 +135,8 @@ func _server_setup(address: String):
 	_account.connect("session_closed", self, "_on_account_session_closed")
 	#warning-ignore: return_value_discarded
 	_account.connect("session_created", self, "_on_account_session_created")
+	#warning-ignore: return_value_discarded
+	actor.connect("info_updated", self, "_on_actor_info_updated")
 
 
 func _on_actor_info_updated():
@@ -183,6 +185,8 @@ func _load_config_async():
 		print_debug("[Game.Server] Invalid game info: %s" % json.result)
 		return -4
 	_meta.set_config(config)
+	actor.set_config(config)
+	sector.set_config(config)
 
 
 func _push_error(code: int, message: String) -> void:

@@ -68,7 +68,6 @@ func is_valid() -> bool:
 
 
 func set_config(config: MetaConfig):
-	print("[Game.Actor] Game ID: %s" % config.game_id)
 	_cfg = config
 
 
@@ -90,7 +89,7 @@ func mint_async() -> int:
 	if OK != data.error:
 		push_error("[JSON] %s (%s)" % [data.error_string, data.error])
 		return -3
-	print_debug("actor_minted >> %s" % data.result)
+	# print_debug("actor_minted >> %s" % data.result)
 	emit_signal("actor_minted", data.result)
 	return OK
 
@@ -134,7 +133,7 @@ func create_async(info: ActorInfo) -> int:
 	_actor = info
 	var id_val = info.id_values()
 	info.attribs.origin = id_val.kind
-	print_debug("actor_created >> %s" % data.result)
+	# print_debug("actor_created >> %s" % data.result)
 	emit_signal("actor_created", data.result)
 	emit_signal("info_updated")
 	return OK
@@ -156,7 +155,7 @@ func reserve_async() -> int:
 	if OK != data.error:
 		push_error("[JSON] %s (%s)" % [data.error_string, data.error])
 		return -3
-	print_debug("actor_reserved >> %s" % data.result)
+	# print_debug("actor_reserved >> %s" % data.result)
 	emit_signal("actor_reserved", data.result)
 	return OK
 

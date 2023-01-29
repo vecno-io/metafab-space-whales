@@ -52,16 +52,16 @@ var highsocre = 0 setget _no_set
 
 var can_jump = false setget _set_can_jump
 
-var dust_storage = 0 setget _set_dust_storage
-var dust_inventory = 0 setget _set_dust_inventory
+var dust_storage: int = 0 setget _set_dust_storage
+var dust_inventory: int = 0 setget _set_dust_inventory
 
-var speed_cost = 384 setget _no_set
-var speed_storage = 0 setget _set_speed_storage
-var speed_inventory = 0 setget _set_speed_inventory
+var speed_cost: int = 384 setget _no_set
+var speed_storage: int = 0 setget _set_speed_storage
+var speed_inventory: int = 0 setget _set_speed_inventory
 
-var firerate_cost = 214 setget _no_set
-var firerate_storage = 0 setget _set_firerate_storage
-var firerate_inventory = 0 setget _set_firerate_inventory
+var firerate_cost: int = 214 setget _no_set
+var firerate_storage: int = 0 setget _set_firerate_storage
+var firerate_inventory: int = 0 setget _set_firerate_inventory
 
 var world = null
 var camera = null
@@ -113,38 +113,85 @@ func _set_can_jump(value):
 
 
 func _set_dust_storage(value):
-	dust_storage = value
 	# TODO Save to storage file
+	if typeof(value) == TYPE_INT:
+		dust_storage = value
+	elif typeof(value) == TYPE_REAL:
+		dust_storage = int(value)
+	elif typeof(value) == TYPE_STRING:
+		dust_storage = value.to_int()
+	else:
+		push_error("invalid type: %s" % typeof(value))
+		return
 	emit_signal("dust_storage_updated", value)
 
 
 func _set_dust_inventory(value):
-	dust_inventory = value
 	# TODO Save to storage file
+	if typeof(value) == TYPE_INT:
+		dust_inventory = value
+		emit_signal("dust_inventory_updated", value)
+	elif typeof(value) == TYPE_REAL:
+		dust_inventory = int(value)
+	elif typeof(value) == TYPE_STRING:
+		dust_inventory = value.to_int()
+	else:
+		push_error("invalid type: %s" % typeof(value))
+		return
 	emit_signal("dust_inventory_updated", value)
 
 
 func _set_speed_storage(value):
-	speed_storage = value
 	# TODO Save to storage file
+	if typeof(value) == TYPE_INT:
+		speed_storage = value
+	elif typeof(value) == TYPE_REAL:
+		speed_storage = int(value)
+	elif typeof(value) == TYPE_STRING:
+		speed_storage = value.to_int()
+	else:
+		push_error("invalid type: %s" % typeof(value))
+		return
 	emit_signal("speed_storage_updated", value)
 
-
 func _set_speed_inventory(value):
-	speed_inventory = value
 	# TODO Save to storage file
+	if typeof(value) == TYPE_INT:
+		speed_inventory = value
+	elif typeof(value) == TYPE_REAL:
+		speed_inventory = int(value)
+	elif typeof(value) == TYPE_STRING:
+		speed_inventory = value.to_int()
+	else:
+		push_error("invalid type: %s" % typeof(value))
+		return
 	emit_signal("speed_inventory_updated", value)
 
 
 func _set_firerate_storage(value):
-	firerate_storage = value
 	# TODO Save to storage file
+	if typeof(value) == TYPE_INT:
+		firerate_storage = value
+	elif typeof(value) == TYPE_REAL:
+		firerate_storage = int(value)
+	elif typeof(value) == TYPE_STRING:
+		firerate_storage = value.to_int()
+	else:
+		push_error("invalid type: %s" % typeof(value))
+		return
 	emit_signal("firerate_storage_updated", value)
 
 
 func _set_firerate_inventory(value):
-	firerate_inventory = value
-	# TODO Save to storage file
+	if typeof(value) == TYPE_INT:
+		firerate_inventory = value
+	elif typeof(value) == TYPE_REAL:
+		firerate_inventory = int(value)
+	elif typeof(value) == TYPE_STRING:
+		firerate_inventory = value.to_int()
+	else:
+		push_error("invalid type: %s" % typeof(value))
+		return
 	emit_signal("firerate_inventory_updated", value)
 
 

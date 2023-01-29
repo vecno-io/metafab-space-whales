@@ -60,7 +60,8 @@ func signed_in():
 	btn_logout.show()
 	form_login.hide()
 	form_actors.show()
-	tabs.set_tab_disabled(1, false)
+	#FixMe: Enable for history tab
+	#tabs.set_tab_disabled(1, false)
 	if is_loading: _end_server_loading()
 
 
@@ -69,7 +70,8 @@ func signed_out():
 	form_login.show()
 	form_actors.hide()
 	actors_slots.hide()
-	tabs.set_tab_disabled(1, true)
+	#FixMe: Enable for history tab
+	#tabs.set_tab_disabled(1, true)
 	if is_loading: _end_server_loading()
 
 
@@ -107,7 +109,8 @@ func _set_player_signed_in():
 	form_login.hide()
 	form_actors.show()
 	is_loading = false
-	tabs.set_tab_disabled(1, false)
+	#FixMe: Enable for history tab
+	#tabs.set_tab_disabled(1, false)
 
 
 func _set_player_signed_out():
@@ -119,7 +122,8 @@ func _set_player_signed_out():
 	form_login.show()
 	form_actors.hide()
 	is_loading = false
-	tabs.set_tab_disabled(1, true)
+	#FixMe: Enable for history tab
+	#tabs.set_tab_disabled(1, true)
 
 
 func _set_server_connected():
@@ -131,7 +135,7 @@ func _set_server_connected():
 
 func _set_server_connecting():
 	tabs.set_tab_disabled(0, true)
-	tabs.set_tab_disabled(1, true)
+	#tabs.set_tab_disabled(1, true)
 	box_link.show()
 	box_actors.hide()
 	box_loading.hide()

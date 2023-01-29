@@ -109,7 +109,7 @@ func id_values() -> Id:
 	res.org_y = sec_list[3]
 	res.pos_x = sec_list[4]
 	res.pos_y = sec_list[5]
-	res.actor = key_list[1]
+	res.index = key_list[1]
 	return res
 
 

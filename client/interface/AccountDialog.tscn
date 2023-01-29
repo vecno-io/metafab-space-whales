@@ -476,7 +476,7 @@ custom_constants/separation = 32
 margin_right = 240.0
 margin_bottom = 16.0
 custom_fonts/font = ExtResource( 3 )
-text = "> LOADING  <"
+text = "> LOADING <"
 align = 1
 
 [node name="LoadingMsg" type="Label" parent="HBoxContainer/RightBox/CenterContainer/TabContainer/Actors/LoadingBox/CenterContainer/VBoxContainer"]

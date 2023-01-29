@@ -82,6 +82,7 @@ func authenticate_player(password: String) -> int:
 
 
 func _on_create_player_result(code: int, result: String) -> void:
+	# Verify new player state and results
 	var json = JSON.parse(result)
 	if code != 200: 
 		_push_error(-1, "auth_player: %s - %s" % [code, json.result])
@@ -100,7 +101,7 @@ func _on_create_player_result(code: int, result: String) -> void:
 		_password = ""
 		_player = null
 		return
-	
+	# Register the new player info to nakama
 	_player = PlayerInfo.new()
 	if OK != _player.from_result(json.result): 
 		_push_error(-4, "meta_register json: %s - %s" % [user_id, json.result])

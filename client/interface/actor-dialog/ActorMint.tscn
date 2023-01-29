@@ -26,7 +26,7 @@ margin_top = 17.0
 margin_right = 202.0
 margin_bottom = 31.0
 size_flags_horizontal = 3
-text = "Mint an Actor"
+text = "Claim a Whale"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_left = 206.0

@@ -263,7 +263,7 @@ func _jump_out_tutorial() -> bool:
 
 func save_game():
 	# Note: This lacks a load so it needs to set all
-	var id = GameServer.actor_id()
+	var id = GameServer.actor.id()
 	if id.length() == 0: return
 	var file := ConfigFile.new()
 	# Dust Currency
@@ -284,7 +284,7 @@ func save_game():
 
 
 func _load_game():
-	var id = GameServer.actor_id()
+	var id = GameServer.actor.id()
 	if id.length() == 0: return
 	var file := ConfigFile.new()
 	var err = file.load(SAVE_FILE % id)

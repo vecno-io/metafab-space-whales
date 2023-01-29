@@ -7,7 +7,7 @@ signal signed_out
 signal player_updated
 
 var _cfg: MetaConfig = null setget _no_set
-var _actor: ActorInfo = null setget _no_set
+# var _actor: ActorInfo = null setget _no_set
 var _player: PlayerInfo = null setget _no_set
 var _password: String = "" setget _no_set
 
@@ -25,16 +25,6 @@ func _init(client: NakamaClient, account: ServerAccount, exception: ServerExcept
 func set_config(config: MetaConfig):
 	print("[Meta.Account] Game ID: %s" % config.game_id)
 	_cfg = config
-
-
-func actor_id() -> String:
-	if _actor == null: return ""
-	return _actor.id
-
-
-func actor_info() -> ActorInfo:
-	if _actor != null: return _actor
-	return ActorInfo.new("", false)
 
 
 func player_id() -> String:

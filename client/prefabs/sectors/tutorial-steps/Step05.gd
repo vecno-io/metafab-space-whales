@@ -39,7 +39,6 @@ var regex_email = RegEx.new()
 var actor_map = {}
 var selected_id =  ""
 var actor_id = ""
-var has_actor = false
 var has_actor_id = false
 var is_minting_id = false
 var is_creating_id = false
@@ -170,15 +169,47 @@ func _set_player_state():
 
 
 func _set_actor_mint_state():
+	if GameServer.actor.has_id():
+		has_actor_id = true
 	var info = GameServer.player_info()
-	print_debug("_set_actor_mint_state: %s" % info.actors_map.size())
-	if !info.has_actor_slots():
+	if !info.has_actor_slots() && !has_actor_id:
 		Global.pause_game()
 		_build_select_list(info)
 		_set_form(Forms.Select)
 		_set_info(State.NoSlots)
 	else:
 		_set_actor_state()
+
+
+
+func _set_actor_state():
+	# We know the player is logged in and has slots.
+	# So check id, if null -> start id reservation
+	# If no id, there is no actor so ask info
+	# if id came back -> create the actor
+	# then in step 6 -> mint the actor
+	if GameServer.actor.is_valid():
+		print_debug("[%s] - _set_actor_state has actor")
+		# TODO Auto Jump this to storage?
+		# TODO Auto Loadup Storage Link?
+		Global.unpause_game()
+		Global.can_jump = true
+		_set_form(Forms.None)
+		_set_info(State.Store)
+		return
+	else:
+		Global.pause_game()
+		_set_form(Forms.Actor)
+		_set_info(State.NoActor)
+		print_debug("[%s] - _set_actor_state no actor")
+		if !has_actor_id && !is_reserving_id:
+			is_reserving_id = true
+			GameServer.actor.connect("actor_reserved", self, "_handle_actor_reserved")
+			var code = yield(GameServer.actor.reserve_async(), "completed")
+			if OK != code:
+				is_reserving_id = false
+				# TODO Set Error Message
+				print_debug("Error: Failed to reserve actor: %s" % code)
 
 
 func _build_select_list(info):
@@ -210,6 +241,7 @@ func _on_actor_selected(actor):
 
 func _on_actor_activated(actor):
 	print_debug(">> activate: %s" % actor.id)
+	GameServer.actor.set_info(actor)
 	# TODO Start Game with Actor
 	select_actor_msg.text = ""
 	actor_id = actor.id
@@ -217,43 +249,7 @@ func _on_actor_activated(actor):
 	is_minting_id = false
 	is_creating_id = false
 	is_reserving_id = false
-	if 0 < actor.name.length():
-		has_actor = true
 	_set_actor_state()
-
-
-
-func _set_actor_state():
-	# We know the player is logged in and has slots.
-	# So check id, if null -> start id reservation
-	# If no id, there is no actor so ask info
-	# if id came back -> create the actor
-	# then in step 6 -> mint the actor
-	if has_actor:
-		Global.unpause_game()
-		_set_form(Forms.None)
-		_set_info(State.Store)
-		return
-	Global.pause_game()
-	_set_form(Forms.Actor)
-	_set_info(State.NoActor)
-	if !has_actor_id && !is_reserving_id:
-		is_reserving_id = true
-		GameServer.actor.connect("actor_reserved", self, "_handle_actor_reserved")
-		var code = yield(GameServer.actor.reserve_async(), "completed")
-		if OK != code:
-			is_reserving_id = false
-			# TODO Set Error Message
-			print_debug("Error: Failed to reserve actor: %s" % code)
-
-
-func _handle_actor_reserved(id):
-	actor_id = id
-	has_actor_id = true
-	is_reserving_id = false
-	_validate_actor_input()
-	# TODO Clear Error Message
-	GameServer.actor.disconnect("actor_reserved", self, "_handle_actor_reserved")
 
 
 func _on_reconnect_pressed():
@@ -368,8 +364,16 @@ func _on_confirm_pressed():
 	_set_actor_state()
 
 
+func _handle_actor_reserved(id):
+	actor_id = id
+	has_actor_id = true
+	is_reserving_id = false
+	_validate_actor_input()
+	# TODO Clear Error Message
+	GameServer.actor.disconnect("actor_reserved", self, "_handle_actor_reserved")
+
+
 func _handle_actor_created(_tx):
-	has_actor = true
 	is_reserving_id = false
 	# TODO Clear Error Message
 	GameServer.actor.disconnect("actor_created", self, "_handle_actor_created")

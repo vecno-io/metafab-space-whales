@@ -48,6 +48,11 @@ func load_actor_data():
 	# Get the game configuration
 	# FixMe Access Private variable
 	var cfg = GameServer._meta._cfg
+	var id_num = _id_as_number()
+	if id_num.length() == 0:
+		return _push_error(GameServer._exception.code, 
+			"load_actor_data: called with invalid id: %s" % id
+		)
 	if OK != GameServer._exception.metafab_parse(MetaFab.get_collection_item(self,
 		"_on_collection_item_result", cfg.collection_actors, _id_as_number()
 	)):
@@ -83,23 +88,59 @@ func _on_collection_item_result(code: int, result: String):
 	emit_signal("actor_loaded", id)
 
 
+func id_values() -> Id:
+	var res = Id.new()
+	var key_list = id.split("::")
+	if key_list.size() != 2:
+		push_error("id_values: invalid id (key)")
+		return res
+	var sec_list = key_list[0].split(":")
+	if sec_list.size() != 6:
+		push_error("id_values: invalid id (sector)")
+		return res
+	res.ver = sec_list[0]
+	res.kind = sec_list[1]
+	res.org_x = sec_list[2]
+	res.org_y = sec_list[3]
+	res.pos_x = sec_list[4]
+	res.pos_y = sec_list[5]
+	res.actor = key_list[1]
+	return res
+
+
 func _id_as_number() -> String:
-	var main_list = id.split("::")
-	var sub_list = main_list[0].split(":")
+	var key_list = id.split("::")
+	if key_list.size() != 2:
+		push_error("id_values: invalid id (key)")
+		return ""
+	var sec_list = key_list[0].split(":")
+	if sec_list.size() != 6:
+		push_error("id_values: invalid id (sector)")
+		return ""
 	return "%d%s%s%s%s%s%s" % [
-		sub_list[0].to_int(), # ver
-		sub_list[1],          # kind
-		sub_list[2],          # org_x
-		sub_list[3],          # org_y
-		sub_list[4],          # pos_x
-		sub_list[5],          # pos_y
-		main_list[1],         # actor
+		sec_list[0].to_int(), # ver
+		sec_list[1],          # kind
+		sec_list[2],          # org_x
+		sec_list[3],          # org_y
+		sec_list[4],          # pos_x
+		sec_list[5],          # pos_y
+		key_list[1],          # actor
 	]
 
 
 func _push_error(code: int, message: String) -> void:
 	if code != OK: push_error("[ActorInfo] Code: %s - %s" % [message, code])
 		
+
+
+class Id:
+	var ver: String
+	var kind: String
+	var org_x: String
+	var org_y: String
+	var pos_x: String
+	var pos_y: String
+	var index: String
 
 
 class Stats:

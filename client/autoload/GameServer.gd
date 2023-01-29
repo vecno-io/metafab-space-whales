@@ -5,6 +5,7 @@ signal signed_in
 signal signed_out
 
 signal user_updated
+signal actor_updated
 signal player_updated
 
 signal session_closed
@@ -56,14 +57,6 @@ func user_id() -> String:
 
 func user_info() -> UserInfo:
 	return _account.user_info()
-
-
-func actor_id() -> String:
-	return _meta.actor_id()
-
-
-func actor_info() -> ActorInfo:
-	return _meta.actor_info()
 
 
 func player_id() -> String:
@@ -129,6 +122,8 @@ func _server_setup(address: String):
 	actor = GameActor.new(_client, _account, _exception)
 	_meta = MetaAccount.new(_client, _account, _exception)
 	#warning-ignore: return_value_discarded
+	actor.connect("info_updated", self, "_on_actor_info_updated")
+	#warning-ignore: return_value_discarded
 	_meta.connect("signed_in", self, "_on_meta_signed_in")
 	#warning-ignore: return_value_discarded
 	_meta.connect("signed_out", self, "_on_meta_signed_out")
@@ -140,6 +135,11 @@ func _server_setup(address: String):
 	_account.connect("session_closed", self, "_on_account_session_closed")
 	#warning-ignore: return_value_discarded
 	_account.connect("session_created", self, "_on_account_session_created")
+
+
+func _on_actor_info_updated():
+	Global.color = actor.color()
+	emit_signal("actor_updated")
 
 
 func _on_meta_signed_in():

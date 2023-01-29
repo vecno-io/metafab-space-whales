@@ -259,16 +259,12 @@ func _on_actor_selected(actor):
 
 
 func _on_actor_activated(actor):
-	print_debug(">> activate: %s" % actor.id)
-	# TODO Start Game with Actor
 	msg_actors.text = ""
-	if 0 < actor.name.length():
-		# TODO Jump in to tutorial 5:
-		# see: _on_actor_activated
-		pass
-	else:
-		# TODO Jump to home, no tutorial
-		pass
+	Global.new_game()
+	GameServer.actor.set_info(actor)
+	Global.local_sector.stepper.skip_to(
+		TutorStepper.Step.f
+	)
 
 
 func _push_error(message: String) -> void:

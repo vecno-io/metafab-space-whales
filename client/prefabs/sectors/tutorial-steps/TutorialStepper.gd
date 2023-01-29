@@ -113,8 +113,6 @@ func _spawn_step(step):
 
 
 func _on_scene_move_ended():
+	# Only On the first step Initializes to a
 	if Global.state == Global.State.Tutorial:
-		_spawn_step(Step.a)
-	# While it makes sense 
-	# it also breaks the flow
-	#	else: _spawn_step(Step.x)
+		if current == Step.x: _spawn_step(Step.a)

@@ -194,11 +194,8 @@ func _set_actor_state():
 	# if id came back -> create the actor
 	# then in step 6 -> mint the actor
 	if GameServer.actor.is_valid():
-		print_debug("[%s] - _set_actor_state has actor")
-		# TODO Auto Jump this to storage?
-		# TODO Auto Loadup Storage Link?
-		Global.unpause_game()
 		Global.can_jump = true
+		Global.unpause_game()
 		_set_form(Forms.None)
 		_set_info(State.Store)
 		return

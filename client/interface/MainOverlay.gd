@@ -19,6 +19,8 @@ onready var shake_timer = get_node("%ShakeTimer")
 
 func _ready():
 	#warning-ignore: return_value_discarded
+	GameServer.actor.connect("info_updated", self, "_on_actor_updated")
+	#warning-ignore: return_value_discarded
 	GameServer.connect("session_created", self, "_on_session_created")
 	#warning-ignore: return_value_discarded
 	GameServer.connect("session_closed", self, "_on_session_closed")
@@ -106,6 +108,13 @@ func _on_session_created():
 func _on_session_closed():
 	server_state.session_closed()
 	account_dialog.session_closed()
+
+
+func _on_actor_updated():
+	if GameServer.actor.is_valid():
+		server_state.actor_loaded()
+	else:
+		server_state.actor_cleared()
 
 
 func _on_state_updated():

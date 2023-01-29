@@ -108,6 +108,11 @@ func _on_take_dust():
 		return
 	Global.dust_storage -= DUST_TRANSFER
 	Global.dust_inventory += DUST_TRANSFER
+	GameServer.actor.take_coin(
+		"DUST",
+		Global.dust_storage,
+		Global.dust_inventory
+	)
 
 
 func _on_store_dust():
@@ -115,6 +120,11 @@ func _on_store_dust():
 		return
 	Global.dust_storage += DUST_TRANSFER
 	Global.dust_inventory -= DUST_TRANSFER
+	GameServer.actor.store_coin(
+		"DUST",
+		Global.dust_storage,
+		Global.dust_inventory
+	)
 
 
 func _on_take_speed():
@@ -122,28 +132,44 @@ func _on_take_speed():
 		return
 	Global.speed_storage -= 1
 	Global.speed_inventory += 1
-
+	GameServer.actor.take_booster(
+		"SPEED",
+		Global.speed_storage,
+		Global.speed_inventory
+	)
 
 func _on_store_speed():
 	if Global.speed_inventory == 0:
 		return
 	Global.speed_storage += 1
 	Global.speed_inventory -= 1
-
+	GameServer.actor.store_booster(
+		"SPEED",
+		Global.speed_storage,
+		Global.speed_inventory
+	)
 
 func _on_take_firerate():
 	if Global.firerate_storage == 0:
 		return
 	Global.firerate_storage -= 1
 	Global.firerate_inventory += 1
-
+	GameServer.actor.take_booster(
+		"ATTACK",
+		Global.speed_storage,
+		Global.speed_inventory
+	)
 
 func _on_store_firerate():
 	if Global.firerate_inventory == 0:
 		return
 	Global.firerate_storage += 1
 	Global.firerate_inventory -= 1
-
+	GameServer.actor.store_booster(
+		"ATTACK",
+		Global.speed_storage,
+		Global.speed_inventory
+	)
 
 func _on_color_updated(value):
 	var light = get_node("Light2D")

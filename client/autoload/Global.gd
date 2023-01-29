@@ -123,7 +123,7 @@ func _set_dust_storage(value):
 	else:
 		push_error("invalid type: %s" % typeof(value))
 		return
-	emit_signal("dust_storage_updated", value)
+	emit_signal("dust_storage_updated", dust_storage)
 
 
 func _set_dust_inventory(value):
@@ -138,7 +138,7 @@ func _set_dust_inventory(value):
 	else:
 		push_error("invalid type: %s" % typeof(value))
 		return
-	emit_signal("dust_inventory_updated", value)
+	emit_signal("dust_inventory_updated", dust_inventory)
 
 
 func _set_speed_storage(value):
@@ -152,7 +152,7 @@ func _set_speed_storage(value):
 	else:
 		push_error("invalid type: %s" % typeof(value))
 		return
-	emit_signal("speed_storage_updated", value)
+	emit_signal("speed_storage_updated", speed_storage)
 
 func _set_speed_inventory(value):
 	# TODO Save to storage file
@@ -165,7 +165,7 @@ func _set_speed_inventory(value):
 	else:
 		push_error("invalid type: %s" % typeof(value))
 		return
-	emit_signal("speed_inventory_updated", value)
+	emit_signal("speed_inventory_updated", speed_inventory)
 
 
 func _set_firerate_storage(value):
@@ -179,7 +179,7 @@ func _set_firerate_storage(value):
 	else:
 		push_error("invalid type: %s" % typeof(value))
 		return
-	emit_signal("firerate_storage_updated", value)
+	emit_signal("firerate_storage_updated", firerate_storage)
 
 
 func _set_firerate_inventory(value):
@@ -192,7 +192,7 @@ func _set_firerate_inventory(value):
 	else:
 		push_error("invalid type: %s" % typeof(value))
 		return
-	emit_signal("firerate_inventory_updated", value)
+	emit_signal("firerate_inventory_updated", firerate_inventory)
 
 
 func _sector_reset():
@@ -234,8 +234,8 @@ func _sector_updated_difficulty(value):
 	emit_signal("updated_difficulty", value)
 
 
-func new_game():
-	state = Global.State.Tutorial
+func new_game(_state = Global.State.Tutorial):
+	state = _state
 	emit_signal("state_updated")
 
 

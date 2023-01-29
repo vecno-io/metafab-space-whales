@@ -45,6 +45,8 @@ func color() -> Color:
 # set_info will set the current actor and emit a signal to update info
 func set_info(info: ActorInfo):
 	_actor = info
+	if is_valid(): 
+		load_inventory()
 	emit_signal("info_updated")
 
 
@@ -158,6 +160,133 @@ func reserve_async() -> int:
 	# print_debug("actor_reserved >> %s" % data.result)
 	emit_signal("actor_reserved", data.result)
 	return OK
+
+
+func load_inventory() -> int:
+	if !self.has_id():
+		print("Invalid request")
+		print_stack()
+		return
+	var session = yield(_account.get_session_async(), "completed")
+	if session == null:
+		return -1
+	var result = yield(_client.rpc_async(
+			session, "actor_inventory", JSON.print({
+				"actor": _actor.id,
+			})
+	), "completed")
+	if OK != _exception.parse_nakama(result):
+		push_error("[RPC] %s (%s)" % [_exception.message, _exception.code])
+		return _exception.code
+	if result.payload.length() < 3:
+		return -2
+	var data = JSON.parse(result.payload)
+	if OK != data.error:
+		push_error("[JSON] %s (%s)" % [data.error_string, data.error])
+		return -3
+	#print_debug("load_inventory >> %s" % data.result)
+	for coin in data.result["coins"]:
+		match coin.key:
+			"DUST":
+				Global.dust_storage = coin["stored"]
+				Global.dust_inventory = coin["inventory"]
+	for booster in data.result["boosters"]:
+		match booster.type:
+			"SPEED":
+				Global.speed_storage = booster["stored"]
+				Global.speed_inventory = booster["inventory"]
+			"ATTACK":
+				Global.firerate_storage = booster["stored"]
+				Global.firerate_inventory = booster["inventory"]
+	return OK
+
+
+func take_coin(key, storage, inventory):
+	if !self.has_id():
+		print("Invalid request")
+		print_stack()
+		return
+	var session = yield(_account.get_session_async(), "completed")
+	if session == null:
+		return -1
+	var result = yield(_client.rpc_async(
+			session, "actor_take_coin", JSON.print({
+				"actor": _actor.id,
+				"key": key,
+				"stored": storage,
+				"inventory": inventory,
+			})
+	), "completed")
+	if OK != _exception.parse_nakama(result):
+		push_error("[RPC] %s (%s)" % [_exception.message, _exception.code])
+		return _exception.code
+	#print("take_coin > %s" % result.payload)
+
+
+func store_coin(key, storage, inventory):
+	if !self.has_id():
+		print("Invalid request")
+		print_stack()
+		return
+	var session = yield(_account.get_session_async(), "completed")
+	if session == null:
+		return -1
+	var result = yield(_client.rpc_async(
+			session, "actor_store_coin", JSON.print({
+				"actor": _actor.id,
+				"key": key,
+				"stored": storage,
+				"inventory": inventory,
+			})
+	), "completed")
+	if OK != _exception.parse_nakama(result):
+		push_error("[RPC] %s (%s)" % [_exception.message, _exception.code])
+		return _exception.code
+	#print("store_coin > %s" % result.payload)
+
+
+func take_booster(type, storage, inventory):
+	if !self.has_id():
+		print("Invalid request")
+		print_stack()
+		return
+	var session = yield(_account.get_session_async(), "completed")
+	if session == null:
+		return -1
+	var result = yield(_client.rpc_async(
+			session, "actor_take_booster", JSON.print({
+				"actor": _actor.id,
+				"type": type,
+				"stored": storage,
+				"inventory": inventory,
+			})
+	), "completed")
+	if OK != _exception.parse_nakama(result):
+		push_error("[RPC] %s (%s)" % [_exception.message, _exception.code])
+		return _exception.code
+	#print("take_booster > %s" % result.payload)
+
+
+func store_booster(type, storage, inventory):
+	if !self.has_id():
+		print("Invalid request")
+		print_stack()
+		return
+	var session = yield(_account.get_session_async(), "completed")
+	if session == null:
+		return -1
+	var result = yield(_client.rpc_async(
+			session, "actor_store_booster", JSON.print({
+				"actor": _actor.id,
+				"type": type,
+				"stored": storage,
+				"inventory": inventory,
+			})
+	), "completed")
+	if OK != _exception.parse_nakama(result):
+		push_error("[RPC] %s (%s)" % [_exception.message, _exception.code])
+		return _exception.code
+	#print("store_booster > %s" % result.payload)
 
 
 func _no_set(_value) -> void:

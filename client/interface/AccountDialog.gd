@@ -264,11 +264,11 @@ func _on_actor_selected(actor):
 
 func _on_actor_activated(actor):
 	msg_actors.text = ""
-	Global.new_game()
 	GameServer.actor.set_info(actor)
-	Global.local_sector.stepper.skip_to(
-		TutorStepper.Step.f
-	)
+	Global.new_game(Global.State.Home)
+	# FixMe This is a hack, disable the tutorial here
+	Global.local_sector.stepper.skip_to(TutorStepper.Step.f)
+	Global.local_player.global_position = Global.camera.home_position
 
 
 func _push_error(message: String) -> void:

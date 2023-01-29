@@ -298,6 +298,12 @@ func CombatOutcomeRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk
 	}
 	// Update all values and set result
 	// TODO: Validate based on combat logs
+	logger.WithFields(map[string]interface{}{
+		"actor": request.Actor,
+		"Dust": request.Dust,
+		"Speed": request.Speed,
+		"Attack": request.Attack,
+	}).Info("inventory update (todo validate)")
 	dust_inventory.Value = request.Dust
 	speed_inventory.Value = request.Speed
 	attack_inventory.Value = request.Attack

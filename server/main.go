@@ -21,7 +21,7 @@ func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runti
 		logger.Error("Unable to register rpc: game_info: %v", err)
 		return err
 	}
-	if err := initializer.RegisterRpc("meta_register", meta.RegisterRpc); err != nil {
+	if err := initializer.RegisterRpc("meta_register", RegisterRpc); err != nil {
 		logger.Error("Unable to register rpc: meta_register: %v", err)
 		return err
 	}
@@ -65,6 +65,13 @@ func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runti
 		return err
 	}
 	return nil
+}
+
+func RegisterRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, payload string) (string, error) {
+	var out, err = meta.RegisterRpc(ctx, logger, db, nk, payload)
+	if err == nil { actor.SetupNewPlayer(ctx, logger, nk) }
+	// This awards the new account with starter coins
+	return out, err
 }
 
 func GameInfoRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, payload string) (string, error) {

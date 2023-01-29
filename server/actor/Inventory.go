@@ -81,6 +81,21 @@ func (res *BoosterResult) FromRequest(req BoosterRequest) {
 }
 
 
+func SetupNewPlayer(ctx context.Context, logger runtime.Logger, nk runtime.NakamaModule) error {
+	user_id, ok := ctx.Value(runtime.RUNTIME_CTX_USER_ID).(string)
+	if !ok { 
+		return errors.New("user id not found")
+	}
+	if _, err := _write_coin_for_storage(ctx, logger, nk, user_id, "DUST", &Coin{12600}, "*"); nil != err {
+		logger.WithFields(map[string]interface{}{
+			"err": err,
+			"user": user_id,
+		}).Error("write coin inventory (DUST)")
+		return errors.New("write coin inventory failed")
+	}
+	return nil
+}
+
 
 func InventoryRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runtime.NakamaModule, payload string) (string, error) {
 	// Requires a valid metafab account, that account needs to own the actor

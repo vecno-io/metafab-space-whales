@@ -37,6 +37,26 @@ func InitModule(ctx context.Context, logger runtime.Logger, db *sql.DB, nk runti
 		logger.Error("Unable to register rpc: actor_reserve: %v", err)
 		return err
 	}
+	if err := initializer.RegisterRpc("actor_inventory", actor.InventoryRpc); err != nil {
+		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		return err
+	}
+	if err := initializer.RegisterRpc("actor_take_coin", actor.TakeCoinRpc); err != nil {
+		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		return err
+	}
+	if err := initializer.RegisterRpc("actor_store_coin", actor.StoreCoinRpc); err != nil {
+		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		return err
+	}
+	if err := initializer.RegisterRpc("actor_take_booster", actor.TakeBoosterRpc); err != nil {
+		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		return err
+	}
+	if err := initializer.RegisterRpc("actor_store_booster", actor.StoreBoosterRpc); err != nil {
+		logger.Error("Unable to register rpc: actor_reserve: %v", err)
+		return err
+	}
 	return nil
 }
 

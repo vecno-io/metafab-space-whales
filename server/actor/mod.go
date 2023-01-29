@@ -216,7 +216,7 @@ func _read_actor_tag_index(ctx context.Context, logger runtime.Logger, nk runtim
 	if result.Value == 0 || result.Value > uint32(MAX_TAG_VALUE) {
 		return Tag{}, "*", errors.New("no more valid tags available")
 	}
-	return Tag{Value: uint16(result.Value), Name: name}, "*", errors.New("err")		
+	return Tag{Value: uint16(result.Value), Name: name}, records[0].Version, nil
 }
 
 // write the current actor tag index, a tag index keeps track of the current id for an specified name
@@ -246,9 +246,9 @@ func _write_actor_tag_index(ctx context.Context, logger runtime.Logger, nk runti
 	}
 	_, err = nk.StorageWrite(ctx, []*runtime.StorageWrite {{
 		Collection: STORAGE_ACTOR_TAG_INDEX,
+		Version: version,
 		Key: index.Name,
 		Value: string(data),
-		Version: version,
 		PermissionRead: 2,
 		PermissionWrite: 0,
 	}})

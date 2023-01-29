@@ -35,15 +35,15 @@ type ProtectedData struct {
 
 func CreateHttpClient() http.Client {
 	return http.Client{
-    Timeout: 12 * time.Second,
+    Timeout: 16 * time.Second,
     Transport: &http.Transport{
 			Dial: (&net.Dialer{
-							Timeout:   4 * time.Second,
-							KeepAlive: 4 * time.Second,
+							Timeout:   8 * time.Second,
+							KeepAlive: 8 * time.Second,
 			}).Dial,
-			TLSHandshakeTimeout:   4 * time.Second,
+			TLSHandshakeTimeout:   8 * time.Second,
 			ResponseHeaderTimeout: 8 * time.Second,
-			ExpectContinueTimeout: 4 * time.Second,
+			ExpectContinueTimeout: 8 * time.Second,
 	}}
 }
 

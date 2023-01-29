@@ -450,7 +450,7 @@ func _create_actor_item(ctx context.Context, logger runtime.Logger, nk runtime.N
 	client := meta.CreateHttpClient()
 	req, err := http.NewRequest("POST", make_url, bytes.NewReader(payload))
 	if err != nil { 
-		_ = _delete_actor_meta(ctx, logger, nk, user_id, metadata.Id, ver)
+		_ = _delete_actor_meta(ctx, logger, nk, user_id, id.Key(), ver)
 		logger.WithFields(map[string]interface{}{
 			"err": err,
 			"user": user_id,
@@ -464,7 +464,7 @@ func _create_actor_item(ctx context.Context, logger runtime.Logger, nk runtime.N
 	req.Header.Add("X-Authorization", secret)
 	res, err := client.Do(req)
 	if err != nil { 
-		_ = _delete_actor_meta(ctx, logger, nk, user_id, metadata.Id, ver)
+		_ = _delete_actor_meta(ctx, logger, nk, user_id, id.Key(), ver)
 		logger.WithFields(map[string]interface{}{
 			"err": err,
 			"user": user_id,
@@ -475,7 +475,7 @@ func _create_actor_item(ctx context.Context, logger runtime.Logger, nk runtime.N
 	defer res.Body.Close()
 	body, _ := io.ReadAll(res.Body)
 	if res.StatusCode != 200 {
-		_ = _delete_actor_meta(ctx, logger, nk, user_id, metadata.Id, ver)
+		_ = _delete_actor_meta(ctx, logger, nk, user_id, id.Key(), ver)
 		logger.WithFields(map[string]interface{}{
 			"user": user_id,
 			"body": body,

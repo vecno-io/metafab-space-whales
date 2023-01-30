@@ -8,6 +8,10 @@ const DUST_TRANSFER = 200
 
 onready var overlay = get_node("%Overlay")
 
+var loading_dust = false
+var loading_speed = false
+var loading_attack = false
+
 onready var dust_take = get_node("%DustTakeBtn")
 onready var dust_store = get_node("%DustStoreBtn")
 onready var dust_storage = get_node("%DustStorage")
@@ -106,70 +110,98 @@ func _on_close_pressed():
 func _on_take_dust():
 	if Global.dust_storage < DUST_TRANSFER:
 		return
+	if loading_dust:
+		return
+	loading_dust = true
 	Global.dust_storage -= DUST_TRANSFER
 	Global.dust_inventory += DUST_TRANSFER
-	GameServer.actor.take_coin(
+	yield(GameServer.actor.take_coin(
 		"DUST",
 		Global.dust_storage,
 		Global.dust_inventory
-	)
+	), "completed")
+	loading_dust = false
 
 
 func _on_store_dust():
 	if Global.dust_inventory < DUST_TRANSFER:
 		return
+	if loading_dust:
+		return
+	loading_dust = true
 	Global.dust_storage += DUST_TRANSFER
 	Global.dust_inventory -= DUST_TRANSFER
-	GameServer.actor.store_coin(
+	yield(GameServer.actor.store_coin(
 		"DUST",
 		Global.dust_storage,
 		Global.dust_inventory
-	)
+	), "completed")
+	loading_dust = false
 
 
 func _on_take_speed():
 	if Global.speed_storage == 0:
 		return
+	if loading_speed:
+		return
+	loading_speed = true
 	Global.speed_storage -= 1
 	Global.speed_inventory += 1
-	GameServer.actor.take_booster(
+	yield(GameServer.actor.take_booster(
 		"SPEED",
 		Global.speed_storage,
 		Global.speed_inventory
-	)
+	), "completed")
+	loading_speed = false
+
 
 func _on_store_speed():
 	if Global.speed_inventory == 0:
 		return
+	if loading_speed:
+		return
+	loading_speed = true
 	Global.speed_storage += 1
 	Global.speed_inventory -= 1
-	GameServer.actor.store_booster(
+	yield(GameServer.actor.store_booster(
 		"SPEED",
 		Global.speed_storage,
 		Global.speed_inventory
-	)
+	), "completed")
+	loading_speed = false
+
 
 func _on_take_firerate():
 	if Global.firerate_storage == 0:
 		return
+	if loading_attack:
+		return
+	loading_attack = true
 	Global.firerate_storage -= 1
 	Global.firerate_inventory += 1
-	GameServer.actor.take_booster(
+	yield(GameServer.actor.take_booster(
 		"ATTACK",
-		Global.speed_storage,
-		Global.speed_inventory
-	)
+		Global.firerate_storage,
+		Global.firerate_inventory
+	), "completed")
+	loading_attack = false
+
 
 func _on_store_firerate():
 	if Global.firerate_inventory == 0:
 		return
+	if loading_attack:
+		return
+	loading_attack = true
 	Global.firerate_storage += 1
 	Global.firerate_inventory -= 1
-	GameServer.actor.store_booster(
+	yield(GameServer.actor.store_booster(
 		"ATTACK",
-		Global.speed_storage,
-		Global.speed_inventory
-	)
+		Global.firerate_storage,
+		Global.firerate_inventory
+	), "completed")
+	loading_attack = false
+
 
 func _on_color_updated(value):
 	var light = get_node("Light2D")
@@ -196,7 +228,7 @@ func _on_speed_storage_updated(value):
 
 func _on_speed_inventory_updated(value):
 	if value < 0: value = 0
-	speed_inventory.text = "%02d/08" % value
+	speed_inventory.text = "%02d/04" % value
 	speed_store.disabled = 0 == value
 
 
@@ -208,5 +240,5 @@ func _on_firerate_storage_updated(value):
 
 func _on_firerate_inventory_updated(value):
 	if value < 0: value = 0
-	firerate_inventory.text = "%02d/08" % value
+	firerate_inventory.text = "%02d/04" % value
 	firerate_store.disabled = 0 == value

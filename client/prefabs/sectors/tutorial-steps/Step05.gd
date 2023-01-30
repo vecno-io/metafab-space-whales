@@ -382,6 +382,7 @@ func _handle_actor_reserved(id):
 func _handle_actor_created(_tx):
 	is_creating_id = false
 	actor_create_msg.text = "minting"
+	GameServer.sector.end_combat()
 	GameServer.actor.disconnect("actor_created", self, "_handle_actor_created")
 	GameServer.actor.connect("actor_minted", self, "_handle_actor_minted")
 	var code = yield(GameServer.actor.mint_async(), "completed")
@@ -395,7 +396,8 @@ func _handle_actor_created(_tx):
 func _handle_actor_minted(_tx):
 	is_minting_id = false
 	actor_create_msg.text = ""
-	GameServer.sector.end_combat()
+	# TODO Next -> Fix bad state on failure
+	# The game plays but actor can not be traded
 
 
 func _on_try_again():

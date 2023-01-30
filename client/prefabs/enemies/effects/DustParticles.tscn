@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://prefabs/enemies/effects/DustParticles.gd" type="Script" id=1]
 [ext_resource path="res://assets/square.png" type="Texture" id=2]
+[ext_resource path="res://addons/godot_sfxr/SfxrStreamPlayer.gd" type="Script" id=3]
+[ext_resource path="res://assets/audio/pick-up.tres" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -31,5 +33,39 @@ wait_time = 0.15
 one_shot = true
 autostart = true
 
+[node name="AudioEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource( 4 )
+volume_db = -28.0
+pitch_scale = 0.55
+bus = "Effects"
+script = ExtResource( 3 )
+wave/type = 1
+sample_params/sound_vol = 0.25
+sample_params/sample_rate = 44100.0
+envelope/attack_time = 0.0
+envelope/sustain_time = 0.0382532
+envelope/punch_time = 0.562156
+envelope/decay_time = 0.14599
+frequency/start_frequency = 0.530643
+frequency/min_freq_cutoff = 0.0
+frequency/slide = 0.0
+frequency/delta_slide = 0.0
+vibrato/depth = 0.0
+vibrato/speed = 0.0
+arpeggiation/frequency_mult = 0.0
+arpeggiation/change_speed = 0.0
+duty_cycle/duty_cycle = 0.0
+duty_cycle/sweep = 0.0
+retrigger/rate = 0.0
+flanger/offset = 0.0
+flanger/sweep = 0.0
+low_pass_filter/cutoff_frequency = 1.0
+low_pass_filter/cutoff_sweep = 0.0
+low_pass_filter/resonance = 0.0
+high_pass_filter/cutoff_frequency = 0.0
+high_pass_filter/cutoff_sweep = 0.0
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_entered"]
 [connection signal="timeout" from="FreezeTimer" to="." method="_on_freeze_timeout"]
+[connection signal="finished" from="AudioEffect" to="." method="_on_AudioEffect_finished"]

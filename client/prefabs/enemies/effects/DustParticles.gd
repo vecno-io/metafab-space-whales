@@ -9,6 +9,7 @@ var dust_amount = 0
 export(int) var dust_min = 50
 export(int) var dust_max = 250
 
+onready var effect = get_node("%AudioEffect")
 
 func _ready():
 	randomize()
@@ -26,10 +27,18 @@ func _on_freeze_timeout():
 	
 
 func _on_hitbox_entered(area: Area2D):
+	if !visible:
+		return
 	if area.is_in_group("player_pickup"):
 		var player = area.get_parent()
 		player.dust_pickup(
 			dust_amount
 		)
 		emit_signal("picked_up")
-		queue_free()
+		visible = false
+		effect.play()
+
+
+
+func _on_AudioEffect_finished():
+	queue_free()

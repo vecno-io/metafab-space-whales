@@ -267,7 +267,7 @@ func _on_actor_activated(actor):
 	GameServer.actor.set_info(actor)
 	Global.new_game(Global.State.Home)
 	# FixMe This is a hack, disable the tutorial here
-	Global.local_sector.stepper.skip_to(TutorStepper.Step.f)
+	Global.local_sector.stepper.skip_to(TutorStepper.Step.g)
 	Global.local_player.global_position = Global.camera.home_position
 
 

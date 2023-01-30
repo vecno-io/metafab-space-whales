@@ -607,7 +607,9 @@ func TakeBoosterRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk r
 	}
 	// Validate and update
 	// Take from stored, add to inventory
-	if request.Stored >= stored.Value {
+	stored.Value -= 1
+	inventory.Value += 1
+	if request.Stored != stored.Value {
 		logger.WithFields(map[string]interface{}{
 			"user": user_id,
 			"player": account.MetafabId,
@@ -615,9 +617,7 @@ func TakeBoosterRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk r
 		}).Error("insufficient funds")
 		return "{}", errors.New("insufficient funds")
 	}
-	var withdrawl = stored.Value - request.Stored
-	var total = inventory.Value + withdrawl
-	if request.Inventory != total {
+	if request.Inventory != inventory.Value {
 		logger.WithFields(map[string]interface{}{
 			"user": user_id,
 			"player": account.MetafabId,
@@ -626,8 +626,6 @@ func TakeBoosterRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk r
 		return "{}", errors.New("verify total failed")
 	}
 	// Updated database value
-	stored.Value = request.Stored
-	inventory.Value = request.Inventory
 	stored_ver, err = _write_booster_for_storage(ctx, logger, nk, user_id, request.Type, stored, stored_ver)
 	if nil != err {
 		logger.WithFields(map[string]interface{}{
@@ -639,7 +637,7 @@ func TakeBoosterRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk r
 		return "{}", errors.New("write booster storage failed")
 	}
 	if _, err := _write_booster_for_inventory(ctx, logger, nk, request.Actor, request.Type, inventory, inventory_ver); nil != err {
-		stored.Value += withdrawl
+		stored.Value += 1
 		if _, inner := _write_booster_for_storage(ctx, logger, nk, user_id, request.Type, stored, stored_ver); nil != inner {
 			logger.WithFields(map[string]interface{}{
 				"errr": inner,
@@ -710,17 +708,17 @@ func StoreBoosterRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk 
 	}
 	// Validate and update
 	// Take from inventory, add to stored
-	if request.Inventory >= inventory.Value {
+	stored.Value += 1
+	inventory.Value -= 1
+	if request.Inventory != inventory.Value {
 		logger.WithFields(map[string]interface{}{
 			"user": user_id,
 			"player": account.MetafabId,
-			"payload": payload,
+			"request": payload,
 		}).Error("insufficient funds")
 		return "{}", errors.New("insufficient funds")
 	}
-	var withdrawl = inventory.Value - request.Inventory
-	var total = stored.Value + withdrawl
-	if request.Stored != total {
+	if request.Stored != stored.Value {
 		logger.WithFields(map[string]interface{}{
 			"user": user_id,
 			"player": account.MetafabId,
@@ -729,8 +727,6 @@ func StoreBoosterRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk 
 		return "{}", errors.New("verify total failed")
 	}
 	// Updated database value
-	stored.Value = request.Stored
-	inventory.Value = request.Inventory
 	stored_ver, err = _write_booster_for_storage(ctx, logger, nk, user_id, request.Type, stored, stored_ver)
 	if nil != err {
 		logger.WithFields(map[string]interface{}{
@@ -742,7 +738,7 @@ func StoreBoosterRpc(ctx context.Context, logger runtime.Logger, db *sql.DB, nk 
 		return "{}", errors.New("write booster storage failed")
 	}
 	if _, err := _write_booster_for_inventory(ctx, logger, nk, request.Actor, request.Type, inventory, inventory_ver); nil != err {
-		stored.Value += withdrawl
+		stored.Value -= 1
 		if _, inner := _write_booster_for_storage(ctx, logger, nk, user_id, request.Type, stored, stored_ver); nil != inner {
 			logger.WithFields(map[string]interface{}{
 				"errr": inner,

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://interface/MainOverlay.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/nebula/Nebulas-6-v1-1.png" type="Texture" id=2]
@@ -9,6 +9,13 @@
 [ext_resource path="res://world_env.tres" type="Environment" id=7]
 [ext_resource path="res://prefabs/StorageLink.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/audio/Chiptronical.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/nebula/Nebulas-3-v1-1.png" type="Texture" id=10]
+[ext_resource path="res://assets/nebula/Nebulas-2-v1-1.png" type="Texture" id=11]
+[ext_resource path="res://assets/nebula/Nebulas-5-v1-1.png" type="Texture" id=12]
+[ext_resource path="res://assets/nebula/Nebulas-4-v1-1.png" type="Texture" id=13]
+[ext_resource path="res://assets/nebula/Stars-3.png" type="Texture" id=14]
+[ext_resource path="res://assets/nebula/Stars-1.png" type="Texture" id=15]
+[ext_resource path="res://assets/nebula/Stars-2.png" type="Texture" id=16]
 
 [node name="MainScene" type="Node"]
 
@@ -29,19 +36,6 @@ tutorial_position = Vector2( 2150, 280 )
 [node name="TutorialScene" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1920, 0 )
 
-[node name="Nebulas-6-v1-1" type="Sprite" parent="."]
-modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
-position = Vector2( -318, -192 )
-z_index = -100
-texture = ExtResource( 2 )
-flip_v = true
-
-[node name="Nebulas-1-v1-1" type="Sprite" parent="."]
-modulate = Color( 0.752941, 0.752941, 0.752941, 0.25098 )
-position = Vector2( 498, 467 )
-z_index = -100
-texture = ExtResource( 3 )
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 7 )
 
@@ -50,3 +44,960 @@ stream = ExtResource( 9 )
 volume_db = -30.268
 autoplay = true
 bus = "Music"
+
+[node name="Temp" type="Node2D" parent="."]
+
+[node name="Nebulas-6-v1-1" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 918, 2736 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -2180, -4635 )
+flip_v = true
+
+[node name="Nebulas-1-v1-1" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 923, 3450 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -336.5, -1491.5 )
+
+[node name="Nebulas-1-v1-3" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 1014, 3952 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -2916.5, -765 )
+flip_h = true
+
+[node name="Nebulas-6-v1-2" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 1014, 3952 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -3472, -424 )
+
+[node name="Nebulas-1-v1-2" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 1064, 4201 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -33.5, -543 )
+
+[node name="Nebulas-2-v1-1" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 1014, 3952 )
+texture = ExtResource( 11 )
+offset = Vector2( -686, 449 )
+
+[node name="Nebulas-4-v1-1" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 3759, 3167 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+offset = Vector2( 3884.99, 3179.01 )
+
+[node name="Nebulas-5-v1-1" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 1280, 2860 )
+rotation = 3.14159
+texture = ExtResource( 12 )
+offset = Vector2( 3408, 1805.01 )
+
+[node name="Nebulas-3-v1-1" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 1014, 3952 )
+texture = ExtResource( 10 )
+offset = Vector2( -1471, -1876 )
+flip_v = true
+
+[node name="Nebulas-6-v1-3" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -2180, -4635 )
+flip_v = true
+
+[node name="Nebulas-1-v1-4" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -336.5, -1491.5 )
+
+[node name="Nebulas-1-v1-5" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -2916.5, -765 )
+flip_h = true
+
+[node name="Nebulas-6-v1-4" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -3472, -424 )
+
+[node name="Nebulas-1-v1-6" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -33.5, -543 )
+
+[node name="Nebulas-2-v1-2" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+texture = ExtResource( 11 )
+offset = Vector2( -686, 449 )
+
+[node name="Nebulas-4-v1-2" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+offset = Vector2( 3884.99, 3179.01 )
+
+[node name="Nebulas-5-v1-2" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+rotation = 3.14159
+texture = ExtResource( 12 )
+offset = Vector2( 3408, 1805.01 )
+
+[node name="Nebulas-3-v1-2" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -3774, 142 )
+texture = ExtResource( 10 )
+offset = Vector2( -1471, -1876 )
+flip_v = true
+
+[node name="Nebulas-6-v1-5" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 6246, 4131 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -3272, -11621 )
+flip_v = true
+
+[node name="Nebulas-1-v1-7" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 8926, -5297 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -2222.5, -270.5 )
+
+[node name="Nebulas-1-v1-8" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 6246, 4131 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -3462.5, -4258 )
+flip_h = true
+
+[node name="Nebulas-6-v1-6" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 6246, 4131 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -4564, -7410 )
+
+[node name="Nebulas-1-v1-9" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 8926, -5297 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -1919.5, 678 )
+
+[node name="Nebulas-2-v1-3" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 6246, 4131 )
+texture = ExtResource( 11 )
+offset = Vector2( -1778, -6537 )
+
+[node name="Nebulas-4-v1-3" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 6246, 4131 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+offset = Vector2( 4976.97, 10165 )
+
+[node name="Nebulas-5-v1-3" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 6246, 4131 )
+rotation = 3.14159
+texture = ExtResource( 12 )
+offset = Vector2( 4499.98, 8791.01 )
+
+[node name="Nebulas-3-v1-3" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 6246, 4131 )
+texture = ExtResource( 10 )
+offset = Vector2( -2563, -8862 )
+flip_v = true
+
+[node name="Nebulas-6-v1-7" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -3272, -11621 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-1-v1-10" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -882.5, -4984.5 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-1-v1-11" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -3462.5, -4258 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-6-v1-8" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -4564, -7410 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-1-v1-12" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -579.5, -4036 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-2-v1-4" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+texture = ExtResource( 11 )
+offset = Vector2( -1778, -6537 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-4-v1-4" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+offset = Vector2( 4976.97, 10165 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-5-v1-4" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+rotation = 3.14159
+texture = ExtResource( 12 )
+offset = Vector2( 4499.98, 8791.01 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-3-v1-4" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 7318, 16083 )
+texture = ExtResource( 10 )
+offset = Vector2( -2563, -8862 )
+flip_h = true
+flip_v = true
+
+[node name="Temp" type="Node2D" parent="Temp"]
+
+[node name="Nebulas-6-v1-1" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -533, 10618 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -2180, -4635 )
+flip_v = true
+
+[node name="Nebulas-1-v1-1" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -741, 11546 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -336.5, -1491.5 )
+
+[node name="Nebulas-1-v1-3" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -437, 11834 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -2916.5, -765 )
+flip_h = true
+
+[node name="Nebulas-6-v1-2" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -437, 11834 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -3472, -424 )
+
+[node name="Nebulas-1-v1-2" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -437, 11834 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -33.5, -543 )
+
+[node name="Nebulas-2-v1-1" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -437, 11834 )
+texture = ExtResource( 11 )
+offset = Vector2( -686, 449 )
+
+[node name="Nebulas-4-v1-1" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -437, 11834 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+offset = Vector2( 3884.99, 3179.01 )
+
+[node name="Nebulas-5-v1-1" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -437, 11834 )
+rotation = 3.14159
+texture = ExtResource( 12 )
+offset = Vector2( 3408, 1805.01 )
+
+[node name="Nebulas-3-v1-1" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -437, 11834 )
+texture = ExtResource( 10 )
+offset = Vector2( -1471, -1876 )
+flip_v = true
+
+[node name="Nebulas-6-v1-3" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -2180, -4635 )
+flip_v = true
+
+[node name="Nebulas-1-v1-4" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -336.5, -1491.5 )
+
+[node name="Nebulas-1-v1-5" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -2916.5, -765 )
+flip_h = true
+
+[node name="Nebulas-6-v1-4" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -3472, -424 )
+
+[node name="Nebulas-1-v1-6" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -33.5, -543 )
+
+[node name="Nebulas-2-v1-2" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+texture = ExtResource( 11 )
+offset = Vector2( -686, 449 )
+
+[node name="Nebulas-4-v1-2" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+offset = Vector2( 3884.99, 3179.01 )
+
+[node name="Nebulas-5-v1-2" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+rotation = 3.14159
+texture = ExtResource( 12 )
+offset = Vector2( 3408, 1805.01 )
+
+[node name="Nebulas-3-v1-2" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -5225, 8024 )
+texture = ExtResource( 10 )
+offset = Vector2( -1471, -1876 )
+flip_v = true
+
+[node name="Nebulas-6-v1-5" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -689, 1510 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -3272, -11621 )
+flip_v = true
+
+[node name="Nebulas-1-v1-7" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -689, 1510 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -882.5, -4984.5 )
+
+[node name="Nebulas-1-v1-8" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -689, 1510 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -3462.5, -4258 )
+flip_h = true
+
+[node name="Nebulas-6-v1-6" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -4994, 3199 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -4564, -7410 )
+flip_h = true
+
+[node name="Nebulas-1-v1-9" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -689, 1510 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -579.5, -4036 )
+
+[node name="Nebulas-2-v1-3" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -689, 1510 )
+texture = ExtResource( 11 )
+offset = Vector2( -1778, -6537 )
+
+[node name="Nebulas-4-v1-3" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -689, 1510 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+offset = Vector2( 4976.97, 10165 )
+
+[node name="Nebulas-5-v1-3" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -689, 1510 )
+rotation = 3.14159
+texture = ExtResource( 12 )
+offset = Vector2( 4499.98, 8791.01 )
+
+[node name="Nebulas-3-v1-3" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -689, 1510 )
+texture = ExtResource( 10 )
+offset = Vector2( -2563, -8862 )
+flip_v = true
+
+[node name="Nebulas-6-v1-7" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 13158, 11379 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -3272, -11621 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-1-v1-10" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 8578, 7590 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -882.5, -4984.5 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-1-v1-11" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 13158, 11379 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -3462.5, -4258 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-6-v1-8" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 13158, 11379 )
+z_index = -100
+texture = ExtResource( 2 )
+offset = Vector2( -4564, -7410 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-1-v1-12" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 8578, 7590 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -579.5, -4036 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-2-v1-4" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 8578, 7590 )
+texture = ExtResource( 11 )
+offset = Vector2( -1778, -6537 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-4-v1-4" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 13158, 11379 )
+rotation = 3.14159
+texture = ExtResource( 13 )
+offset = Vector2( 4976.97, 10165 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-5-v1-4" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 13158, 11379 )
+rotation = 3.14159
+texture = ExtResource( 12 )
+offset = Vector2( 4499.98, 8791.01 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-3-v1-4" type="Sprite" parent="Temp/Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 8578, 7590 )
+texture = ExtResource( 10 )
+offset = Vector2( -2563, -8862 )
+flip_h = true
+flip_v = true
+
+[node name="Nebulas-1-v1-13" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 9478, 6243 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -882.5, -4984.5 )
+
+[node name="Nebulas-1-v1-14" type="Sprite" parent="Temp"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 9478, 6243 )
+scale = Vector2( 2, 2 )
+z_index = -100
+texture = ExtResource( 3 )
+offset = Vector2( -579.5, -4036 )
+
+[node name="Stars" type="Node2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0.376471 )
+
+[node name="Stars-1" type="Sprite" parent="Stars"]
+position = Vector2( 1850, 2643 )
+texture = ExtResource( 15 )
+
+[node name="Stars-2" type="Sprite" parent="Stars"]
+position = Vector2( 466, 1746 )
+texture = ExtResource( 16 )
+
+[node name="Stars-73" type="Sprite" parent="Stars"]
+position = Vector2( 990, 529 )
+texture = ExtResource( 16 )
+
+[node name="Stars-3" type="Sprite" parent="Stars"]
+position = Vector2( 53, 2830 )
+texture = ExtResource( 14 )
+
+[node name="Stars-4" type="Sprite" parent="Stars"]
+position = Vector2( 3972, 1413 )
+texture = ExtResource( 15 )
+flip_h = true
+
+[node name="Stars-5" type="Sprite" parent="Stars"]
+position = Vector2( 2588, 516 )
+texture = ExtResource( 16 )
+flip_h = true
+
+[node name="Stars-6" type="Sprite" parent="Stars"]
+position = Vector2( 2175, 1600 )
+texture = ExtResource( 14 )
+flip_h = true
+
+[node name="Stars-7" type="Sprite" parent="Stars"]
+position = Vector2( -473, 4013 )
+texture = ExtResource( 15 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-8" type="Sprite" parent="Stars"]
+position = Vector2( -1857, 3116 )
+texture = ExtResource( 16 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-9" type="Sprite" parent="Stars"]
+position = Vector2( -2270, 4200 )
+texture = ExtResource( 14 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-10" type="Sprite" parent="Stars"]
+position = Vector2( 3030, 3650 )
+texture = ExtResource( 15 )
+flip_v = true
+
+[node name="Stars-11" type="Sprite" parent="Stars"]
+position = Vector2( 1147, 3615 )
+texture = ExtResource( 16 )
+flip_v = true
+
+[node name="Stars-12" type="Sprite" parent="Stars"]
+position = Vector2( -1715, 2230 )
+texture = ExtResource( 14 )
+flip_v = true
+
+[node name="Stars-13" type="Sprite" parent="Stars"]
+position = Vector2( -1066, 210 )
+texture = ExtResource( 15 )
+
+[node name="Stars-14" type="Sprite" parent="Stars"]
+position = Vector2( -2450, -687 )
+texture = ExtResource( 16 )
+
+[node name="Stars-15" type="Sprite" parent="Stars"]
+position = Vector2( -2863, 397 )
+texture = ExtResource( 14 )
+
+[node name="Stars-16" type="Sprite" parent="Stars"]
+position = Vector2( 1056, -1020 )
+texture = ExtResource( 15 )
+flip_h = true
+
+[node name="Stars-17" type="Sprite" parent="Stars"]
+position = Vector2( -328, -1917 )
+texture = ExtResource( 16 )
+flip_h = true
+
+[node name="Stars-18" type="Sprite" parent="Stars"]
+position = Vector2( -741, -833 )
+texture = ExtResource( 14 )
+flip_h = true
+
+[node name="Stars-19" type="Sprite" parent="Stars"]
+position = Vector2( -3389, 1580 )
+texture = ExtResource( 15 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-20" type="Sprite" parent="Stars"]
+position = Vector2( -4773, 683 )
+texture = ExtResource( 16 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-21" type="Sprite" parent="Stars"]
+position = Vector2( -5186, 1767 )
+texture = ExtResource( 14 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-22" type="Sprite" parent="Stars"]
+position = Vector2( 114, 1217 )
+texture = ExtResource( 15 )
+flip_v = true
+
+[node name="Stars-23" type="Sprite" parent="Stars"]
+position = Vector2( -1769, 1182 )
+texture = ExtResource( 16 )
+flip_v = true
+
+[node name="Stars-24" type="Sprite" parent="Stars"]
+position = Vector2( -4631, -203 )
+texture = ExtResource( 14 )
+flip_v = true
+
+[node name="Stars-25" type="Sprite" parent="Stars"]
+position = Vector2( -2664, -2568 )
+texture = ExtResource( 15 )
+
+[node name="Stars-26" type="Sprite" parent="Stars"]
+position = Vector2( -4048, -3465 )
+texture = ExtResource( 16 )
+
+[node name="Stars-27" type="Sprite" parent="Stars"]
+position = Vector2( -4461, -2381 )
+texture = ExtResource( 14 )
+
+[node name="Stars-28" type="Sprite" parent="Stars"]
+position = Vector2( -542, -3798 )
+texture = ExtResource( 15 )
+flip_h = true
+
+[node name="Stars-29" type="Sprite" parent="Stars"]
+position = Vector2( -1926, -4695 )
+texture = ExtResource( 16 )
+flip_h = true
+
+[node name="Stars-30" type="Sprite" parent="Stars"]
+position = Vector2( -2339, -3611 )
+texture = ExtResource( 14 )
+flip_h = true
+
+[node name="Stars-31" type="Sprite" parent="Stars"]
+position = Vector2( -4987, -1198 )
+texture = ExtResource( 15 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-32" type="Sprite" parent="Stars"]
+position = Vector2( -6371, -2095 )
+texture = ExtResource( 16 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-33" type="Sprite" parent="Stars"]
+position = Vector2( -6784, -1011 )
+texture = ExtResource( 14 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-34" type="Sprite" parent="Stars"]
+position = Vector2( -1484, -1561 )
+texture = ExtResource( 15 )
+flip_v = true
+
+[node name="Stars-35" type="Sprite" parent="Stars"]
+position = Vector2( -3367, -1596 )
+texture = ExtResource( 16 )
+flip_v = true
+
+[node name="Stars-36" type="Sprite" parent="Stars"]
+position = Vector2( -6229, -2981 )
+texture = ExtResource( 14 )
+flip_v = true
+
+[node name="Stars-37" type="Sprite" parent="Stars"]
+position = Vector2( 5851, -2692 )
+texture = ExtResource( 15 )
+
+[node name="Stars-38" type="Sprite" parent="Stars"]
+position = Vector2( 4467, -3589 )
+texture = ExtResource( 16 )
+
+[node name="Stars-39" type="Sprite" parent="Stars"]
+position = Vector2( 4054, -2505 )
+texture = ExtResource( 14 )
+
+[node name="Stars-40" type="Sprite" parent="Stars"]
+position = Vector2( 7973, -3922 )
+texture = ExtResource( 15 )
+flip_h = true
+
+[node name="Stars-41" type="Sprite" parent="Stars"]
+position = Vector2( 6589, -4819 )
+texture = ExtResource( 16 )
+flip_h = true
+
+[node name="Stars-42" type="Sprite" parent="Stars"]
+position = Vector2( 6176, -3735 )
+texture = ExtResource( 14 )
+flip_h = true
+
+[node name="Stars-43" type="Sprite" parent="Stars"]
+position = Vector2( 3528, -1322 )
+texture = ExtResource( 15 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-44" type="Sprite" parent="Stars"]
+position = Vector2( 2144, -2219 )
+texture = ExtResource( 16 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-45" type="Sprite" parent="Stars"]
+position = Vector2( 1731, -1135 )
+texture = ExtResource( 14 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-46" type="Sprite" parent="Stars"]
+position = Vector2( 7031, -1685 )
+texture = ExtResource( 15 )
+flip_v = true
+
+[node name="Stars-47" type="Sprite" parent="Stars"]
+position = Vector2( 5148, -1720 )
+texture = ExtResource( 16 )
+flip_v = true
+
+[node name="Stars-48" type="Sprite" parent="Stars"]
+position = Vector2( 2286, -3105 )
+texture = ExtResource( 14 )
+flip_v = true
+
+[node name="Stars-49" type="Sprite" parent="Stars"]
+position = Vector2( 7655, 3245 )
+texture = ExtResource( 15 )
+
+[node name="Stars-50" type="Sprite" parent="Stars"]
+position = Vector2( 6271, 2348 )
+texture = ExtResource( 16 )
+
+[node name="Stars-51" type="Sprite" parent="Stars"]
+position = Vector2( 5858, 3432 )
+texture = ExtResource( 14 )
+
+[node name="Stars-52" type="Sprite" parent="Stars"]
+position = Vector2( 9777, 2015 )
+texture = ExtResource( 15 )
+flip_h = true
+
+[node name="Stars-53" type="Sprite" parent="Stars"]
+position = Vector2( 8393, 1118 )
+texture = ExtResource( 16 )
+flip_h = true
+
+[node name="Stars-54" type="Sprite" parent="Stars"]
+position = Vector2( 7980, 2202 )
+texture = ExtResource( 14 )
+flip_h = true
+
+[node name="Stars-55" type="Sprite" parent="Stars"]
+position = Vector2( 5332, 4615 )
+texture = ExtResource( 15 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-56" type="Sprite" parent="Stars"]
+position = Vector2( 3948, 3718 )
+texture = ExtResource( 16 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-57" type="Sprite" parent="Stars"]
+position = Vector2( 3535, 4802 )
+texture = ExtResource( 14 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-58" type="Sprite" parent="Stars"]
+position = Vector2( 8835, 4252 )
+texture = ExtResource( 15 )
+flip_v = true
+
+[node name="Stars-59" type="Sprite" parent="Stars"]
+position = Vector2( 6952, 4217 )
+texture = ExtResource( 16 )
+flip_v = true
+
+[node name="Stars-60" type="Sprite" parent="Stars"]
+position = Vector2( 4090, 2832 )
+texture = ExtResource( 14 )
+flip_v = true
+
+[node name="Stars-61" type="Sprite" parent="Stars"]
+position = Vector2( 620, 6423 )
+texture = ExtResource( 15 )
+
+[node name="Stars-62" type="Sprite" parent="Stars"]
+position = Vector2( -764, 5526 )
+texture = ExtResource( 16 )
+
+[node name="Stars-63" type="Sprite" parent="Stars"]
+position = Vector2( -1177, 6610 )
+texture = ExtResource( 14 )
+
+[node name="Stars-64" type="Sprite" parent="Stars"]
+position = Vector2( 2742, 5193 )
+texture = ExtResource( 15 )
+flip_h = true
+
+[node name="Stars-65" type="Sprite" parent="Stars"]
+position = Vector2( 1358, 4296 )
+texture = ExtResource( 16 )
+flip_h = true
+
+[node name="Stars-66" type="Sprite" parent="Stars"]
+position = Vector2( 945, 5380 )
+texture = ExtResource( 14 )
+flip_h = true
+
+[node name="Stars-67" type="Sprite" parent="Stars"]
+position = Vector2( -1703, 7793 )
+texture = ExtResource( 15 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-68" type="Sprite" parent="Stars"]
+position = Vector2( -3087, 6896 )
+texture = ExtResource( 16 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-69" type="Sprite" parent="Stars"]
+position = Vector2( -3500, 7980 )
+texture = ExtResource( 14 )
+flip_h = true
+flip_v = true
+
+[node name="Stars-70" type="Sprite" parent="Stars"]
+position = Vector2( 1800, 7430 )
+texture = ExtResource( 15 )
+flip_v = true
+
+[node name="Stars-71" type="Sprite" parent="Stars"]
+position = Vector2( -83, 7395 )
+texture = ExtResource( 16 )
+flip_v = true
+
+[node name="Stars-72" type="Sprite" parent="Stars"]
+position = Vector2( -2945, 6010 )
+texture = ExtResource( 14 )
+flip_v = true
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 1440, 3240 )

@@ -13,7 +13,9 @@ signal session_created
 
 
 # Note: Set key and domain before build
-const SERVER_KEY = "Client-Key-420-1337"
+# const SERVER_KEY = "Client-Key-420-1337"
+const SERVER_KEY = "Vecno-Key-420-1337"
+
 const SERVER_DOMAIN = "%s%s.game-server.test"
 
 
@@ -33,23 +35,25 @@ func _init() -> void:
 	# needs to be saved and loaded from nakama
 	# Configure the servers client
 	_exception = ServerException.new()
-	if ConfigWorker.server_localhost():
-		print("[Game.Server] Using: localhost")
-		_server_setup("127.0.0.1")
-		return
-	var region = ConfigWorker.server_region()
-	var network = ConfigWorker.server_network()
-	var address = SERVER_DOMAIN % [ region, network ]
-	print("[Game.Server] Using: %s" % address)
-	_server_setup(address)
+	# FixMe JAm code below
+	# Disabled selection below, jam web builds
+	# if ConfigWorker.server_localhost():
+	# 	print("[Game.Server] Using: localhost")
+	# 	_server_setup("127.0.0.1")
+	# 	return
+	# var region = ConfigWorker.server_region()
+	# var network = ConfigWorker.server_network()
+	# var address = SERVER_DOMAIN % [ region, network ]
+	print("[Game.Server] Using: %s" % "dust-alpha.story-arc.io")
+	_server_setup("dust-alpha.story-arc.io")
 
 
 func game_id() -> String:
-	return ConfigWorker.game_id()
+	return _meta._cfg.game_id
 
 
 func game_key() -> String:
-	return ConfigWorker.game_key()
+	return _meta._cfg.public_key
 
 
 func user_id() -> String:
@@ -117,7 +121,7 @@ func _no_set(_value) -> void:
 
 func _server_setup(address: String):
 	# Create the Client, Account, and Storage; connect all signals
-	_client = Nakama.create_client(SERVER_KEY, address, 7350, "http", 12, NakamaLogger.LOG_LEVEL.INFO)
+	_client = Nakama.create_client(SERVER_KEY, address, 7350, "https", 16, NakamaLogger.LOG_LEVEL.INFO)
 	_client.auto_retry = false
 	_account = ServerAccount.new(_client, _exception)
 	_meta = MetaAccount.new(_client, _account, _exception)
@@ -187,6 +191,7 @@ func _load_config_async():
 	_meta.set_config(config)
 	actor.set_config(config)
 	sector.set_config(config)
+	print_debug(">> %s" % json.result)
 
 
 func _push_error(code: int, message: String) -> void:

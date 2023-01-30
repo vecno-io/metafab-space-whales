@@ -53,7 +53,7 @@ func create_player(password: String) -> int:
 	var user = _account.user_info()
 	if !user.is_valid(): return -1
 	if OK != _exception.metafab_parse(MetaFab.create_player(self,
-		"_on_create_player_result", ConfigWorker.game_key(), 
+		"_on_create_player_result", _cfg.public_key, 
 		user.id, password
 	)):
 		_push_error(_exception.code, 
@@ -69,7 +69,7 @@ func authenticate_player(password: String) -> int:
 	var user = _account.user_info()
 	if !user.is_valid(): return -1
 	if OK != _exception.metafab_parse(MetaFab.auth_player(self,
-		"_on_authenticate_player_result", ConfigWorker.game_key(), 
+		"_on_authenticate_player_result", _cfg.public_key,
 		user.id, password
 	)): 
 		_push_error(_exception.code, 

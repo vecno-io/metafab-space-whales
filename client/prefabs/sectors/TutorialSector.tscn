@@ -117,28 +117,29 @@ unique_name_in_owner = true
 wait_time = 1.6
 
 [node name="Nebula" type="Node2D" parent="."]
+scale = Vector2( 2, 2 )
 z_index = -980
 
 [node name="Nebulas-2-v1-1" type="Sprite" parent="Nebula"]
-modulate = Color( 0.752941, 0.752941, 0.752941, 0.25098 )
-position = Vector2( 1290, 784 )
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 1429.5, 572.501 )
 texture = ExtResource( 3 )
 
 [node name="Nebulas-4-v1-1" type="Sprite" parent="Nebula"]
-modulate = Color( 0.752941, 0.752941, 0.752941, 0.25098 )
-position = Vector2( -594, -132 )
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( -454.499, -343.499 )
 rotation = 3.14159
 texture = ExtResource( 6 )
 
 [node name="Nebulas-5-v1-1" type="Sprite" parent="Nebula"]
-modulate = Color( 0.752941, 0.752941, 0.752941, 0.25098 )
-position = Vector2( -100, 542 )
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 39.5007, 330.501 )
 rotation = 3.14159
 texture = ExtResource( 1 )
 
 [node name="Nebulas-3-v1-1" type="Sprite" parent="Nebula"]
-modulate = Color( 0.752941, 0.752941, 0.752941, 0.25098 )
-position = Vector2( 1051, 142 )
+modulate = Color( 0.752941, 0.752941, 0.752941, 0.12549 )
+position = Vector2( 1190.5, -69.4988 )
 texture = ExtResource( 2 )
 flip_v = true
 

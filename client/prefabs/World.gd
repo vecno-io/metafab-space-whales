@@ -1,5 +1,7 @@
 extends Node2D
 
+# Note: This is nolonger used?
+# It was part of the original setup
 
 var sector = null
 

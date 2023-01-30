@@ -59,18 +59,18 @@ custom_constants/separation = 24
 [node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoFinal"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
-margin_right = 422.0
-margin_bottom = 99.0
-custom_fonts/font = ExtResource( 4 )
-text = "When ready press jump, your drive is set to a low thread space. Try to clear all treaths, to claim the sector to deploy your own storagelink.
+margin_right = 350.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 2 )
+text = "When ready press jump and your drive is set to a low thread space. Try to clear all threats, and claim the sector to deploy your storage link.
 
 Good luck!"
 autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoFinal"]
-margin_top = 123.0
-margin_right = 422.0
-margin_bottom = 123.0
+margin_top = 140.0
+margin_right = 350.0
+margin_bottom = 140.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/separation = 16
@@ -106,18 +106,18 @@ custom_constants/separation = 24
 [node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoStore"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
-margin_right = 422.0
-margin_bottom = 99.0
-custom_fonts/font = ExtResource( 4 )
-text = "When ready press jump, your drive is set to a low thread space. Try to clear all treaths, to claim the sector to deploy your own storagelink.
+margin_right = 350.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 2 )
+text = "When ready press jump and your drive is set to a low thread space. Try to clear all threats, and claim the sector to deploy your storage link.
 
 Good luck!"
 autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoStore"]
-margin_top = 123.0
-margin_right = 422.0
-margin_bottom = 123.0
+margin_top = 140.0
+margin_right = 350.0
+margin_bottom = 140.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/separation = 16
@@ -153,17 +153,16 @@ custom_constants/separation = 24
 [node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoNoUser"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
-margin_right = 301.0
+margin_right = 350.0
 margin_bottom = 82.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 text = "This is a local storage link. To access the link you need to be verified. 
 
-Please sign-in or register."
+Please sign in or register."
 autowrap = true
 
 [node name="InfoNoActor" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
 unique_name_in_owner = true
-visible = false
 margin_left = 16.0
 margin_top = 24.0
 margin_right = 366.0
@@ -176,10 +175,13 @@ custom_constants/separation = 24
 [node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoNoActor"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
-margin_right = 301.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 4 )
-text = "This is a local storage link. To optimize a linked whale configuration amd training are needed.
+margin_right = 350.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 2 )
+text = "This is a local storage link. 
+
+To optimize a linked whale configuration and training 
+are needed.
 
 Provide us with some info
 and claim your whale."
@@ -202,8 +204,8 @@ modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
 margin_right = 422.0
 margin_bottom = 116.0
-custom_fonts/font = ExtResource( 4 )
-text = "Sorry, it seems you already have several setups. At this point in time we do not offer extra slots. Try again later, as capacity grows slots might be auctioned off. 
+custom_fonts/font = ExtResource( 2 )
+text = "Sorry, it seems you already have several setups. At this point we do not offer extra slots. Try again later, as capacity grows slots might be auctioned off. 
 
 Pick an existing slot."
 autowrap = true

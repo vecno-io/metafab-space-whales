@@ -50,9 +50,9 @@ func _on_session_created():
 
 func _on_player_updated():
 	# To play a valid game session is required
-	if !GameServer.is_session_valid():
-		new_game_btn.disabled = true
-		return
+	# if !GameServer.is_session_valid():
+	# 	new_game_btn.disabled = true
+	# 	return
 	# Guest sessions can start the tutorial
 	if !GameServer.is_player_valid():
 		new_game_btn.disabled = false

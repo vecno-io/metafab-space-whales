@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/fonts/Text-10-O1.tres" type="DynamicFont" id=1]
 [ext_resource path="res://prefabs/sectors/tutorial-steps/Step02.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/Text-8-O1.tres" type="DynamicFont" id=3]
 [ext_resource path="res://prefabs/enemies/effects/DustParticles.tscn" type="PackedScene" id=4]
 [ext_resource path="res://prefabs/enemies/HaulerEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefabs/enemies/HunterEnemy.tscn" type="PackedScene" id=6]
@@ -31,6 +30,7 @@ custom_constants/margin_left = 16
 
 [node name="InfoEnter-02A" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
 unique_name_in_owner = true
+visible = false
 margin_left = 16.0
 margin_top = 24.0
 margin_right = 366.0
@@ -45,8 +45,8 @@ modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
 margin_right = 350.0
 margin_bottom = 87.0
-custom_fonts/font = ExtResource( 3 )
-text = "The Haulers, they are a bit slow but will try to harvest large amounts of dust from you. They will run off with a full cargo to bring it home.
+custom_fonts/font = ExtResource( 1 )
+text = "The Haulers are a bit slow but will try to harvest large amounts of dust from you. They will run off with a full cargo to bring it home.
 
 Ready to kill it?"
 autowrap = true
@@ -91,18 +91,19 @@ custom_constants/separation = 24
 [node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02B"]
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
-margin_right = 422.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 3 )
-text = "The Hunters, fast and agile they will stick on you and try to slow you down so haulers can catch up.
+margin_right = 350.0
+margin_bottom = 87.0
+custom_fonts/font = ExtResource( 1 )
+text = "The Hunters, fast and agile will stick to you and try to slow you down so haulers can catch up.
 
+Do not let them hit your head!
 Kill it fast when ready."
 autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02B"]
-margin_top = 106.0
-margin_right = 422.0
-margin_bottom = 132.0
+margin_top = 111.0
+margin_right = 350.0
+margin_bottom = 137.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/separation = 16
@@ -142,7 +143,7 @@ show_behind_parent = true
 margin_right = 422.0
 margin_bottom = 65.0
 custom_fonts/font = ExtResource( 1 )
-text = "As mentioned before, all we do uses Dust so aim well and waisting bullets. The goal is to bring home dust and build out your base to hold them back."
+text = "Aim well and wasting bullets can drain your storage. The goal is to bring home dust, save up and build out your base to hold them back."
 autowrap = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Overlay/HBoxContainer/LeftBox/InfoExit-02"]

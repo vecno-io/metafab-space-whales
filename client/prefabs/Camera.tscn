@@ -10,6 +10,7 @@ limit_top = -8000
 limit_right = 8000
 limit_bottom = 8000
 script = ExtResource( 1 )
+sector_position = Vector2( 1440, 3240 )
 
 [node name="ShakeTimer" type="Timer" parent="."]
 unique_name_in_owner = true

@@ -4,7 +4,7 @@ extends Sprite
 signal link_opened
 signal link_closed
 
-const DUST_TRANSFER = 200
+const DUST_TRANSFER = 600
 
 onready var overlay = get_node("%Overlay")
 
@@ -113,13 +113,15 @@ func _on_take_dust():
 	if loading_dust:
 		return
 	loading_dust = true
-	Global.dust_storage -= DUST_TRANSFER
-	Global.dust_inventory += DUST_TRANSFER
+	dust_take.disabled = true
+	dust_store.disabled = true
 	yield(GameServer.actor.take_coin(
 		"DUST",
-		Global.dust_storage,
-		Global.dust_inventory
+		Global.dust_storage - DUST_TRANSFER,
+		Global.dust_inventory + DUST_TRANSFER
 	), "completed")
+	Global.dust_storage -= DUST_TRANSFER
+	Global.dust_inventory += DUST_TRANSFER
 	loading_dust = false
 
 
@@ -129,13 +131,15 @@ func _on_store_dust():
 	if loading_dust:
 		return
 	loading_dust = true
-	Global.dust_storage += DUST_TRANSFER
-	Global.dust_inventory -= DUST_TRANSFER
+	dust_take.disabled = true
+	dust_store.disabled = true
 	yield(GameServer.actor.store_coin(
 		"DUST",
-		Global.dust_storage,
-		Global.dust_inventory
+		Global.dust_storage + DUST_TRANSFER,
+		Global.dust_inventory - DUST_TRANSFER
 	), "completed")
+	Global.dust_storage += DUST_TRANSFER
+	Global.dust_inventory -= DUST_TRANSFER
 	loading_dust = false
 
 
@@ -145,13 +149,15 @@ func _on_take_speed():
 	if loading_speed:
 		return
 	loading_speed = true
-	Global.speed_storage -= 1
-	Global.speed_inventory += 1
+	speed_take.disabled = true
+	speed_store.disabled = true
 	yield(GameServer.actor.take_booster(
 		"SPEED",
-		Global.speed_storage,
-		Global.speed_inventory
+		Global.speed_storage - 1,
+		Global.speed_inventory + 1
 	), "completed")
+	Global.speed_storage -= 1
+	Global.speed_inventory += 1
 	loading_speed = false
 
 
@@ -161,13 +167,15 @@ func _on_store_speed():
 	if loading_speed:
 		return
 	loading_speed = true
-	Global.speed_storage += 1
-	Global.speed_inventory -= 1
+	speed_take.disabled = true
+	speed_store.disabled = true
 	yield(GameServer.actor.store_booster(
 		"SPEED",
-		Global.speed_storage,
-		Global.speed_inventory
+		Global.speed_storage + 1,
+		Global.speed_inventory - 1
 	), "completed")
+	Global.speed_storage += 1
+	Global.speed_inventory -= 1
 	loading_speed = false
 
 
@@ -177,13 +185,15 @@ func _on_take_firerate():
 	if loading_attack:
 		return
 	loading_attack = true
-	Global.firerate_storage -= 1
-	Global.firerate_inventory += 1
+	firerate_take.disabled = true
+	firerate_store.disabled = true
 	yield(GameServer.actor.take_booster(
 		"ATTACK",
-		Global.firerate_storage,
-		Global.firerate_inventory
+		Global.firerate_storage - 1 ,
+		Global.firerate_inventory + 1
 	), "completed")
+	Global.firerate_storage -= 1
+	Global.firerate_inventory += 1
 	loading_attack = false
 
 
@@ -193,13 +203,15 @@ func _on_store_firerate():
 	if loading_attack:
 		return
 	loading_attack = true
-	Global.firerate_storage += 1
-	Global.firerate_inventory -= 1
+	firerate_take.disabled = true
+	firerate_store.disabled = true
 	yield(GameServer.actor.store_booster(
 		"ATTACK",
-		Global.firerate_storage,
-		Global.firerate_inventory
+		Global.firerate_storage + 1,
+		Global.firerate_inventory - 1
 	), "completed")
+	Global.firerate_storage += 1
+	Global.firerate_inventory -= 1
 	loading_attack = false
 
 

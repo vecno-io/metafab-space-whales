@@ -265,6 +265,9 @@ func _on_hitbox_entered(area:Area2D):
 	if destroyed: 
 		return
 	if area.is_in_group("enemy"):
+		if !area.get_parent().visible:
+			print_debug("dead item")
+			return
 		Global.dust_inventory -= int(Global.dust_inventory * 0.6)
 		Global.firerate_inventory = 0
 		Global.speed_inventory = 0

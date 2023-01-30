@@ -44,23 +44,26 @@ size_flags_horizontal = 3
 custom_constants/margin_right = 0
 custom_constants/margin_top = 24
 custom_constants/margin_left = 16
+custom_constants/margin_bottom = 16
 
 [node name="InfoEnter-02" type="VBoxContainer" parent="Overlay/HBoxContainer/LeftBox"]
 margin_left = 16.0
-margin_top = 24.0
-margin_right = 366.0
-margin_bottom = 540.0
+margin_top = 510.0
+margin_right = 100.0
+margin_bottom = 524.0
 mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 0
+size_flags_vertical = 8
 custom_constants/separation = 24
 
-[node name="InfoLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02"]
+[node name="DificultyLabel" type="Label" parent="Overlay/HBoxContainer/LeftBox/InfoEnter-02"]
+unique_name_in_owner = true
 modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
 show_behind_parent = true
-margin_right = 350.0
-margin_bottom = 12.0
-custom_fonts/font = ExtResource( 1 )
+margin_right = 84.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 7 )
+text = "LVL 01"
 
 [node name="MidleBox" type="MarginContainer" parent="Overlay/HBoxContainer"]
 margin_left = 370.0

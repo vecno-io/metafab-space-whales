@@ -23,7 +23,11 @@ export(Array, PackedScene) var enemies
 
 onready var respwn_box = get_node("%RespwnBox")
 onready var cost_label = get_node("%CostLabel")
+
+
 onready var spawn_node = get_node("%PlayerTargets")
+onready var dificulty_label = get_node("%DificultyLabel")
+
 # onready var spawn_timer = get_node("%SpawnBaseBtn")
 # onready var spawn_timer = get_node("%SpawnScoutBtn")
 # onready var spawn_timer = get_node("%SpawnFighterBtn")
@@ -34,7 +38,7 @@ onready var difficulty_timer = get_node("%DifficultyTimer")
 # TODO ESC Disconnect and reset
 
 # TODO Display dificulty value
-# TODO Save inventory on jump out
+
 
 func _ready():
 	randomize()
@@ -89,6 +93,7 @@ func _on_difficulty_timeout():
 		if time > spawn_time_mimimum: spawn_timer.wait_time = time
 		else: spawn_timer.wait_time = spawn_time_mimimum
 		spawn_timer.wait_time = time
+		dificulty_label.text = "lvl: %02d" % difficulty
 		emit_signal("updated_difficulty", difficulty)
 
 
@@ -108,6 +113,7 @@ func _on_player_jumped():
 func _end_combat():
 	spawn_timer.stop()
 	difficulty_timer.stop()
+	GameServer.sector.end_combat()
 	for item in spawn_node.get_children():
 		item.queue_free()
 
